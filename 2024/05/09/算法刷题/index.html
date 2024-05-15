@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:\Users\zhangdengsheng\AppData\Roaming\Typora\typora-user-images\image-20240509151300969.png">
 <meta property="article:published_time" content="2024-05-09T06:33:39.000Z">
-<meta property="article:modified_time" content="2024-05-14T07:00:48.151Z">
+<meta property="article:modified_time" content="2024-05-15T03:54:32.402Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="c:\Users\zhangdengsheng\AppData\Roaming\Typora\typora-user-images\image-20240509151300969.png">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.6k 字
+          9.1k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          64 分钟
+          77 分钟
         
       </span>
     
@@ -516,6 +516,68 @@
 <p>外层遍历石头，内存倒序遍历容量。</p>
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lastStoneWeightII</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; stones)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-number">15001</span>, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; stones.<span class="hljs-built_in">size</span>(); i++) sum += stones[i];<br>        <span class="hljs-type">int</span> target = sum / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; stones.<span class="hljs-built_in">size</span>(); i++) &#123; <span class="hljs-comment">// 遍历物品</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = target; j &gt;= stones[i]; j--) &#123; <span class="hljs-comment">// 遍历背包</span><br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - stones[i]] + stones[i]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum - dp[target] - dp[target];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="9、目标和"><a href="#9、目标和" class="headerlink" title="9、目标和"></a>9、目标和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">https://leetcode.cn/problems/target-sum/</a></p>
+<p>给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。返回可以使最终数组和为目标数 S 的所有添加符号的方法数。</p>
+<p>既然目标值为target，那么就一定有：加法组合 - 减法组合 &#x3D; target。</p>
+<p>加法组合 + 减法组合&#x3D; sum，而sum是固定的。减法组合&#x3D; sum - 加法组合</p>
+<p>公式来了， 加法组合- (sum - 加法组合) &#x3D; target 推导出 加法组合&#x3D; (target + sum)&#x2F;2 。</p>
+<p>target是固定的，sum是固定的，加法组合就可以求出来。</p>
+<p>此时问题就是在集合nums中找出值为(target + sum)&#x2F;2的加法组合。—转化为01背包问题（元素不能重复使用）</p>
+<p>假设加法的总和为x，那么减法对应的总和就是sum - x。</p>
+<p>所以我们要求的是 x - (sum - x) &#x3D; target</p>
+<p>x &#x3D; (target + sum) &#x2F; 2–&gt;x即为背包容量–&gt;<strong>转化为求装满背包容量为x的背包一共有几种方法</strong>。</p>
+<p><strong>注意：</strong></p>
+<p>这里的背包容量是一个取整的表达式，例如sum 是5，S是2的话其实就是无解的，所以</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> ((S + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></table></figure>
+
+<p>同时如果 S的绝对值已经大于sum，那么也是没有方案的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(S) &gt; sum) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></table></figure>
+
+<p>1、确定dp数组及其含义：</p>
+<p>dp[j]表示装满容量为j的背包一共有dp[j]种方法。</p>
+<p>2、推导递推公式</p>
+<p>有哪些来源可以推出dp[j]呢？</p>
+<p>只要搞到nums[i]，凑成dp[j]就有dp[j - nums[i]] 种方法。注意这里说的是装满背包的方法总数，</p>
+<p>例如：dp[j]，j 为5，</p>
+<ul>
+<li>已经有一个1（nums[i]） 的话，有 dp[4]种方法 凑成 容量为5的背包。背包里已经有一个1了，对于容量为5的背包来说，装满它有dp[5-1]种方法，即dp[4]种方法。下述同理。</li>
+<li>已经有一个2（nums[i]） 的话，有 dp[3]种方法 凑成 容量为5的背包。</li>
+<li>已经有一个3（nums[i]） 的话，有 dp[2]中方法 凑成 容量为5的背包</li>
+<li>已经有一个4（nums[i]） 的话，有 dp[1]中方法 凑成 容量为5的背包</li>
+<li>已经有一个5 （nums[i]）的话，有 dp[0]中方法 凑成 容量为5的背包</li>
+</ul>
+<p>那么凑整dp[5]有多少方法呢，也就是把 所有的 dp[j - nums[i]] 累加起来。</p>
+<p>递推公式为：dp[j] &#x3D; dp[j] + dp[j-nums[i]]</p>
+<p>3、dp数组初始化</p>
+<p>如果数组[0] ，target &#x3D; 0，那么 bagSize &#x3D; (target + sum) &#x2F; 2 &#x3D; 0。 dp[0]也应该是1， 也就是说给数组里的元素 0 前面无论放加法还是减法，都是 1 种方法。</p>
+<p>所以本题我们应该初始化 dp[0] 为 1。装满容量为0的背包有1种方法，—什么都不放。</p>
+<p>4、确定遍历顺序</p>
+<p>外层遍历物品，内层倒序遍历背包容量（确保每个物品只被使用一次）</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findTargetSumWays</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-built_in">size</span>();i++) sum += nums[i]; <span class="hljs-comment">// 求和</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(target) &gt; sum) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//目标和的绝对值大于总和，没有解决方案</span><br>    <span class="hljs-keyword">if</span>((target+sum)%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 向下取整 没有解决方案</span><br>    <span class="hljs-comment">// 转化为01背包问题</span><br>    <span class="hljs-type">int</span> bagsize = (target+sum)/<span class="hljs-number">2</span>;<span class="hljs-comment">//背包容量</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(bagsize+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)</span></span>;<span class="hljs-comment">//定义dp数组</span><br>    dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<span class="hljs-comment">//初始化，不取任何数，背包容量为0，算一种方案；</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-built_in">size</span>();i++)&#123;<span class="hljs-comment">// 先遍历物品</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j =bagsize;j&gt;=nums[i];j--)&#123;<span class="hljs-comment">// 倒序遍历背包容量，防止物品重复使用</span><br>            dp[j] = dp[j] +dp[j-nums[i]];<span class="hljs-comment">// 求装满背包有几种方法的递推公式。</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[bagsize];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="10、一和零"><a href="#10、一和零" class="headerlink" title="10、一和零"></a>10、一和零</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">https://leetcode.cn/problems/ones-and-zeroes/</a></p>
+<p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>本题的本质其实是01背包问题：这个背包容量有两个纬度m和n，不同长度的字符串就是不同大小的物品</p>
+<p>一个字符串由x个0和y个1组成（重量）x要满足m，y要满足n。</p>
+<p>1、确定dp数值及其含义</p>
+<p>dp[i] [j] 表示最多含有i个0和j个1的strs的最大子集的大小（元素个数)为dp[i] [j]。</p>
+<p>2、确定递推公式：</p>
+<p>还是分为拿还是不拿</p>
+<p>不拿：dp[i] [j] </p>
+<p>拿：dp[i-zeronum] [j-onenum] + 1 </p>
+<p>dp[i] [j]是可以由前一个strs推导出来的，如果字符串strs里有一个元素有x个o和y个1，那么dp[i] [j] &#x3D; dp[i-x] [j-y]  +1</p>
+<p>去的是dp[i] [j] 的最大值</p>
+<p>所以dp[i] [j] &#x3D; max(dp[i] [j], dp[i - zeronum] [j - onenum] + 1);</p>
+<p>字符串的zeronum和onenum相当于物品的重量（weight[i]），字符串本身的个数相当于物品的价值（value[i]）。</p>
+<p>3、dp数组初始化</p>
+<p>物品价值是非负的，初始化为0即可，保证会被递推公式覆盖。</p>
+<p>4、确定遍历顺序</p>
+<p>物品就是strs里的字符串，背包容量就是m和n。先遍历物品再遍历背包，且倒序遍历背包容量。</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findMaxForm</span><span class="hljs-params">(vector&lt;string&gt;&amp; strs, <span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m+<span class="hljs-number">1</span>,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>));<span class="hljs-comment">//   默认初始化为0；</span><br>        <span class="hljs-keyword">for</span>(string str:strs)&#123;<br>            <span class="hljs-type">int</span> zeronum = <span class="hljs-number">0</span>,onenum =<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> c :str)&#123;<span class="hljs-comment">// 字符串只由0和1组成</span><br>            <span class="hljs-keyword">if</span>( c == <span class="hljs-string">&#x27;0&#x27;</span>)zeronum++;<br>            <span class="hljs-keyword">else</span> onenum++;<br>            &#125;<span class="hljs-comment">//遍历物品，统计每个物品（字符串）所包含的0和1的个数（重量）</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i =m;i&gt;=zeronum;i--)&#123;<span class="hljs-comment">// 倒序遍历背包容量</span><br>                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=n;j&gt;=onenum;j--)&#123;<span class="hljs-comment">// 倒序遍历背包容量</span><br>                    dp[i][j] = <span class="hljs-built_in">max</span>(dp[i][j],dp[i-zeronum][j-onenum]+<span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>            <span class="hljs-keyword">return</span> dp[m][n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 
                 
