@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:\Users\zhangdengsheng\AppData\Roaming\Typora\typora-user-images\image-20240509151300969.png">
 <meta property="article:published_time" content="2024-05-21T07:31:48.000Z">
-<meta property="article:modified_time" content="2024-05-21T09:23:34.674Z">
+<meta property="article:modified_time" content="2024-05-22T08:04:58.315Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="c:\Users\zhangdengsheng\AppData\Roaming\Typora\typora-user-images\image-20240509151300969.png">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          17k 字
+          22k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          142 分钟
+          180 分钟
         
       </span>
     
@@ -843,7 +843,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-type">int</span> len = prices.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(len,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">2</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] -= prices[<span class="hljs-number">0</span>];<span class="hljs-comment">// dp数组初始化，第0天持有，等于当天买入，所得收益为-prices[0]；</span><br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<span class="hljs-comment">// 第0天不持有，收益就是0</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i =<span class="hljs-number">1</span>; i&lt;len;i++)&#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>],-prices[i]);<span class="hljs-comment">//当天买入，利润为-prices[0]</span><br>            dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>],prices[i]+dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>]);<span class="hljs-comment">// 前一天不持有，和前一天持有今天卖出取最大值</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[len<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>];<br>    &#125;<br>&#125;; <span class="hljs-comment">// 为什么最后结果是dp[len-1][1]而不是dp[len-1][0]:因为不持有股票（卖出）一定比持有利润高--只卖买一次。</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="21、买卖股票的最佳时机"><a href="#21、买卖股票的最佳时机" class="headerlink" title="21、买卖股票的最佳时机||"></a>21、买卖股票的最佳时机||</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/</a></p>
-<p>可以买卖多次。</p>
+<p>可以买卖无数次。</p>
 <p>因为一只股票可以买卖多次，所以当第i天买入股票的时候，所持有的现金可能有之前买卖过的利润，<strong>即i-1天有利润。</strong></p>
 <p>所以区别在于递推公式不同，dp[i] [0] &#x3D; max(dp[i - 1] [0], <strong>dp[i - 1] [1] - prices[i]</strong>); 第i天持有股票的利润发生了变化，可以在买入时有之前卖出的利润。</p>
 <p>代码:</p>
@@ -894,6 +894,209 @@
 <p>从递归公式其实已经可以看出，一定是从前向后遍历，因为dp[i]，依靠dp[i - 1]的数值。</p>
 <p>代码:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (prices.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(prices.<span class="hljs-built_in">size</span>(), <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = -prices[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>] = -prices[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            dp[i][<span class="hljs-number">0</span>] = dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>];<br>            dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] - prices[i]);<br>            dp[i][<span class="hljs-number">2</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] + prices[i]);<br>            dp[i][<span class="hljs-number">3</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>] - prices[i]);<br>            dp[i][<span class="hljs-number">4</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">4</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>] + prices[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[prices.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>][<span class="hljs-number">4</span>];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="23、买卖股票的最佳时机IV"><a href="#23、买卖股票的最佳时机IV" class="headerlink" title="23、买卖股票的最佳时机IV"></a>23、买卖股票的最佳时机IV</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/</a></p>
+<p>最多可以有k次买卖，奇数次是买入，偶数次是卖出</p>
+<p>1、确定dp数组以及下标的含义</p>
+<p>在上一题中，我们定义了一个二维dp数组，本题其实依然可以用一个二维dp数组。</p>
+<p>使用二维数组 dp[i] [j] ：第i天的状态为j，所剩下的最大利润是dp[i] [j]</p>
+<p>j的状态表示为：</p>
+<ul>
+<li>0 表示不操作</li>
+<li>1 第一次买入</li>
+<li>2 第一次卖出</li>
+<li>3 第二次买入</li>
+<li>4 第二次卖出</li>
+<li>…..</li>
+</ul>
+<p><strong>大家应该发现规律了吧 ，除了0以外，偶数就是卖出，奇数就是买入</strong>。</p>
+<p>题目要求是至多有K笔交易，那么j的范围就定义为 2 * k + 1 就可以了。</p>
+<p>所以二维dp数组的C++定义为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(prices.<span class="hljs-built_in">size</span>(), <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">2</span> * k + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br></code></pre></td></tr></table></figure>
+
+<p>2、确定递推公式</p>
+<p>达到dp[i] [1]状态，有两个具体操作：</p>
+<ul>
+<li>操作一：第i天买入股票了，那么dp[i] [1] &#x3D; dp[i - 1] [0] - prices[i]</li>
+<li>操作二：第i天没有操作，而是沿用前一天买入的状态，即：dp[i] [1] &#x3D; dp[i - 1] [1]</li>
+</ul>
+<p>选最大的，所以 dp[i] [1] &#x3D; max(dp[i - 1] [0] - prices[i], dp[i - 1] [1]);</p>
+<p>同理dp[i] [2]也有两个操作：</p>
+<ul>
+<li>操作一：第i天卖出股票了，那么dp[i] [2] &#x3D; dp[i - 1] [1] + prices[i]</li>
+<li>操作二：第i天没有操作，沿用前一天卖出股票的状态，即：dp[i] [2] &#x3D; dp[i - 1] [2]</li>
+</ul>
+<p>所以dp[i] [2] &#x3D; max(dp[i - 1] [1] + prices[i], dp[i - 1] [2])</p>
+<p>同理可以类比剩下的状态，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">2</span> * k - <span class="hljs-number">1</span>; j += <span class="hljs-number">2</span>) &#123;<br>    dp[i][j + <span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][j] - prices[i]);<br>    dp[i][j + <span class="hljs-number">2</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j + <span class="hljs-number">2</span>], dp[i - <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] + prices[i]);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>本题和上一题的最大的区别就是这里要类比j为奇数是买，偶数是卖的状态</strong>。</p>
+<p>3、dp数组如何初始化</p>
+<p>第0天没有操作，这个最容易想到，就是0，即：dp[0] [0] &#x3D; 0;</p>
+<p>第0天做第一次买入的操作，dp[0] [1] &#x3D; -prices[0];</p>
+<p>第0天做第一次卖出的操作，这个初始值应该是多少呢？</p>
+<p>此时还没有买入，怎么就卖出呢？ 其实大家可以理解<strong>当天买入，当天卖出</strong>，所以dp[0] [2] &#x3D; 0;</p>
+<p>第0天第二次买入操作，初始值应该是多少呢？应该不少同学疑惑，第一次还没买入呢，怎么初始化第二次买入呢？</p>
+<p>第二次买入依赖于第一次卖出的状态，其实相当于第0天第一次买入了，第一次卖出了，然后在买入一次（第二次买入），那么现在手头上没有现金，只要买入，现金就做相应的减少。</p>
+<p>所以第二次买入操作，初始化为：dp[0] [3] &#x3D; -prices[0];</p>
+<p>第二次卖出初始化dp[0] [4] &#x3D; 0;</p>
+<p><strong>所以同理可以推出dp[0] [j]当j为奇数的时候都初始化为 -prices[0]</strong></p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">2</span> * k; j += <span class="hljs-number">2</span>) &#123;<br>    dp[<span class="hljs-number">0</span>][j] = -prices[<span class="hljs-number">0</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>4、确定遍历顺序</p>
+<p>从递归公式其实已经可以看出，一定是从前向后遍历，因为dp[i]，依靠dp[i - 1]的数值。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(<span class="hljs-type">int</span> k, vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices)</span> </span>&#123;<br><br>        <span class="hljs-keyword">if</span> (prices.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(prices.<span class="hljs-built_in">size</span>(), <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">2</span> * k + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<span class="hljs-comment">// 定义dp数组的大小</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">2</span> * k; j += <span class="hljs-number">2</span>) &#123;<span class="hljs-comment">// dp数组初始化 奇数次是买入，只要是买入 利润均为-prices[0]</span><br>            dp[<span class="hljs-number">0</span>][j] = -prices[<span class="hljs-number">0</span>];<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt; prices.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">2</span> * k - <span class="hljs-number">1</span>; j += <span class="hljs-number">2</span>) &#123;<br>                dp[i][j + <span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][j] - prices[i]);<br>                dp[i][j + <span class="hljs-number">2</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j + <span class="hljs-number">2</span>], dp[i - <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] + prices[i]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[prices.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>][<span class="hljs-number">2</span> * k];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>24、买卖股票的最佳时机含冷冻期、</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/</a></p>
+<ul>
+<li>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</li>
+<li>卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。</li>
+</ul>
+<p>1、确定dp数组以及下标的含义</p>
+<p>dp[i] [j]，第i天状态为j，收益为dp[i] [j]。</p>
+<ul>
+<li>状态一：持有股票状态（今天买入股票，或者是之前就买入了股票然后没有操作，一直持有）</li>
+<li>不持有股票状态，这里就有两种卖出股票状态<ul>
+<li>状态二：保持卖出股票的状态（两天前就卖出了股票，度过一天冷冻期。或者是前一天就是卖出股票状态，一直没操作）</li>
+<li>状态三：今天卖出股票</li>
+</ul>
+</li>
+<li>状态四：今天为冷冻期状态，但冷冻期状态不可持续，只有一天</li>
+</ul>
+<p>买卖股票最佳时机 1，2，3，4 的题目讲解中，今天卖出股票」我是没有单独列出一个状态的归类为「不持有股票的状态」，而本题为什么要单独列出「今天卖出股票」 一个状态呢？</p>
+<p>因为本题我们有<strong>冷冻期</strong>，而冷冻期的前一天，只能是 「今天卖出股票」状态，如果是 「不持有股票状态」那么就很模糊，因为不一定是 卖出股票的操作。</p>
+<p>2、确定递推公式</p>
+<p><strong>达到买入股票状态</strong>（状态一）即：dp[i] [0]，有两个具体操作：</p>
+<ul>
+<li>操作一：前一天就是持有股票状态（状态一），<strong>dp[i] [0] &#x3D; dp[i - 1] [0]</strong></li>
+<li>操作二：今天买入了，有两种情况<ul>
+<li>前一天是冷冻期（状态四），dp[i - 1] [3] - prices[i]</li>
+<li>前一天是保持卖出股票的状态（状态二），dp[i - 1] [1] - prices[i]</li>
+</ul>
+</li>
+</ul>
+<p>那么dp[i] [0] &#x3D; max(dp[i - 1] [0], dp[i - 1] [3] - prices[i], dp[i - 1] [1] - prices[i]);</p>
+<p><strong>达到保持卖出股票状态</strong>（状态二）即：dp[i] [1]，有两个具体操作：</p>
+<ul>
+<li>操作一：前一天就是状态二  dp[i] [1] &#x3D; <strong>dp[i-1] [1]</strong></li>
+<li>操作二：前一天是冷冻期（状态四）dp[i] [1] &#x3D;  <strong>dp[i-1] [3]</strong></li>
+</ul>
+<p>dp[i] [1] &#x3D; max(dp[i - 1] [1], dp[i - 1] [3]);</p>
+<p><strong>达到今天就卖出股票状态</strong>（状态三），即：dp[i] [2] ，只有一个操作：</p>
+<p>昨天一定是持有股票状态（状态一），今天卖出</p>
+<p>即：dp[i] [2] &#x3D; <strong>dp[i - 1] [0] + prices[i];</strong></p>
+<p><strong>达到冷冻期状态</strong>（状态四），即：dp[i] [3]，只有一个操作：</p>
+<p>昨天卖出了股票（状态三）</p>
+<p><strong>dp[i] [3] &#x3D; dp[i - 1] [2];</strong></p>
+<p>综上分析，递推代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">dp[i][<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>], <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) - prices[i]);<span class="hljs-comment">//状态1，保持买入状态：前一天冷冻期，今天买入或者前一天是卖出状态。</span><br>dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>]);<span class="hljs-comment">// 状态2，保持卖出状态：前一天就卖出了，或者前一天冷冻期，今天没操作</span><br>dp[i][<span class="hljs-number">2</span>] = dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] + prices[i];<span class="hljs-comment">// 状态3，今天卖出股票：前一天持有股票，今天卖出</span><br>dp[i][<span class="hljs-number">3</span>] = dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>]; <span class="hljs-comment">// 状态4 ，处于冷冻期：则昨天卖出了股票</span><br></code></pre></td></tr></table></figure>
+
+<p>3、dp数组如何初始化</p>
+<p>dp[0] [0] &#x3D; -prices[0] ：当天买入，收益就是-prices[0]。</p>
+<p>dp[0] [1] &#x3D; 0：当天买入当天卖出，收益不变，为0。</p>
+<p>同理，dp[0] [2] 、dp[0] [3] 都初始化为0.</p>
+<p>4、确定遍历顺序</p>
+<p>从递归公式上可以看出，dp[i] 依赖于 dp[i-1]，所以是从前向后遍历。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = prices.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">4</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] -= prices[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 持股票</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>], <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>] - prices[i], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] - prices[i]));<br>            dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>]);<br>            dp[i][<span class="hljs-number">2</span>] = dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] + prices[i];<br>            dp[i][<span class="hljs-number">3</span>] = dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(dp[n - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>], <span class="hljs-built_in">max</span>(dp[n - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], dp[n - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>]));<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>最后结果是取 状态二，状态三，和状态四的最大值，不少同学会把状态四忘了，状态四是冷冻期，最后一天如果是冷冻期也可能是最大值。</strong></p>
+<h2 id="24、买卖股票的最佳时机含手续费"><a href="#24、买卖股票的最佳时机含手续费" class="headerlink" title="24、买卖股票的最佳时机含手续费"></a>24、买卖股票的最佳时机含手续费</h2><p>每次交易需支付一次手续费，无限次交易。</p>
+<p>对比买卖股票的最佳时机||，只是在卖出操作时计算手续费即可，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices, <span class="hljs-type">int</span> fee)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = prices.<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] -= prices[<span class="hljs-number">0</span>]; <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] - prices[i]);<br>            dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] + prices[i] - fee);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(dp[n - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>], dp[n - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>]);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="25、最长上升子序列"><a href="#25、最长上升子序列" class="headerlink" title="25、最长上升子序列"></a>25、最长上升子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/">https://leetcode.cn/problems/longest-increasing-subsequence/</a></p>
+<p>子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p>当前下标i的递增子序列长度，其实和i之前的下表j的子序列长度有关系，那又是什么样的关系呢。</p>
+<p>1、dp[i]的定义</p>
+<p>本题中，正确定义dp数组的含义十分重要。</p>
+<p><strong>dp[i]表示i之前包括i的以nums[i]结尾的最长递增子序列的长度</strong></p>
+<p>为什么一定表示 “以nums[i]结尾的最长递增子序” ，因为我们在做“递增比较”的时候，如果比较 nums[j] 和 nums[i] 的大小，那么两个递增子序列一定分别以nums[j]为结尾 和 nums[i]为结尾， 要不然这个比较就没有意义了，不是尾部元素的比较那么 如何算递增呢。</p>
+<p>2、状态转移方程（递推公式）</p>
+<p>位置i的最长升序子序列等于<strong>j从0到i-1各个位置的最长升序子序列</strong> + 1 的最大值。</p>
+<p>i因此：if (nums[i] &gt; nums[j]) dp[i] &#x3D; max(dp[i], dp[j] + 1);</p>
+<p>3、dp[i]的初始化</p>
+<p>每一个i，对应的dp[i]（即最长递增子序列）起始大小至少都是1.</p>
+<p>4、确定遍历顺序</p>
+<p>dp[i] 是有0到i-1各个位置的最长递增子序列 推导而来，那么遍历i一定是从前向后遍历。</p>
+<p>j其实就是遍历0到i-1，那么是从前到后，还是从后到前遍历都无所谓，只要吧 0 到 i-1 的元素都遍历了就行了。 所以默认习惯 从前向后遍历。</p>
+<p>遍历i的循环在外层，遍历j则在内层，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123;<br>        <span class="hljs-keyword">if</span> (nums[i] &gt; nums[j]) dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j] + <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (dp[i] &gt; result) result = dp[i]; <span class="hljs-comment">// 取长的子序列</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lengthOfLIS</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (nums.<span class="hljs-built_in">size</span>() &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123;<br>                <span class="hljs-keyword">if</span> (nums[i] &gt; nums[j]) dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j] + <span class="hljs-number">1</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (dp[i] &gt; result) result = dp[i]; <span class="hljs-comment">// 取长的子序列</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="26、最长连续递增序列"><a href="#26、最长连续递增序列" class="headerlink" title="26、最长连续递增序列"></a>26、最长连续递增序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-continuous-increasing-subsequence/">https://leetcode.cn/problems/longest-continuous-increasing-subsequence/</a></p>
+<p>本题与上题的区别在于连续。</p>
+<p>1、确定dp数组（dp table）以及下标的含义</p>
+<p>**dp[i]：以下标i为结尾的连续递增的子序列长度为dp[i]**。</p>
+<p>注意这里的定义，一定是以下标i为结尾，并不是说一定以下标0为起始位置。</p>
+<p>2、确定递推公式</p>
+<p>如果 nums[i] &gt; nums[i - 1]，那么以 i 为结尾的连续递增的子序列长度 一定等于 以i - 1为结尾的连续递增的子序列长度 + 1 </p>
+<p>即：<strong>dp[i] &#x3D; dp[i - 1] + 1</strong>;</p>
+<p><strong>注意这里就体现出和上一道题目的区别！</strong></p>
+<p>因为本题要求连续递增子序列，所以就只要比较nums[i]与nums[i - 1]，而不用去比较nums[j]与nums[i] （j是在0到i之间遍历）。</p>
+<p>3、dp数组如何初始化</p>
+<p>以下标i为结尾的连续递增的子序列长度最少也应该是1，即就是nums[i]这一个元素。</p>
+<p>所以dp[i]应该初始1;</p>
+<p>4、遍历顺序</p>
+<p>从递推公式上可以看出， dp[i + 1]依赖dp[i]，所以一定是从前向后遍历</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) &#123;<br>    <span class="hljs-keyword">if</span> (nums[i] &gt; nums[i - <span class="hljs-number">1</span>]) &#123; <span class="hljs-comment">// 连续记录</span><br>        dp[i] = dp[i - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findLengthOfLCIS</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> result = <span class="hljs-number">1</span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size() ,<span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] &gt; nums[i - <span class="hljs-number">1</span>]) &#123; <span class="hljs-comment">// 连续记录</span><br>                dp[i] = dp[i - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (dp[i] &gt; result) result = dp[i];<span class="hljs-comment">//取最大的值。</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="27、最长重复子数组"><a href="#27、最长重复子数组" class="headerlink" title="27、最长重复子数组"></a>27、最长重复子数组</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-length-of-repeated-subarray/">https://leetcode.cn/problems/maximum-length-of-repeated-subarray/</a></p>
+<p>给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度，其实就是最长公共子序列。</p>
+<p>1、确定dp数组（dp table）以及下标的含义</p>
+<p>dp[i] [j] ：以下标i - 1为结尾的<strong>A</strong>，和以下标j - 1为结尾的<strong>B</strong>，最长重复子数组长度为dp[i] [j]。 （<strong>特别注意</strong>： “以下标i - 1为结尾的A” 标明一定是 以A[i-1]为结尾的字符串 ）</p>
+<p>dp[i] [j]的定义也就决定着，我们在遍历dp[i] [j]的时候i 和 j都要从1开始。为什么要从i-1和j-1开始，是为了初始化方便。</p>
+<p>2、确定递推公式</p>
+<p>根据dp[i] [j]的定义，dp[i] [j]的状态只能由dp[i - 1] [j - 1]推导出来。</p>
+<p>即当A[i - 1] 和B[j - 1]相等的时候，dp[i] [j] &#x3D; dp[i - 1] [j - 1] + 1;</p>
+<p>根据递推公式可以看出，遍历i 和 j 要从1开始！</p>
+<p>3、dp数组如何初始化</p>
+<p>根据dp[i] [j]的定义，dp[i] [0] 和dp[0] [j]其实都是没有意义的！</p>
+<p>但dp[i] [0] 和dp[0] [j]要初始值，因为 为了方便递归公式dp[i] [j] &#x3D; dp[i - 1] [j - 1] + 1;</p>
+<p>所以dp[i] [0] 和dp[0] [j]初始化为0。</p>
+<p>举个例子A[0]如果和B[0]相同的话，dp[1] [1] &#x3D; dp[0] [0] + 1，只有dp[0] [0]初始为0，正好符合递推公式逐步累加起来。</p>
+<p>4、确定遍历顺序</p>
+<p>外层for循环遍历A，内层for循环遍历B。</p>
+<p>那又有同学问了，外层for循环遍历B，内层for循环遍历A。不行么？</p>
+<p>也行，一样的，我这里就用外层for循环遍历A，内层for循环遍历B了。</p>
+<p>同时题目要求长度最长的子数组的长度。所以在遍历的时候顺便把dp[i] [j]的最大值记录下来。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findLength</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums1, vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums2)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">dp</span>(nums1.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(nums2.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>));<span class="hljs-comment">// dp数组的定义以及初始化，这里取num.size()+1,是因为dp数组下标的含义是到[i-1]和[j-1]结尾的最长重复子数组</span><br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<span class="hljs-comment">// 记录结果，这里初始化为0，是因为后面会被覆盖。</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i =<span class="hljs-number">1</span>;i&lt;=nums1.<span class="hljs-built_in">size</span>();i++)&#123;<span class="hljs-comment">// &lt;=是因为下标含义是到[i-1]结尾</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=nums2.<span class="hljs-built_in">size</span>();j++)&#123;<br>                <span class="hljs-keyword">if</span>(nums1[i<span class="hljs-number">-1</span>] == nums2[j<span class="hljs-number">-1</span>])&#123;<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + <span class="hljs-number">1</span>;<br>                &#125; <br>                <span class="hljs-keyword">if</span>(dp[i][j] &gt; result) result =dp[i][j];<span class="hljs-comment">//要求长度最长的子数组的长度。所以在遍历的时候顺便把dp[i][j]的最大值记录下来</span><br>            &#125; <br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="28、最长公共子序列"><a href="#28、最长公共子序列" class="headerlink" title="28、最长公共子序列"></a>28、最长公共子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">https://leetcode.cn/problems/longest-common-subsequence/</a></p>
+<p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。</p>
+<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。</p>
+<p>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列</p>
+<p>1、确定dp数组（dp table）以及下标的含义</p>
+<p>dp[i] [j]：长度为[0, i - 1]的字符串text1与长度为[0, j - 1]的字符串text2的最长公共子序列的<strong>长度</strong>（个数）为dp[i] [j]。这么定义下标是为了初始化方便。</p>
+<p>2、确定递推公式</p>
+<p>主要就是两大情况： text1[i - 1] 与 text2[j - 1]相同，text1[i - 1] 与 text2[j - 1]不相同</p>
+<p>如果text1[i - 1] 与 text2[j - 1]相同，那么找到了一个公共元素，所以dp[i] [j] &#x3D; dp[i - 1] [j - 1] + 1;</p>
+<p>如果text1[i - 1] 与 text2[j - 1]不相同，那就看看text1[0, i - 2]与text2[0, j - 1]的最长公共子序列 和 text1[0, i - 1]与text2[0, j - 2]的最长公共子序列，取最大的。</p>
+<p>即：dp[i] [j] &#x3D; max(dp[i - 1] [j], dp[i] [j - 1]);</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (text1[i - <span class="hljs-number">1</span>] == text2[j - <span class="hljs-number">1</span>]) &#123;<br>    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    dp[i][j] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>3、dp数组如何初始化</p>
+<p>先看看dp[i] [0]应该是多少呢？</p>
+<p>test1[0, i-1]和空串的最长公共子序列自然是0，所以dp[i] [0] &#x3D; 0;</p>
+<p>同理dp[0] [j]也是0。</p>
+<p>其他下标都是随着递推公式逐步覆盖，初始为多少都可以，那么就统一初始为0。</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(text1.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(text2.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br></code></pre></td></tr></table></figure>
+
+<p>4、遍历顺序</p>
+<p>从递推公式，可以看出，有三个方向可以推出dp[i] [j]，那么为了在递推的过程中，这三个方向都是经过计算的数值，所以要从前向后，从上到下来遍历这个矩阵。</p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">longestCommonSubsequence</span><span class="hljs-params">(string text1, string text2)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(text1.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(text2.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= text1.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= text2.<span class="hljs-built_in">size</span>(); j++) &#123;<br>                <span class="hljs-keyword">if</span> (text1[i - <span class="hljs-number">1</span>] == text2[j - <span class="hljs-number">1</span>]) &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    dp[i][j] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[text1.<span class="hljs-built_in">size</span>()][text2.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
