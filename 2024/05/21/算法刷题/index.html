@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:\Users\zhangdengsheng\AppData\Roaming\Typora\typora-user-images\image-20240509151300969.png">
 <meta property="article:published_time" content="2024-05-21T07:31:48.000Z">
-<meta property="article:modified_time" content="2024-05-22T08:04:58.315Z">
+<meta property="article:modified_time" content="2024-05-23T12:36:46.137Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="c:\Users\zhangdengsheng\AppData\Roaming\Typora\typora-user-images\image-20240509151300969.png">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          22k 字
+          24k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          180 分钟
+          201 分钟
         
       </span>
     
@@ -1097,6 +1097,96 @@
 <p>从递推公式，可以看出，有三个方向可以推出dp[i] [j]，那么为了在递推的过程中，这三个方向都是经过计算的数值，所以要从前向后，从上到下来遍历这个矩阵。</p>
 <p>代码:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">longestCommonSubsequence</span><span class="hljs-params">(string text1, string text2)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(text1.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(text2.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= text1.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= text2.<span class="hljs-built_in">size</span>(); j++) &#123;<br>                <span class="hljs-keyword">if</span> (text1[i - <span class="hljs-number">1</span>] == text2[j - <span class="hljs-number">1</span>]) &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    dp[i][j] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[text1.<span class="hljs-built_in">size</span>()][text2.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="29、不相交的线"><a href="#29、不相交的线" class="headerlink" title="29、不相交的线"></a>29、不相交的线</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/uncrossed-lines/">https://leetcode.cn/problems/uncrossed-lines/</a></p>
+<p>绘制一些连接两个数字 A[i] 和 B[j] 的直线，只要 A[i] &#x3D;&#x3D; B[j]，且直线不能相交！</p>
+<p>直线不能相交，这就是说明在字符串A中 找到一个与字符串B相同的子序列，且这个子序列不能改变相对顺序，只要相对顺序不改变，链接相同数字的直线就不会相交。其实也就是说A和B的最长公共子序列是[1,4]，长度为2。 这个公共子序列指的是相对顺序不变（即数字4在字符串A中数字1的后面，那么数字4也应该在字符串B数字1的后面）</p>
+<p>这么分析完之后，大家可以发现：<strong>本题说是求绘制的最大连线数，其实就是求两个字符串的最长公共子序列的长度！</strong></p>
+<p>所以代码跟上一题一样：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxUncrossedLines</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; A, vector&lt;<span class="hljs-type">int</span>&gt;&amp; B)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(A.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(B.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= A.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= B.<span class="hljs-built_in">size</span>(); j++) &#123;<br>                <span class="hljs-keyword">if</span> (A[i - <span class="hljs-number">1</span>] == B[j - <span class="hljs-number">1</span>]) &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    dp[i][j] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[A.<span class="hljs-built_in">size</span>()][B.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="30、最大子序和"><a href="#30、最大子序和" class="headerlink" title="30、最大子序和"></a>30、最大子序和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">https://leetcode.cn/problems/maximum-subarray/</a></p>
+<p>1、确定dp数组（dp table）以及下标的含义</p>
+<p>**dp[i]：包括下标i（以nums[i]为结尾）的最大连续子序列和为dp[i]**。</p>
+<p>2、确定递推公式</p>
+<p>dp[i]只有两个方向可以推出来：</p>
+<ul>
+<li>dp[i - 1] + nums[i]，即：nums[i]加入当前连续子序列和</li>
+<li>nums[i]，即：从头开始计算当前连续子序列和</li>
+</ul>
+<p>一定是取最大的，所以dp[i] &#x3D; max(dp[i - 1] + nums[i], nums[i]);</p>
+<p>3、dp数组如何初始化</p>
+<p>从递推公式可以看出来dp[i]是依赖于dp[i - 1]的状态，dp[0]就是递推公式的基础。</p>
+<p>dp[0]应该是多少呢?</p>
+<p>根据dp[i]的定义，很明显dp[0]应为nums[0]即dp[0] &#x3D; nums[0]。</p>
+<p>4、确定遍历顺序</p>
+<p>递推公式中dp[i]依赖于dp[i - 1]的状态，需要从前向后遍历。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size())</span></span>;<span class="hljs-comment">//定义dp数组，并初始化大小</span><br>        dp[<span class="hljs-number">0</span>] = nums[<span class="hljs-number">0</span>];<span class="hljs-comment">// 初始化数组</span><br>        <span class="hljs-type">int</span> result = dp[<span class="hljs-number">0</span>];<span class="hljs-comment">// 用来记录结果</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>] + nums[i], nums[i]); <span class="hljs-comment">// 状态转移公式</span><br>            <span class="hljs-keyword">if</span> (dp[i] &gt; result) result = dp[i]; <span class="hljs-comment">// result 保存dp[i]的最大值</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="31、判断子序列"><a href="#31、判断子序列" class="headerlink" title="31、判断子序列"></a>31、判断子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">https://leetcode.cn/problems/is-subsequence/</a></p>
+<p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。</p>
+<p>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，”ace”是”abcde”的一个子序列，而”aec”不是）。</p>
+<p>这里s是t的子串，t的长度肯定大于s，所以要删除也是删除t中的元素。</p>
+<p>1、确定dp数组（dp table）以及下标的含义</p>
+<p>**dp[i] [j] 表示以下标i-1为结尾的字符串s，和以下标j-1为结尾的字符串t，相同子序列的长度为dp[i] [j]**。</p>
+<p>注意这里是判断s是否为t的子序列。即t的长度是大于等于s的。</p>
+<p>2、确定递推公式</p>
+<p>在确定递推公式的时候，首先要考虑如下两种操作，整理如下：</p>
+<ul>
+<li>if (s[i - 1] &#x3D;&#x3D; t[j - 1])<ul>
+<li>t中找到了一个字符在s中也出现了</li>
+</ul>
+</li>
+<li>if (s[i - 1] !&#x3D; t[j - 1])<ul>
+<li>相当于t要删除元素，继续匹配</li>
+</ul>
+</li>
+</ul>
+<p>if (s[i - 1] &#x3D;&#x3D; t[j - 1])，那么dp[i] [j] &#x3D; dp[i - 1] [j - 1] + 1;，因为找到了一个相同的字符，相同子序列长度自然要在dp[i-1] [j-1]的基础上加1</p>
+<p>if (s[i - 1] !&#x3D; t[j - 1])，此时相当于t要删除元素，t如果把当前元素t[j - 1]删除，那么dp[i] [j] 的数值就是 看s[i - 1]与 t[j - 2]的比较结果了，即：dp[i] [j] &#x3D; dp[i] [j - 1];</p>
+<p>3、dp数组如何初始化</p>
+<p>从递推公式可以看出dp[i] [j]都是依赖于dp[i - 1] [j - 1] 和 dp[i] [j - 1]，所以dp[0] [0]和dp[i] [0]是一定要初始化的。同理dp[0] [j]也要初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(t.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br></code></pre></td></tr></table></figure>
+
+<p>4、确定遍历顺序</p>
+<p>同理从递推公式可以看出dp[i] [j]都是依赖于dp[i - 1] [j - 1] 和 dp[i] [ j - 1]，那么遍历顺序也应该是从上到下，从左到右。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isSubsequence</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(t.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<span class="hljs-comment">//定义dp数组</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-comment">//&lt;= 是因为表示i-1/j-1</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= t.<span class="hljs-built_in">size</span>(); j++) &#123;<br>                <span class="hljs-keyword">if</span> (s[i - <span class="hljs-number">1</span>] == t[j - <span class="hljs-number">1</span>])<br>                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">else</span> dp[i][j] = dp[i][j - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (dp[s.<span class="hljs-built_in">size</span>()][t.<span class="hljs-built_in">size</span>()] == s.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>dp[i] [j]表示以下标i-1为结尾的字符串s和以下标j-1为结尾的字符串t 相同子序列的长度，所以如果dp[s.size()] [t.size()] 与 字符串s的长度相同说明：s与t的最长相同子序列就是s，那么s 就是 t 的子序列。</p>
+<h2 id="32、不同的子序列"><a href="#32、不同的子序列" class="headerlink" title="32、不同的子序列"></a>32、不同的子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/distinct-subsequences/">https://leetcode.cn/problems/distinct-subsequences/</a></p>
+<p>给定一个字符串 s 和一个字符串 t ，计算在 s 的子序列中 t 出现的个数。</p>
+<p>字符串的一个 子序列 是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如，”ACE” 是 “ABCDE” 的一个子序列，而 “AEC” 不是）</p>
+<p>1、确定dp数组（dp table）以及下标的含义</p>
+<p>dp[i] [j]：以i-1为结尾的s子序列中出现以j-1为结尾的t的个数为dp[i] [j]。</p>
+<p>记住dp数组的定义，为了理解递推公式的含义，至于为什么用i-1、j-1结尾，是为了初始化方便而已，交给递推公式就可以了。</p>
+<p>2、确定递推公式</p>
+<p>这一类问题，基本是要分析两种情况</p>
+<ul>
+<li>s[i - 1] 与 t[j - 1]相等</li>
+<li>s[i - 1] 与 t[j - 1] 不相等</li>
+</ul>
+<p>当s[i - 1] 与 t[j - 1]相等时，dp[i] [j]可以有两部分组成。</p>
+<p>一部分是用s[i - 1]来匹配，那么个数为dp[i - 1] [j - 1]。即不需要考虑当前s子串和t子串的最后一位字母，所以只需要 dp[i-1] [j-1]。</p>
+<p>一部分是不用s[i - 1]来匹配，个数为dp[i - 1] [j]。用s[i-2]取匹配。例如： s： bagg 和 t： bag ，s[3] 和 t[2]是相同的，但是字符串s也可以不用s[3]来匹配，即用s[0]s[1]s[2]组成的bag。当然也可以用s[3]来匹配，即：s[0]s[1]s[3]组成的bag。</p>
+<p>所以当s[i - 1] 与 t[j - 1]相等时，dp[i] [j] &#x3D; dp[i - 1] [j - 1] + dp[i - 1] [j];</p>
+<p>当s[i - 1] 与 t[j - 1]不相等时，dp[i] [j]只有一部分组成，不用s[i - 1]来匹配（就是模拟在s中删除这个元素），即：dp[i - 1] [j]</p>
+<p>所以递推公式为：dp[i] [j] &#x3D; dp[i - 1] [j]; &#x2F;&#x2F; 即模拟在s中删除一位来匹配。</p>
+<p><strong>为什么只考虑 “不用s[i - 1]来匹配” 这种情况， 不考虑 “不用t[j - 1]来匹配” 的情况呢。这里大家要明确，我们求的是 s 中有多少个 t，而不是 求t中有多少个s，所以只考虑 s中删除元素的情况，即 不用s[i - 1]来匹配 的情况。</strong></p>
+<p>3、dp数组如何初始化</p>
+<p>从递推公式dp[i] [j] &#x3D; dp[i - 1] [j - 1] + dp[i - 1] [j]; 和 dp[i] [j] &#x3D; dp[i - 1] [j]; 中可以看出dp[i] [j] 是从上方和左上方推导而来，如图：，那么 dp[i] [0] 和dp[0] [j]是一定要初始化的。</p>
+<p>dp[i] [0] 表示：以i-1为结尾的s可以随便删除元素，出现空字符串的个数。</p>
+<p>那么dp[i] [0]一定都是1，因为也就是把以i-1为结尾的s，删除所有元素，出现空字符串的个数就是1。</p>
+<p>再来看dp[0] [j]，dp[0] [j]：空字符串s可以随便删除元素，出现以j-1为结尾的字符串t的个数。</p>
+<p>那么dp[0] [j]一定都是0，s如论如何也变成不了t。</p>
+<p>dp[0] [0]应该是1，空字符串s，可以删除0个元素，变成空字符串t。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;vector&lt;<span class="hljs-type">long</span> <span class="hljs-type">long</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">long</span> <span class="hljs-type">long</span>&gt;(t.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>));<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= t.<span class="hljs-built_in">size</span>(); j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span>; <span class="hljs-comment">// 其实这行代码可以和dp数组初始化的时候放在一起，但我为了凸显初始化的逻辑，所以还是加上了。</span><br></code></pre></td></tr></table></figure>
+
+<p>4、确定遍历顺序</p>
+<p>从递推公式dp[i] [j] &#x3D; dp[i - 1] [j - 1] + dp[i - 1] [j]; 和 dp[i] [j] &#x3D; dp[i - 1] [j]; 中可以看出dp[i] [j]都是根据左上方和正上方推出来的。所以遍历的时候一定是从上到下，从左到右，这样保证dp[i] [j]可以根据之前计算出来的数值进行计算。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">numDistinct</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">uint64_t</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">uint64_t</span>&gt;(t.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; t.<span class="hljs-built_in">size</span>(); j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= t.<span class="hljs-built_in">size</span>(); j++) &#123;<br>                <span class="hljs-keyword">if</span> (s[i - <span class="hljs-number">1</span>] == t[j - <span class="hljs-number">1</span>]) &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">1</span>][j];<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];<span class="hljs-comment">//模拟删s</span><br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[s.<span class="hljs-built_in">size</span>()][t.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
