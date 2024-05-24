@@ -24,7 +24,7 @@
 <meta property="og:description" content="计算机网络1、从输入URL到页面展示期间发生了什么？（1）检查缓存：浏览器收到用户请求后，先检查浏览器缓存里是否有该资源，如果有直接返回；如果没有，进入下一步网络请求。 （2）DNS域名解析：进行网络请求之前需要获取请求域名的IP地址，（HTTP协议）。如果是HTTPS，还需要建立TLS连接。DNS解析时会按照本地浏览器缓存-&gt;本地HOST文件-&gt;路由器缓存-&gt;DNS服务器-&amp;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-05-23T02:48:04.474Z">
+<meta property="article:modified_time" content="2024-05-24T07:38:31.031Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          22k 字
+          26k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          184 分钟
+          221 分钟
         
       </span>
     
@@ -807,16 +807,16 @@
 <p>所以，在查询时使用了二级索引，如果查询的数据能在二级索引里查询的到，那么就不需要回表，这个过程就是<strong>覆盖索引</strong>。如果查询的数据不在二级索引里，就会先检索二级索引，找到对应的叶子节点，获取到主键值后，然后再检索主键索引，就能查询到数据了，这个过程就是<strong>回表</strong>。</p>
 </li>
 <li><p>按「字段特性」分类：</p>
-<p><strong>主键索引</strong>：主键索引就是建立在主键字段上的索引，通常在创建表的时候一起创建，一张表最多只有一个主键索引，索引列的值不允许有空值。</p>
-<p><strong>唯一索引</strong>：唯一索引建立在 UNIQUE 字段上的索引，一张表可以有多个唯一索引，索引列的值必须唯一，但是允许有空值。</p>
-<p><strong>普通索引</strong>：普通索引就是建立在普通字段上的索引，既不要求字段为主键，也不要求字段为 UNIQUE，允许空值和重复值。</p>
+<p><strong>主键索引</strong>：主键索引就是建立在主键字段上的索引，通常在创建表的时候一起创建，<strong>一张表最多只有一个主键索引，索引列的值不允许有空值</strong>。</p>
+<p><strong>唯一索引</strong>：唯一索引建立在 UNIQUE 字段上的索引，一张表可以有多个唯一索引，<strong>索引列的值必须唯一，但是允许有空值</strong>。</p>
+<p><strong>普通索引</strong>：普通索引就是建立在普通字段上的索引，既不要求字段为主键，也不要求字段为 UNIQUE，<strong>允许空值和重复值</strong>。</p>
 <p><strong>前缀索引</strong>：前缀索引是指对字符类型字段的前几个字符建立的索引，而不是在整个字段上建立的索引，前缀索引可以建立在字段类型为 char、 varchar、binary、varbinary 的列上。</p>
 </li>
 <li><p>按「字段个数」分类：</p>
 <p><strong>单列索引</strong>：立在单列上的索引称为单列索引，比如主键索引。</p>
 <p><strong>联合索引</strong>：通过将多个字段组合成一个索引，该索引就被称为联合索引。使用联合索引时，存在<strong>最左匹配原则</strong>，也就是按照最左优先的方式进行索引的匹配。在使用联合索引进行查询的时候，如果不遵循「最左匹配原则」，联合索引会失效，这样就无法利用到索引快速查询的特性了。</p>
 <p>注意：联合索引有一些特殊情况，<strong>并不是查询过程使用了联合索引查询，就代表联合索引中的所有字段都用到了联合索引进行索引查询</strong>，也就是可能存在部分字段用到联合索引的 B+Tree，部分字段没有用到联合索引的 B+Tree 的情况。</p>
-<p>这种特殊情况就发生在范围查询。联合索引的最左匹配原则会一直向右匹配直到遇到「范围查询」就会停止匹配。<strong>也就是范围查询的字段可以用到联合索引，但是在范围查询字段的后面的字段无法用到联合索引</strong>。</p>
+<p><strong>这种特殊情况就发生在范围查询</strong>。联合索引的最左匹配原则会一直向右匹配直到遇到「范围查询」就会停止匹配。<strong>也就是范围查询的字段可以用到联合索引，但是在范围查询字段的后面的字段无法用到联合索引</strong>。</p>
 </li>
 </ul>
 <h2 id="4、什么时候需要索引，什么时候不需要索引？"><a href="#4、什么时候需要索引，什么时候不需要索引？" class="headerlink" title="4、什么时候需要索引，什么时候不需要索引？"></a>4、什么时候需要索引，什么时候不需要索引？</h2><p>索引最大的好处是提高查询速度，但是索引也是有缺点的，比如：</p>
@@ -837,6 +837,121 @@
 <li><strong>表数据太少的时候，不需要创建索引</strong>；（小表）</li>
 <li><strong>经常更新的字段不用创建索引</strong>，比如不要对电商项目的用户余额建立索引，因为索引字段频繁修改，由于要维护 B+Tree的有序性，那么就需要频繁的重建索引，这个过程是会影响数据库性能的。</li>
 </ul>
+<h2 id="5、为什么MySql采用B-Tree作为索引？"><a href="#5、为什么MySql采用B-Tree作为索引？" class="headerlink" title="5、为什么MySql采用B+Tree作为索引？"></a>5、为什么MySql采用B+Tree作为索引？</h2><p>MySql的数据是持久化的，所以其数据（索引+记录）是保存在磁盘中的，防止设备断电而导致数据丢失。所以，当我们通过索引查找数据的时候，查询过程会发生多次磁盘IO，而磁盘IO发生次数越多，所消耗的时间也越大。</p>
+<p>所以，我们希望索引的数据结构能在尽可能少的磁盘的 I&#x2F;O 操作中完成查询工作，因为磁盘 I&#x2F;O 操作越少，所消耗的时间也就越小</p>
+<p>另外，另外，MySQL 是支持范围查找的，所以索引的数据结构不仅要能高效地查询某一个记录，而且也要能高效地执行范围查找。</p>
+<p>综上所述，要设计一个适合 MySQL 索引的数据结构，至少满足以下要求：</p>
+<ul>
+<li>能在尽可能少的磁盘的 I&#x2F;O 操作中完成查询工作；</li>
+<li>要能高效地查询某一个记录，也要能高效地执行范围查找；</li>
+</ul>
+<p>分析各种数据结构的优缺点：</p>
+<p>二分查找法每次都把查询的范围减半，这样时间复杂度就降到了 O(logn)，但是每次查找都需要不断计算中间位置。</p>
+<p>二叉查找树（搜索树）解决了连续结构插入新元素开销很大的问题，同时又保持着天然的二分结构，但是**当每次插入的元素都是二叉查找树中最大的元素，二叉查找树就会退化成了一条链表，查找数据的时间复杂度变成了 O(n)**。</p>
+<p>为了解决二叉查找树会在极端情况下退化成链表的问题，后面就有人提出<strong>平衡二叉查找树（AVL 树）</strong>。主要是在二叉查找树的基础上增加了一些条件约束：<strong>每个节点的左子树和右子树的高度差不能超过 1</strong>。也就是说节点的左子树和右子树仍然为平衡二叉树，这样查询操作的时间复杂度就会一直维持在 O(logn)。但是<strong>不管平衡二叉查找树还是红黑树，都会随着插入的元素增多，而导致树的高度变高，这就意味着磁盘 I&#x2F;O 操作次数多，会影响整体数据查询的效率</strong>。</p>
+<p>为了解决降低树的高度的问题，后面就出来了 <strong>B 树</strong>，它不再限制一个节点就只能有 2 个子节点，而是允许 M 个子节点 (M&gt;2)，从而降低树的高度。同样的节点数量在平衡二叉树的场景下，树的高度就会很高，意味着磁盘 I&#x2F;O 操作会更多。<strong>所以，B 树在数据查询中比平衡二叉树效率要高。</strong>但是 B 树的每个节点都包含数据（索引+记录），而用户的记录数据的大小很有可能远远超过了索引数据，这就需要花费更多的磁盘 I&#x2F;O 操作次数来读到「有用的索引数据」，另外，如果使用 B 树来做范围查询的话，需要使用中序遍历，这会涉及多个节点的磁盘 I&#x2F;O 问题，从而导致整体速度下降。</p>
+<p>B+ 树与 B 树差异的点，主要是以下这几点：</p>
+<ul>
+<li><strong>叶子节点（最底部的节点）才会存放实际数据（索引+记录）</strong>，<strong>非叶子节点只会存放索引；</strong></li>
+<li>所有索引都会在叶子节点出现，叶子节点之间构成一个有序链表；</li>
+<li>非叶子节点的索引也会同时存在在子节点中，并且是在子节点中所有索引的最大（或最小）。</li>
+<li>非叶子节点中有多少个子节点，就有多少个索引；</li>
+</ul>
+<p>总结：MySQL 默认的存储引擎 InnoDB 采用的是 B+ 树作为索引的数据结构，原因有：</p>
+<ul>
+<li>B+ 树的非叶子节点不存放实际的记录数据，仅存放索引，因此数据量相同的情况下，相比存储即存索引又存记录的 B 树，B+树的非叶子节点可以存放更多的索引，因此 B+ 树可以比 B 树更「矮胖」，<strong>查询底层节点的磁盘 I&#x2F;O次数会更少。</strong>–单点查询更快</li>
+<li>B+ 树有大量的冗余节点（所有非叶子节点都是冗余索引），这些冗余索引让 B+ 树在插入、删除的效率都更高，比如删除根节点的时候，不会像 B 树那样会发生复杂的树的变化；–插入和删除效率</li>
+<li>B+ 树叶子节点之间用链表连接了起来，<strong>有利于范围查询</strong>，而 B 树要实现范围查询，因此只能通过树的遍历来完成范围查询，这会涉及多个节点的磁盘 I&#x2F;O 操作，范围查询效率不如 B+ 树。–范围查询</li>
+</ul>
+<h2 id="6、索引失效的场景有哪些？"><a href="#6、索引失效的场景有哪些？" class="headerlink" title="6、索引失效的场景有哪些？"></a>6、索引失效的场景有哪些？</h2><p>1、对索引使用左或者左右模糊匹配</p>
+<p>当我们使用左或者左右模糊匹配的时候，也就是 <code>like %xx</code> 或者 <code>like %xx%</code> 这两种方式都会造成索引失效，<strong>因为索引 B+ 树是按照「索引值」有序排列存储的，只能根据前缀进行比较。</strong></p>
+<p>2、对索引使用函数</p>
+<p>有时候我们会用一些 MySQL 自带的函数来得到我们想要的结果，这时候要注意了，如果查询条件中对索引字段使用函数，就会导致索引失效。因为索引保存的是索引字段的原始值，而不是经过函数计算后的值，自然就没办法走索引了。</p>
+<p><strong>从 MySQL 8.0 开始，索引特性增加了函数索引，即可以针对函数计算后的值建立一个索引，也就是说该索引的值是函数计算后的值，所以就可以通过扫描索引来查询数据。</strong></p>
+<p>3、对索引进行表达式计算</p>
+<p>在查询条件中对索引进行表达式计算，也是无法走索引的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">explain select * from t_user where id + 1 = 10; // 不行<br>explain select * from t_user where id = 10 -1;// 可以<br></code></pre></td></tr></table></figure>
+
+<p>4、对索引进行隐式类型转换</p>
+<p><strong>MySQL 在遇到字符串和数字比较的时候，会自动把字符串转为数字，然后再进行比较</strong>。</p>
+<p>前面的例子一中的查询语句，我也跟大家说了是会走<strong>全表扫描</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">/</span><span class="hljs-operator">/</span>例子一的查询语句<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t_user <span class="hljs-keyword">where</span> phone <span class="hljs-operator">=</span> <span class="hljs-number">1300000001</span>;<br></code></pre></td></tr></table></figure>
+
+<p>这是因为 phone 字段为字符串，所以 MySQL 要会自动把字符串转为数字，所以这条语句相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t_user <span class="hljs-keyword">where</span> <span class="hljs-built_in">CAST</span>(phone <span class="hljs-keyword">AS</span> signed <span class="hljs-type">int</span>) <span class="hljs-operator">=</span> <span class="hljs-number">1300000001</span>;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，<strong>CAST 函数是作用在了 phone 字段，而 phone 字段是索引，也就是对索引使用了函数！而前面我们也说了，对索引使用函数是会导致索引失效的</strong>。</p>
+<p>例子二中的查询语句，我跟大家说了是会走索引扫描：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">/</span><span class="hljs-operator">/</span>例子二的查询语句<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t_user <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> &quot;1&quot;;<br></code></pre></td></tr></table></figure>
+
+<p>这时因为字符串部分是输入参数，也就需要将字符串转为数字，所以这条语句相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t_user <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-built_in">CAST</span>(&quot;1&quot; <span class="hljs-keyword">AS</span> signed <span class="hljs-type">int</span>);<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，<strong>索引字段并没有用任何函数，CAST 函数是用在了输入参数，因此是可以走索引扫描的。</strong></p>
+<p>5、联合索引非最左匹配（或遇到范围查询）</p>
+<p>对主键字段建立的索引叫做聚簇索引，对普通字段建立的索引叫做二级索引。</p>
+<p>那么<strong>多个普通字段组合在一起创建的索引就叫做联合索引</strong>，也叫组合索引。</p>
+<p>创建联合索引时，我们需要注意创建时的顺序问题，因为联合索引 (a, b, c) 和 (c, b, a) 在使用的时候会存在差别。联合索引要能正确使用需要遵循<strong>最左匹配原则</strong>，也就是按照最左优先的方式进行索引的匹配。</p>
+<p>也就是说，如果我们想使用联合索引中尽可能多的列，查询条件中的各个列必须是联合索引中从最左边开始连续的列。如果我们仅仅按照第二列搜索，肯定无法走索引。</p>
+<p>6、WHERE语句中的OR</p>
+<p>在 WHERE 子句中，如果在 OR 前的条件列是索引列，而在 OR 后的条件列不是索引列，那么索引会失效。</p>
+<p>总结：</p>
+<ul>
+<li>当我们使用左或者左右模糊匹配的时候，也就是 <code>like %xx</code> 或者 <code>like %xx%</code>这两种方式都会造成索引失效；</li>
+<li>当我们在查询条件中对索引列使用函数，就会导致索引失效。</li>
+<li>当我们在查询条件中对索引列进行表达式计算，也是无法走索引的。</li>
+<li>MySQL 在遇到字符串和数字比较的时候，会自动把字符串转为数字，然后再进行比较。如果字符串是索引列，而条件语句中的输入参数是数字的话，那么索引列会发生隐式类型转换，由于隐式类型转换是通过 CAST 函数实现的，等同于对索引列使用了函数，所以就会导致索引失效。</li>
+<li>联合索引要能正确使用需要遵循最左匹配原则，也就是按照最左优先的方式进行索引的匹配，否则就会导致索引失效。</li>
+<li>在 WHERE 子句中，如果在 OR 前的条件列是索引列，而在 OR 后的条件列不是索引列，那么索引会失效</li>
+</ul>
+<h2 id="7、事物有哪些特性"><a href="#7、事物有哪些特性" class="headerlink" title="7、事物有哪些特性"></a>7、事物有哪些特性</h2><p>1、<strong>原子性</strong>：事物是不可分割的最小工作单元，一个事物中的所有操作，要么全部完成，要么全部未完成，不会停留在中间状态（比如只完成一半）。如果事物执行过程中发生了错误，会被回滚到没执行操作之前原来的状态，像事物没有执行过一样。**–undo 回滚日志实现**</p>
+<p>2、<strong>一致性</strong>：一个事物操作之前和执行之后的状态必须保持一致。比如用户 A 和用户 B 在银行分别有 800 元和 600 元，总共 1400 元，用户 A 给用户 B 转账 200 元，分为两个步骤，从 A 的账户扣除 200 元和对 B 的账户增加 200 元。一致性就是要求上述步骤操作后，最后的结果是用户 A 还有 600 元，用户 B 有 800 元，总共 1400 元，而不会出现用户 A 扣除了 200 元，但用户 B 未增加的情况。**–其他三种共同保障**</p>
+<p>3、隔离性：数据库允许多个并发事务同时对其数据进行修改和读取，隔离性可以防止多个事物并发执行时由于交叉执行导致的数据不一致的情况，因为多个事物并发执行的时候不会相互干扰，每个事物都有一个完整的数据空间，对其他并发事务是隔离的。**–MVCC（多版本并发控制）或者锁机制。**</p>
+<p>4、持久性：事物处理结束之后，对数据的修改是永久的，即使系统故障也不会丢失。-<strong>-redo log（重做日志）</strong></p>
+<h2 id="8、说一说事物的隔离级别以及他们都是怎么实现的？"><a href="#8、说一说事物的隔离级别以及他们都是怎么实现的？" class="headerlink" title="8、说一说事物的隔离级别以及他们都是怎么实现的？"></a>8、说一说事物的隔离级别以及他们都是怎么实现的？</h2><p>MySQL 服务端是允许多个客户端连接的，这意味着 MySQL 会出现同时处理多个事务的情况。那么<strong>在同时处理多个事务的时候，就可能出现脏读（dirty read）、不可重复读（non-repeatable read）、幻读（phantom read）的问题</strong>。</p>
+<p>当多个事务并发执行时可能会遇到「脏读、不可重复读、幻读」的现象，这些现象会对事务的一致性产生不同程序的影响。</p>
+<ul>
+<li>脏读：读到其他事务未提交的数据；</li>
+<li>不可重复读：前后读取的数据不一致；</li>
+<li>幻读：前后读取的记录数量不一致。</li>
+</ul>
+<p>SQL 标准提出了四种隔离级别来规避这些现象，隔离级别越高，性能效率就越低，这四个隔离级别如下：<strong>自上而下隔离级别逐级变高</strong>、性能越低</p>
+<ul>
+<li><strong>读未提交（*read uncommitted*）</strong>，指一个事务还没提交时，它做的变更就能被其他事务看到；</li>
+<li><strong>读提交（*read committed*）</strong>，指一个事务提交之后，它做的变更才能被其他事务看到；</li>
+<li><strong>可重复读（*repeatable read*）</strong>，指一个事务执行过程中看到的数据，一直跟这个事务启动时看到的数据是一致的，<strong>MySQL InnoDB 引擎的默认隔离级别</strong>；</li>
+<li><strong>串行化（*serializable* ）</strong>；会对记录加上读写锁，在多个事务对这条记录进行读写操作时，如果发生了读写冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行；</li>
+</ul>
+<p><strong>针对不同的隔离级别，并发事务时可能发生的现象也会不同</strong>，也就是说：</p>
+<ul>
+<li>在「读未提交」隔离级别下，可能发生<strong>脏读</strong>、<strong>不可重复读</strong>和<strong>幻读</strong>现象；</li>
+<li>在「读提交」隔离级别下，可能发生<strong>不可重复读</strong>和<strong>幻读</strong>现象，但是不可能发生脏读现象；</li>
+<li>在「可重复读」隔离级别下，可能发生<strong>幻读</strong>现象，但是不可能发生脏读和不可重复读现象；</li>
+<li>在「串行化」隔离级别下，脏读、不可重复读和幻读现象都不可能会发生。</li>
+</ul>
+<p>要解决脏读现象，就要将隔离级别升级到读已提交以上的隔离级别，要解决不可重复读现象，就要将隔离级别升级到可重复读以上的隔离级别。</p>
+<p>而对于幻读现象，不建议将隔离级别升级为串行化，因为这会导致数据库并发时性能很差。MySQL InnoDB 引擎的默认隔离级别虽然是「可重复读」，但是它很大程度上避免幻读现象，解决的方案有两种：</p>
+<ul>
+<li>针对<strong>快照读</strong>（普通 select 语句），是<strong>通过 MVCC 方式解决了幻读</strong>，因为可重复读隔离级别下，事务执行过程中看到的数据，一直跟这个事务启动时看到的数据是一致的，即使中途有其他事务插入了一条数据，是查询不出来这条数据的，所以就很好了避免幻读问题。</li>
+<li>针对<strong>当前读</strong>（select … for update 等语句），是<strong>通过 next-key lock（记录锁+间隙锁）方式解决了幻读</strong>，因为当执行 select … for update 语句的时候，会加上 next-key lock，如果有其他事务在 next-key lock 锁范围内插入了一条记录，那么这个插入语句就会被阻塞，无法成功插入，所以就很好了避免幻读问题。</li>
+</ul>
+<p>对于「读提交」和「可重复读」隔离级别的事务来说，它们是通过 Read View 来实现的，它们的区别在于创建 Read View 的时机不同：</p>
+<ul>
+<li>「读提交」隔离级别是在<strong>每个 select 都会生成一个新的 Read View，</strong>也意味着，事务期间的多次读取同一条数据，前后两次读的数据可能会出现不一致，因为可能这期间另外一个事务修改了该记录，并提交了事务。</li>
+<li>「可重复读」隔离级别是<strong>启动事务时生成一个 Read View</strong>，然后整个事务期间都在用这个 Read View，<strong>这样就保证了在事务期间读到的数据都是事务启动前的记录。</strong></li>
+</ul>
+<p>这两个隔离级别实现是通过「事务的 Read View 里的字段」和「记录中的两个隐藏列」的比对，来控制并发事务访问同一个记录时的行为，这就叫 MVCC（多版本并发控制）。</p>
+<p>在可重复读隔离级别中，普通的 select 语句就是基于 MVCC 实现的快照读，也就是不会加锁的。而 select .. for update 语句就不是快照读了，而是当前读了，也就是每次读都是拿到最新版本的数据，但是它会对读到的记录加上 next-key lock 锁。</p>
+<h2 id="9、MySQL-可重复读隔离级别，完全解决幻读了吗？"><a href="#9、MySQL-可重复读隔离级别，完全解决幻读了吗？" class="headerlink" title="9、MySQL 可重复读隔离级别，完全解决幻读了吗？"></a>9、MySQL 可重复读隔离级别，完全解决幻读了吗？</h2><p>MySQL InnoDB 引擎的可重复读隔离级别（默认隔离级），根据不同的查询方式，分别提出了避免幻读的方案：</p>
+<ul>
+<li>针对<strong>快照读</strong>（普通 select 语句），是通过 MVCC 方式解决了幻读。</li>
+<li>针对<strong>当前读</strong>（select … for update 等语句），是通过 next-key lock（记录锁+间隙锁）方式解决了幻读。</li>
+</ul>
+<p>我举例了两个发生幻读场景的例子。</p>
+<p>第一个例子：对于快照读， MVCC 并不能完全避免幻读现象。因为当事务 A 更新了一条事务 B 插入的记录，那么事务 A 前后两次查询的记录条目就不一样了，所以就发生幻读。</p>
+<p>第二个例子：对于当前读，如果事务开启后，并没有执行当前读，而是先快照读，然后这期间如果其他事务插入了一条记录，那么事务后续使用当前读进行查询的时候，就会发现两次查询的记录条目就不一样了，所以就发生幻读。</p>
+<p>所以，<strong>MySQL 可重复读隔离级别并没有彻底解决幻读，只是很大程度上避免了幻读现象的发生。</strong></p>
+<p>要避免这类特殊场景下发生幻读的现象的话，就是尽量在开启事务之后，马上执行 select … for update 这类当前读的语句，因为它会对记录加 next-key lock，从而避免其他事务插入一条新记录。</p>
 
                 
               </div>
