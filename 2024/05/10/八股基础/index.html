@@ -24,7 +24,7 @@
 <meta property="og:description" content="计算机网络1、从输入URL到页面展示期间发生了什么？（1）检查缓存：浏览器收到用户请求后，先检查浏览器缓存里是否有该资源，如果有直接返回；如果没有，进入下一步网络请求。 （2）DNS域名解析：进行网络请求之前需要获取请求域名的IP地址，（HTTP协议）。如果是HTTPS，还需要建立TLS连接。DNS解析时会按照本地浏览器缓存-&gt;本地HOST文件-&gt;路由器缓存-&gt;DNS服务器-&amp;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-05-25T06:48:04.238Z">
+<meta property="article:modified_time" content="2024-05-26T01:41:14.402Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          30k 字
+          31k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          251 分钟
+          260 分钟
         
       </span>
     
@@ -392,12 +392,12 @@
 <p>本地DNS服务器接着向顶级域DNS服务器发送查询请求，顶级域DNS服务器也不负责具体的域名解析，它会告诉本地DNS服务器前往哪个权威域名DNS服务器发送查询请求。</p>
 <p>本地DNS服务器接着向权威DNS服务器发送查询请求，权威DNS服务器是负责存储特定域名和IP地址映射的服务器。当权威DNS服务器收到查询请求是，会查找“example.com”域名对应的IP地址，并将结果返回给本地DNS服务器。</p>
 <p>本地DNS服务器将收到的IP地址返回给浏览器，并将域名解析结果缓存在本地，以便下次更快响应。</p>
-<h2 id="（10）HTTP多个TCP连接怎么实现"><a href="#（10）HTTP多个TCP连接怎么实现" class="headerlink" title="（10）HTTP多个TCP连接怎么实现"></a>（10）HTTP多个TCP连接怎么实现</h2><p>多个tcp连接是靠某些服务器对Connection： keep-alive的Header的支持。即完成这个HTTP请求之后，不要断开HTTP请求使用的TCP连接，这样的好处是连接可以被重复使用，之后发送的HTTP请求不需要重新建立新的TCP连接，并且SSL的开销也可以避免。</p>
-<h2 id="（11）TCP的keepalive和HTTP的keep-alive是一个东西吗"><a href="#（11）TCP的keepalive和HTTP的keep-alive是一个东西吗" class="headerlink" title="（11）TCP的keepalive和HTTP的keep-alive是一个东西吗"></a>（11）TCP的keepalive和HTTP的keep-alive是一个东西吗</h2><p>HTTP的keep-alive，是由应用层（用户态）实现的，成为HTTP长连接：—<strong>保持成为长连接</strong></p>
+<h3 id="（10）HTTP多个TCP连接怎么实现"><a href="#（10）HTTP多个TCP连接怎么实现" class="headerlink" title="（10）HTTP多个TCP连接怎么实现"></a>（10）HTTP多个TCP连接怎么实现</h3><p>多个tcp连接是靠某些服务器对Connection： keep-alive的Header的支持。即完成这个HTTP请求之后，不要断开HTTP请求使用的TCP连接，这样的好处是连接可以被重复使用，之后发送的HTTP请求不需要重新建立新的TCP连接，并且SSL的开销也可以避免。</p>
+<h3 id="（11）TCP的keepalive和HTTP的keep-alive是一个东西吗"><a href="#（11）TCP的keepalive和HTTP的keep-alive是一个东西吗" class="headerlink" title="（11）TCP的keepalive和HTTP的keep-alive是一个东西吗"></a>（11）TCP的keepalive和HTTP的keep-alive是一个东西吗</h3><p>HTTP的keep-alive，是由应用层（用户态）实现的，成为HTTP长连接：—<strong>保持成为长连接</strong></p>
 <p>每次请求都要经历这样的过程：建立TCP-&gt;请求资源-&gt;响应资源-&gt;释放连接，这是HTTP短连接，但是这样每次建立连接都只能请求一次资源，所以HTTP通过keep-alive实现了使用同一个TCP连接来发送和接收多个HTTP请求，避免了连接建立和释放的开销，即HTTP长连接。</p>
 <p>TCP的keepalive，是由TCP层（内核态）实现的，称为TCP保活机制。—<strong>判断是否存活</strong></p>
 <p>TCP有一个定时任务倒计时，超时后会触发任务，内容是发送一个探测报文给对端，用来判断对端是否存活。</p>
-<h2 id="12、TCP连接如何确保可靠性"><a href="#12、TCP连接如何确保可靠性" class="headerlink" title="12、TCP连接如何确保可靠性"></a>12、TCP连接如何确保可靠性</h2><p>1、数据块大小控制：应用数据被分割成TCP认为最合适发送的数据块，在传输给网络层，数据块被称为报文段或段。</p>
+<h2 id="3、TCP连接如何确保可靠性"><a href="#3、TCP连接如何确保可靠性" class="headerlink" title="3、TCP连接如何确保可靠性"></a>3、TCP连接如何确保可靠性</h2><p>1、数据块大小控制：应用数据被分割成TCP认为最合适发送的数据块，在传输给网络层，数据块被称为报文段或段。</p>
 <p>2、序列号：TCP给每个数据包指定序列号，接收方根据序列号对数据包进行排序，并根据序列号对数据包进行去重。</p>
 <p>3、校验和：TCP将保持首部和数据的校验和，这是一个端到端的校验和，目的是检测数据在传输过程中的任何变化，如果收到的报文的校验和有误，TCP将丢弃这个报文段和不确认收到此报文段（对面要重新发送或采取别的措施）</p>
 <p>4、流量控制：TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据，当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止数据包丢失。TCP利用滑动窗口实现流量控制。</p>
@@ -406,7 +406,7 @@
 <p>7、超时重传：当TCP发出一个数据段后，启动一个定时器，等待目的端的确认收到这个报文段，如果在定时器时间内没收到，将重新发送这个报文段。 <strong>超时重传时间 RTO 的值应该略大于报文往返 RTT 的值</strong></p>
 <p>还有一种实现重传机制的方式叫：<code>SACK</code>（ Selective Acknowledgment）， <strong>选择性确认</strong>。</p>
 <p>这种方式需要在 TCP 头部「选项」字段里加一个 <code>SACK</code> 的东西，它<strong>可以将已收到的数据的信息发送给「发送方」</strong>，这样发送方就可以知道哪些数据收到了，哪些数据没收到，知道了这些信息，就可以<strong>只重传丢失的数据</strong>。</p>
-<h2 id="13、既然提到了拥塞控制，拥塞控制是怎么实现的？"><a href="#13、既然提到了拥塞控制，拥塞控制是怎么实现的？" class="headerlink" title="13、既然提到了拥塞控制，拥塞控制是怎么实现的？"></a>13、既然提到了拥塞控制，拥塞控制是怎么实现的？</h2><p>拥塞控制算法主要有以下几种：</p>
+<h2 id="4、既然提到了拥塞控制，拥塞控制是怎么实现的？"><a href="#4、既然提到了拥塞控制，拥塞控制是怎么实现的？" class="headerlink" title="4、既然提到了拥塞控制，拥塞控制是怎么实现的？"></a>4、既然提到了拥塞控制，拥塞控制是怎么实现的？</h2><p>拥塞控制算法主要有以下几种：</p>
 <p>1、慢启动</p>
 <p>在连接刚开始时，发送方会逐渐增加发送窗口的大小，以指数增长的速度增加发送窗口的数据量。</p>
 <p>2、拥塞避免</p>
@@ -417,7 +417,7 @@
 <p>当发送方发送的数据包丢失或者网络出现拥塞时，接收方会重复发送确认通知（ACK）来通知发送方有数据丢失，当发送方收到三次重复确认时，在超时时间到期内立刻重新发送丢失的数据包，而不是等超时之后再发，这样可以减少网络的拥塞程度。</p>
 <p>5、拥塞窗口调整</p>
 <p>发送方根据网络的拥塞程度动态调整发送窗口的大小，通过监测网络延迟和丢包情况来确定合适的发送速率，以避免网络拥塞。</p>
-<h2 id="14、Cookie和Session是什么，有什么区别？"><a href="#14、Cookie和Session是什么，有什么区别？" class="headerlink" title="14、Cookie和Session是什么，有什么区别？"></a>14、Cookie和Session是什么，有什么区别？</h2><p>Cookie和Session都用于管理用户的状态和身份。</p>
+<h2 id="5、Cookie和Session是什么，有什么区别？"><a href="#5、Cookie和Session是什么，有什么区别？" class="headerlink" title="5、Cookie和Session是什么，有什么区别？"></a>5、Cookie和Session是什么，有什么区别？</h2><p>Cookie和Session都用于管理用户的状态和身份。</p>
 <p>Cookie通过在客户端记录信息来确定用户身份。</p>
 <p>Session通过在服务器端记录信息确定用户身份。</p>
 <p>1、Cookie</p>
@@ -1053,7 +1053,7 @@
 <p>1、undo log 两大作用：</p>
 <ul>
 <li><strong>实现事务回滚，保障事务的原子性</strong>。事务处理过程中，如果出现了错误或者用户执 行了 ROLLBACK 语句，MySQL 可以利用 undo log 中的历史数据将数据恢复到事务开始之前的状态。</li>
-<li><strong>实现 MVCC（多版本并发控制）关键因素之一</strong>。MVCC 是通过 Read View + undo log 实现的。undo log 为每条记录保存多份历史数据，MySQL 在执行快照读（普通 select 语句）的时候，会根据事务的 Read View 里的信息，顺着 undo log 的版本链找到满足其可见性的记录。</li>
+<li><strong>实现 MVCC（多版本并发控制）关键因素之一</strong>。MVCC 是通过 Read View + undo log 实现的。undo log 为每条记录保存多份历史数据，MySQL 在执行快照读（普通 select 语句）的时候，会根据事务的 Read View 里的信息，<strong>顺着 undo log 的版本链</strong>找到满足其可见性的记录。</li>
 </ul>
 <p>2、redo log 和 undo log 区别在哪？</p>
 <p>这两种日志是属于 InnoDB 存储引擎的日志，它们的区别在于：</p>
@@ -1061,7 +1061,7 @@
 <li>redo log 记录了此次事务「<strong>完成后</strong>」的数据状态，记录的是更新<strong>之后</strong>的值；</li>
 <li>undo log 记录了此次事务「<strong>开始前</strong>」的数据状态，记录的是更新<strong>之前</strong>的值；</li>
 </ul>
-<p>事务提交之前发生了崩溃，重启后会通过 undo log 回滚事务，事务提交之后发生了崩溃，重启后会通过 redo log 恢复事务。<strong>Redo</strong> log 保证了事务四大特性中的持久性。</p>
+<p><strong>事务提交之前</strong>发生了崩溃，重启后会通过 undo log 回滚事务，<strong>事务提交之后</strong>发生了崩溃，重启后会通过 redo log 恢复事务。<strong>Redo</strong> log 保证了事务四大特性中的<strong>持久性。</strong></p>
 <p>3、为什么需要 redo log 这个问题我们有两个答案：</p>
 <ul>
 <li><strong>实现事务的持久性，让 MySQL 有 crash-safe 的能力</strong>，能够保证 MySQL 在任何时间段突然崩溃，重启后之前已提交的记录都不会丢失；</li>
@@ -1092,13 +1092,43 @@
 <p><em>3、写入方式不同：</em></p>
 <ul>
 <li>binlog 是追加写，写满一个文件，就创建一个新的文件继续写，不会覆盖以前的日志，保存的是全量的日志。</li>
-<li>redo log 是循环写，日志空间大小是固定，全部写满就从头开始，保存未被刷入磁盘的脏页日志。</li>
+<li><strong>redo log 是循环写</strong>，日志空间大小是固定，全部写满就从头开始，保存未被刷入磁盘的脏页日志。</li>
 </ul>
 <p><em>4、用途不同：</em></p>
 <ul>
 <li>binlog 用于备份恢复、主从复制；</li>
 <li>redo log 用于掉电等故障恢复。</li>
 </ul>
+<h2 id="13、MySQL-磁盘-I-O-很高，有什么优化的方法？"><a href="#13、MySQL-磁盘-I-O-很高，有什么优化的方法？" class="headerlink" title="13、MySQL 磁盘 I&#x2F;O 很高，有什么优化的方法？"></a>13、MySQL 磁盘 I&#x2F;O 很高，有什么优化的方法？</h2><p>现在我们知道事务在提交的时候，需要将 binlog 和 redo log 持久化到磁盘，那么如果出现 MySQL 磁盘 I&#x2F;O 很高的现象，我们可以通过控制以下参数，来 “延迟” binlog 和 redo log 刷盘的时机，从而降低磁盘 I&#x2F;O 的频率：</p>
+<ul>
+<li>设置组提交的两个参数： binlog_group_commit_sync_delay 和 binlog_group_commit_sync_no_delay_count 参数，延迟 binlog 刷盘的时机，从而减少 binlog 的刷盘次数。这个方法是基于“额外的故意等待”来实现的，因此可能会增加语句的响应时间，但即使 MySQL 进程中途挂了，也没有丢失数据的风险，因为 binlog 早被写入到 page cache 了，只要系统没有宕机，缓存在 page cache 里的 binlog 就会被持久化到磁盘。</li>
+<li>将 sync_binlog 设置为大于 1 的值（比较常见是 100~1000），表示每次提交事务都 write，但累积 N 个事务后才 fsync，相当于延迟了 binlog 刷盘的时机。但是这样做的风险是，主机掉电时会丢 N 个事务的 binlog 日志。</li>
+<li>将 innodb_flush_log_at_trx_commit 设置为 2。表示每次事务提交时，都只是缓存在 redo log buffer 里的 redo log 写到 redo log 文件，注意写入到「 redo log 文件」并不意味着写入到了磁盘，因为操作系统的文件系统中有个 Page Cache，专门用来缓存文件数据的，所以写入「 redo log文件」意味着写入到了操作系统的文件缓存，然后交由操作系统控制持久化到磁盘的时机。但是这样做的风险是，主机掉电的时候会丢数据。</li>
+</ul>
+<h2 id="14、总结"><a href="#14、总结" class="headerlink" title="14、总结"></a>14、总结</h2><p>具体更新一条记录 <code>UPDATE t_user SET name = &#39;xiaolin&#39; WHERE id = 1;</code> 的流程如下:</p>
+<ol>
+<li>执行器负责具体执行，会调用存储引擎的接口，通过主键索引树搜索获取 id &#x3D; 1 这一行记录：<ul>
+<li>如果 id&#x3D;1 这一行所在的数据页本来就在 buffer pool 中，就直接返回给执行器更新；</li>
+<li>如果记录不在 buffer pool，将数据页从磁盘读入到 buffer pool，返回记录给执行器。</li>
+</ul>
+</li>
+<li>执行器得到聚簇索引记录后，会看一下更新前的记录和更新后的记录是否一样：<ul>
+<li>如果一样的话就不进行后续更新流程；</li>
+<li>如果不一样的话就把更新前的记录和更新后的记录都当作参数传给 InnoDB 层，让 InnoDB 真正的执行更新记录的操作；</li>
+</ul>
+</li>
+<li>开启事务， InnoDB 层更新记录前，首先要记录相应的 undo log，因为这是更新操作，需要把被更新的列的旧值记下来，也就是要生成一条 undo log，undo log 会写入 Buffer Pool 中的 Undo 页面，不过在内存修改该 Undo 页面后，需要记录对应的 redo log。</li>
+<li>InnoDB 层开始更新记录，会先更新内存（同时标记为脏页），然后将记录写到 redo log 里面，这个时候更新就算完成了。为了减少磁盘I&#x2F;O，不会立即将脏页写入磁盘，后续由后台线程选择一个合适的时机将脏页写入到磁盘。这就是 <strong>WAL 技术</strong>，MySQL 的写操作并不是立刻写到磁盘上，而是先写 redo 日志，然后在合适的时间再将修改的行数据写到磁盘上。</li>
+<li>至此，一条记录更新完了。</li>
+<li>在一条更新语句执行完成后，然后开始记录该语句对应的 binlog，此时记录的 binlog 会被保存到 binlog cache，并没有刷新到硬盘上的 binlog 文件，在事务提交时才会统一将该事务运行过程中的所有 binlog 刷新到硬盘。</li>
+<li>事务提交（为了方便说明，这里不说组提交的过程，只说<strong>两阶段提交</strong>）：<ul>
+<li><strong>prepare 阶段</strong>：将 redo log 对应的事务状态设置为 prepare，然后将 redo log 刷新到硬盘；</li>
+<li><strong>commit 阶段</strong>：将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为 commit（将事务设置为 commit 状态后，刷入到磁盘 redo log 文件）；</li>
+</ul>
+</li>
+<li>至此，一条更新语句执行完成。</li>
+</ol>
+<p><strong>为什么需要两阶段提交：</strong>事务提交后，redo log 和 binlog 都要持久化到磁盘，但是这两个是独立的逻辑，可能出现半成功的状态，这样就造成两份日志之间的逻辑不一致。</p>
 
                 
               </div>
