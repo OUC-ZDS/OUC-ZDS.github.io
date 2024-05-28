@@ -24,7 +24,7 @@
 <meta property="og:description" content="计算机网络1、从输入URL到页面展示期间发生了什么？（1）检查缓存：浏览器收到用户请求后，先检查浏览器缓存里是否有该资源，如果有直接返回；如果没有，进入下一步网络请求。 （2）DNS域名解析：进行网络请求之前需要获取请求域名的IP地址，（HTTP协议）。如果是HTTPS，还需要建立TLS连接。DNS解析时会按照本地浏览器缓存-&gt;本地HOST文件-&gt;路由器缓存-&gt;DNS服务器-&amp;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-05-26T01:41:14.402Z">
+<meta property="article:modified_time" content="2024-05-28T03:07:42.736Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          31k 字
+          34k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          260 分钟
+          283 分钟
         
       </span>
     
@@ -443,10 +443,55 @@
 <p>6、静态多态：也称为编译时多态，包括函数重载和模版，由于在编译时已经确定了调用哪个函数，所以称为静态多态。</p>
 <h2 id="3、new-和-malloc的区别"><a href="#3、new-和-malloc的区别" class="headerlink" title="3、new 和 malloc的区别"></a>3、new 和 malloc的区别</h2><p>1、new内存分配失败时，会抛出bac_alloc异常，它不会返回NULL；malloc分配内存失败时返回NULL。</p>
 <p>  2、使⽤new操作符申请内存分配时⽆须指定内存块的⼤⼩，⽽malloc则需要显式地指出所需内存的尺⼨。 </p>
-<p> 3、opeartor new &#x2F;operator delete可以被᯿载，⽽malloc&#x2F;free并不允许᯿载。 </p>
+<p> 3、opeartor new &#x2F;operator delete可以被重载，⽽malloc&#x2F;free并不允许重载。 </p>
 <p> 4、new&#x2F;delete会调⽤对象的构造函数&#x2F;析构函数以完成对象的构造&#x2F;析构。⽽malloc则不会  </p>
 <p>5、malloc与free是C++&#x2F;C语⾔的标准库函数,new&#x2F;delete是C++的运算符  </p>
 <p>6、new操作符从⾃由存储区上为对象动态分配内存空间，⽽malloc函数从堆上动态分配内存。</p>
+<h2 id="4、讲一讲封装、继承、多态是什么？"><a href="#4、讲一讲封装、继承、多态是什么？" class="headerlink" title="4、讲一讲封装、继承、多态是什么？"></a>4、讲一讲封装、继承、多态是什么？</h2><p><strong>封装：</strong>将一个功能或者方法的实现过程以及所需要的数据封装成一个函数，对外提供一个公共的访问接口以供其他程序调用，降低耦合性。这么做使得类成为一个具有内部数据自我隐藏能力、功能独立的软件模块。</p>
+<p>意义：保护类中的成员，保护或者防止代码在无意中被破坏，避免了让类外成员直接访问或修改类中的数据，只能通过类提供的接口进行访问。</p>
+<p><strong>继承：</strong>子类可以继承父类的特征和行为，可以复用基类（父类）的全体数据和成员函数具有从基类（父类）复制而来的成员数据和成员函数。（基类的私有成员可以被继承，但是无法被访问）。其中<strong>构造函数、析构函数、友元函数、静态数据成员、静态成员函数</strong>都不能被继承。基类中成员的访问方式只能决定派生类能否访问它们。增强了代码耦合性，当父类中的成员变量或者类本身被final关键字修饰时，修饰的类不能被继承，修饰的成员变量不能重写或修改。</p>
+<p>意义：基类的程序代码可以被派生类服用，提高了软件复用的效率，缩短了软件开发的周期。</p>
+<p><strong>多态：</strong>不同继承类的对象对同一消息做出不同的响应，基类的指针指向或绑定到派生类的对象，使得基类指针呈现不同的表现形式。</p>
+<p>意义：对已存在的代码具有可替代性，对代码具有可扩充性，新增子类不会影响已存在类的各种性质，在程序中体现了灵活多样的操作，提高了使用效率，简化了对应用代码的编写和修改过程。</p>
+<h2 id="5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？"><a href="#5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？" class="headerlink" title="5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？"></a>5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？</h2><p>实现方式：多态分为动态多态（动态多态是利用虚函数实现运行时的多态，即在系统编译的时候并不知道程序将要调用哪一个函数，只有在运行到这里的时候才能确定接下来会跳转到哪一个函数。）和静态多态（又称编译期多态，即在系统编译期间就可以确定程序将要执行哪个函数），其中动态多态是通过虚函数实现的，虚函数是类的成员函数，存在存储虚函数指针的表叫做虚函数表，虚函数表是一个存储类成员虚函数的指针，每个指针都指向调用它的地方，当子类调用虚函数时，就会去虚表里面找自己对应的函数指针，从而实现“谁调用、实现谁”从而实现多态。而静态多态则是通过函数重载（函数名相同，参数不同，两个函数在同一作用域），运算符重载，和重定义（又叫隐藏，指的是在继承关系中，子类实现了一个和父类名字一样的函数，（只关注函数名，和参数与返回值无关）这样的话子类的函数就把父类的同名函数隐藏了。隐藏只与函数名有关，与参数没有关系.）来实现的。</p>
+<p>优点：加强代码的可扩展性，可替换性，增强程序的灵活性，提高使用效率，简化对应用代码的编写和修改过程。</p>
+<h2 id="6、final标识符的作用是什么"><a href="#6、final标识符的作用是什么" class="headerlink" title="6、final标识符的作用是什么"></a>6、final标识符的作用是什么</h2><p>放在类的后面表示该类无法被继承，也就是阻止了从类的继承，放在虚函数后面该虚函数无法被重写，表示阻止虚函数的重载</p>
+<h2 id="7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的"><a href="#7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的" class="headerlink" title="7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的"></a>7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的</h2><p>在C++中，虚函数的实现原理基于两个关键概念：虚函数表和虚函数指针</p>
+<p>虚函数表：每个包含虚函数的类都会生成一个虚函数表，其中存储着该类中所有虚函数的地址。虚函数表是一个由指针构成的数组，每个指针指向一个虚函数的实现代码。</p>
+<p>虚函数指针：在对象的内存布局中，编译器会添加一个额外的指针，称为虚函数指针或虚表指针。这个指针指向该对象对应的虚函数表，从而让程序能够动态的调用虚函数。</p>
+<p>当一个基类指针或引用调用虚函数时，编译器会使用虚表指针来查找该对象对应的虚函数表，并根据函数在虚函数表中的位置来调用正确的虚函数。</p>
+<p>在编译阶段生成，虚函数和普通函数一样存放在代码段，只是它的指针又存放在了虚表之中。</p>
+<h2 id="8、智能指针的本质是什么，它们的实现原理是什么？"><a href="#8、智能指针的本质是什么，它们的实现原理是什么？" class="headerlink" title="8、智能指针的本质是什么，它们的实现原理是什么？"></a>8、智能指针的本质是什么，它们的实现原理是什么？</h2><p>智能指针本质是一个封装了一个原始C++指针的类模板，为了确保动态内存的安全性而产生的。实现原理是通过一个对象存储需要被自动释放的资源，然后依靠对象的析构函数来释放资源。</p>
+<p>智能指针⽤于管理动态内存的对象，其主要⽬的是在避免内存泄漏和⽅便资源管理。</p>
+<p>分为独占智能指针、共享智能指针和弱引用智能指针。</p>
+<p>std::unique_ptr （独占智能指针）提供对动态分配的单⼀对象所有权的独占管理。通过独占所有权，确保只有⼀个 std::unique_ptr 可以拥有指定的内存资源。移动语义和右值引⽤允许 std::unique_ptr 在所有权转移时⾼ 效地进⾏转移。</p>
+<p>std::shared_ptr （共享智能指针）允许多个智能指针共享同⼀块内存资源。内部使⽤引⽤计数来跟踪对象被共享的次数，当计数 为零时，资源被释放。提供更灵活的内存共享，但可能存在循环引⽤的问题。</p>
+<p>std::weak_ptr （弱引用智能指针）⽤于解决 std::shared_ptr 可能导致的循环引⽤问题。 std::weak_ptr 可以从 std::shared_ptr 创建，但不会增加引⽤计数，不会影响资源的释放。 通过 std::weak_ptr::lock() 可以获取⼀个 std::shared_ptr 来访问资源。</p>
+<h2 id="9、匿名函数的本质是什么？他的优点是什么？"><a href="#9、匿名函数的本质是什么？他的优点是什么？" class="headerlink" title="9、匿名函数的本质是什么？他的优点是什么？"></a>9、匿名函数的本质是什么？他的优点是什么？</h2><p>匿名函数本质上是一个对象，在其定义的过程中会创建出一个栈对象，内部通过<strong>重载()符号</strong>实现函数调用的外表。</p>
+<p>优点：使用匿名函数，可以免去函数的声明和定义。这样匿名函数仅在调用函数的时候才会创建函数对象，而调用结束后立即释放，所以匿名函数比非匿名函数更节省空间。</p>
+<h2 id="10、delete-和-free-有什么区别？"><a href="#10、delete-和-free-有什么区别？" class="headerlink" title="10、delete 和 free 有什么区别？"></a>10、delete 和 free 有什么区别？</h2><p>类型安全性： delete 会调⽤对象的析构函数，确保资源被正确释放。 free 不了解对象的构造和析构，只是简单地释放内存块。 </p>
+<p>内存块释放后的⾏为： delete 释放的内存块的指针值会被设置为 nullptr ，以避免ᰀ指针。 free 不会修改指针的值，可能导致ᰀ指针问题。 </p>
+<p>数组的释放： delete 可以正确释放通过 new[] 分配的数组。 free 不了解数组的⼤⼩，不适⽤于释放通过 malloc 分配的数组。</p>
+<h2 id="11、什么是野指针，如何产生以及如何避免？"><a href="#11、什么是野指针，如何产生以及如何避免？" class="headerlink" title="11、什么是野指针，如何产生以及如何避免？"></a>11、什么是野指针，如何产生以及如何避免？</h2><p>野指针是指指向已被释放或无效的的内存地址的指针，使用野指针可能会导致程序崩溃、数据损坏或其他不可预测的行为。通常由以下几种情况产生：</p>
+<p>1、释放后没有置空指针</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span>* ptr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br><span class="hljs-keyword">delete</span> ptr;<br><span class="hljs-comment">// 此时 ptr 成为ᰀ指针，因为它仍然指向已经被释放的内存</span><br>ptr = <span class="hljs-literal">nullptr</span>; <br></code></pre></td></tr></table></figure>
+
+<p>2、返回局部变量的指针（局部变量在函数调用后被销毁，返回的指针成为了野指针&#x2F;悬浮指针）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span>* <span class="hljs-title">createInt</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-type">int</span> x = <span class="hljs-number">10</span>;<br> <span class="hljs-keyword">return</span> &amp;x; <span class="hljs-comment">// x 是局部变ᰁ，函数结束后 x 被销毁，返回的指针成为野指针</span><br>&#125;<br><span class="hljs-comment">// 在使⽤返回值时可能引发未定义⾏为</span><br></code></pre></td></tr></table></figure>
+
+<p>3、释放内存后没有调整指针指向（同1）</p>
+<p>4、函数参数指针被释放</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-type">int</span>* ptr)</span> </span>&#123;<br> <span class="hljs-comment">// 操作 ptr</span><br> <span class="hljs-keyword">delete</span> ptr;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-type">int</span>* ptr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br> <span class="hljs-built_in">foo</span>(ptr);<br> <span class="hljs-comment">// 在 foo 函数中 ptr 被释放，但在 main 函数中仍然可⽤，成为野指针</span><br> <span class="hljs-comment">// 避免：在 foo 函数中不要释放调⽤⽅传递的指针</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的解决方法以及避免野指针的方法：</p>
+<p>1、释放内存后将指针设置为nullptr；2、避免返回局部变量的指针；3、使用智能指针；4、注意函数参数的生命周期，避免在函数内释放调用方传递的指针。</p>
+<h2 id="12、野指针和悬浮指针的区别"><a href="#12、野指针和悬浮指针的区别" class="headerlink" title="12、野指针和悬浮指针的区别"></a>12、野指针和悬浮指针的区别</h2><p>野指针是指向已经被释放或者⽆效的内存地址的指针。通常由于指针指向的内存被释放，但指针本身没有被置为 nullptr 或者重新分配有效的内存，导致指针仍然包含之前的内存地址。使⽤野指针进⾏访问会导致未定义⾏ 为，可能引发程序崩溃、数据损坏等问题。</p>
+<p> 悬浮指针是<strong>指向已经被销毁的对象的引⽤</strong>。当函数返回⼀个局部变量的引⽤，⽽调⽤者使⽤该引⽤时，就可能产⽣ 悬浮引⽤。访问悬浮引⽤会导致未定义⾏为，因为引⽤指向的对象已经被销毁，数据不再有效。</p>
+<h2 id="13、说说C-的内存分配方式"><a href="#13、说说C-的内存分配方式" class="headerlink" title="13、说说C++的内存分配方式"></a>13、说说C++的内存分配方式</h2><p>（1）从静态存储区域分配：内存在程序编译的时候就已经分配好，这块内存在程序的整个运⾏期间都存在，如全局变量，static变量。 </p>
+<p>（2）在栈上创建：在执⾏函数时，函数内局部变量的存储单元都可以在栈上创建，函数执⾏结束时这些存储单元⾃动被释放。栈内存 分配运算内置于处理器的指令集中，效率很⾼，但是分配的内存容量有限。 </p>
+<p>（3）从堆上分配(动态内存分配) 程序在运⾏的时候⽤malloc或new申请任意多少的内存，程序员负责在何时⽤free或delete释放内存。动态内存的 ⽣存期⾃⼰决定，使⽤⾮常灵活。</p>
+<h2 id="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"><a href="#14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数" class="headerlink" title="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"></a>14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数</h2><p>1、成员函数</p>
+<p>是属于类的函数，它们可以访问类的成员变量和其他成员函数。 成员函数可以分为普通成员函数和静态成员函数。 普通成员函数使⽤对象调⽤，可以访问对象的成员变量·。 普通成员函数的声明和定义通常在类的内部，但定义时需要使⽤类名作为限定符。</p>
 <h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1、进程和线程的区别"><a href="#1、进程和线程的区别" class="headerlink" title="1、进程和线程的区别"></a>1、进程和线程的区别</h2><p>进程是系统进行资源分配和调度的基本单位。</p>
 <p>线程是操作系统能够进行运算调度的最小单位。线程是进程的子任务，是进程内的执行单元。一个进程至少有一个线程，一个进程可以运行多个线程，这些线程共享一块内存。</p>
 <p>资源开销：</p>
