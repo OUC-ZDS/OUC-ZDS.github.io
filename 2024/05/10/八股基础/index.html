@@ -23,10 +23,13 @@
 <meta property="og:site_name" content="佑安的个人博客">
 <meta property="og:description" content="计算机网络1、从输入URL到页面展示期间发生了什么？（1）检查缓存：浏览器收到用户请求后，先检查浏览器缓存里是否有该资源，如果有直接返回；如果没有，进入下一步网络请求。 （2）DNS域名解析：进行网络请求之前需要获取请求域名的IP地址，（HTTP协议）。如果是HTTPS，还需要建立TLS连接。DNS解析时会按照本地浏览器缓存-&gt;本地HOST文件-&gt;路由器缓存-&gt;DNS服务器-&amp;g">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a-20230309232253633.png">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-05-28T07:37:24.543Z">
+<meta property="article:modified_time" content="2024-05-29T06:43:03.314Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
   
   
   
@@ -219,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          36k 字
+          41k 字
         
       </span>
     
@@ -230,7 +233,7 @@
         
         
         
-          298 分钟
+          339 分钟
         
       </span>
     
@@ -430,108 +433,6 @@
 <p>数据容量：Cookie存储容量较小，一般为几KB，Session存储容量较大，通常没有固定限制，取决于服务器的配置和资源。</p>
 <p>安全性：Cookie存储于用户浏览器中可以被用户读取和篡改。相比之下，Session存储于服务器上更难被访问和修改。</p>
 <p>传输方式：Cookie在每次HTTP请求中会被自动发送到服务器，而Session ID通常通过Cookie或者URL参数传递。</p>
-<h1 id="C-语言基础"><a href="#C-语言基础" class="headerlink" title="C++语言基础"></a>C++语言基础</h1><h2 id="1、虚函数与纯虚函数的区别"><a href="#1、虚函数与纯虚函数的区别" class="headerlink" title="1、虚函数与纯虚函数的区别"></a>1、虚函数与纯虚函数的区别</h2><p><strong>虚函数</strong> </p>
-<p>有实现： 虚函数有函数声明和实现，即在基类中可以提供默认实现。 </p>
-<p>可选实现： 派⽣类可以选择是否覆盖虚函数。如果派⽣类没有提供实现，将使⽤基类的默认实现。 </p>
-<p>允许实例化： 虚函数的类可以被实例化。即你可以创建⼀个虚函数的类的对象。 调⽤靠对象类型决定： 在运⾏时，根据对象的实际类型来决定调⽤哪个版本的虚函数。 </p>
-<p>⽤ virtual 关键字声明： 虚函数使⽤ virtual 关键字声明，但不包含 &#x3D; 0 。</p>
-<p><strong>纯虚函数</strong> </p>
-<p>没有实现： 纯虚函数没有函数体，只有函数声明，即没有提供默认的实现。 </p>
-<p>强制覆盖： 派⽣类必须提供纯虚函数的具体实现，否则它们也会成为<strong>抽象类</strong>。 </p>
-<p>禁⽌实例化： 包含纯虚函数的类⽆法被实例化，只能⽤于派⽣其他类。</p>
-<p>⽤ &#x3D; 0 声明： 纯虚函数使⽤ &#x3D; 0 在函数声明末尾进⾏声明。</p>
-<p> 为接⼝提供规范： 通过纯虚函数，抽象类提供⼀种接⼝规范，要求派⽣类提供相关实现。</p>
-<h2 id="2、CPP怎么实现多态？"><a href="#2、CPP怎么实现多态？" class="headerlink" title="2、CPP怎么实现多态？"></a>2、CPP怎么实现多态？</h2><p>1、函数重载：通过在同一个作用域内定义多个同名函数，但是参数类型和数量不同，编译器会根据调用时提供的参数来决定调用哪个函数版本。</p>
-<p>2、运算符重载：允许定义或修改大部分运算符的默认行为。</p>
-<p>3、模板：通过模板函数或模板类，可以编写泛型代码，实现对多种类型的操作，而无需知道这些类型的具体细节。</p>
-<p>4、抽象基类：使用包含纯虚函数的类作为接口，强制派生类提供纯虚函数的具体实现。</p>
-<p>5、动态多态：除了虚函数外，还可以通过指针或引用传递基类类型的对象，而在运行时根据对象的实际类型来调用相应的成员函数，这通常与虚函数一起使用。</p>
-<p>6、静态多态：也称为编译时多态，包括函数重载和模版，由于在编译时已经确定了调用哪个函数，所以称为静态多态。</p>
-<h2 id="3、new-和-malloc的区别"><a href="#3、new-和-malloc的区别" class="headerlink" title="3、new 和 malloc的区别"></a>3、new 和 malloc的区别</h2><p>1、new内存分配失败时，会抛出bac_alloc异常，它不会返回NULL；malloc分配内存失败时返回NULL。</p>
-<p>  2、使⽤new操作符申请内存分配时⽆须指定内存块的⼤⼩，⽽malloc则需要显式地指出所需内存的尺⼨。 </p>
-<p> 3、opeartor new &#x2F;operator delete可以被重载，⽽malloc&#x2F;free并不允许重载。 </p>
-<p> 4、new&#x2F;delete会调⽤对象的构造函数&#x2F;析构函数以完成对象的构造&#x2F;析构。⽽malloc则不会  </p>
-<p>5、malloc与free是C++&#x2F;C语⾔的标准库函数,new&#x2F;delete是C++的运算符  </p>
-<p>6、new操作符从⾃由存储区上为对象动态分配内存空间，⽽malloc函数从堆上动态分配内存。</p>
-<h2 id="4、讲一讲封装、继承、多态是什么？"><a href="#4、讲一讲封装、继承、多态是什么？" class="headerlink" title="4、讲一讲封装、继承、多态是什么？"></a>4、讲一讲封装、继承、多态是什么？</h2><p><strong>封装：</strong>将一个功能或者方法的实现过程以及所需要的数据封装成一个函数，对外提供一个公共的访问接口以供其他程序调用，降低耦合性。这么做使得类成为一个具有内部数据自我隐藏能力、功能独立的软件模块。</p>
-<p>意义：保护类中的成员，保护或者防止代码在无意中被破坏，避免了让类外成员直接访问或修改类中的数据，只能通过类提供的接口进行访问。</p>
-<p><strong>继承：</strong>子类可以继承父类的特征和行为，可以复用基类（父类）的全体数据和成员函数具有从基类（父类）复制而来的成员数据和成员函数。（基类的私有成员可以被继承，但是无法被访问）。其中<strong>构造函数、析构函数、友元函数、静态数据成员、静态成员函数</strong>都不能被继承。基类中成员的访问方式只能决定派生类能否访问它们。增强了代码耦合性，当父类中的成员变量或者类本身被final关键字修饰时，修饰的类不能被继承，修饰的成员变量不能重写或修改。</p>
-<p>意义：基类的程序代码可以被派生类服用，提高了软件复用的效率，缩短了软件开发的周期。</p>
-<p><strong>多态：</strong>不同继承类的对象对同一消息做出不同的响应，基类的指针指向或绑定到派生类的对象，使得基类指针呈现不同的表现形式。</p>
-<p>意义：对已存在的代码具有可替代性，对代码具有可扩充性，新增子类不会影响已存在类的各种性质，在程序中体现了灵活多样的操作，提高了使用效率，简化了对应用代码的编写和修改过程。</p>
-<h2 id="5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？"><a href="#5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？" class="headerlink" title="5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？"></a>5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？</h2><p>实现方式：多态分为动态多态（动态多态是利用虚函数实现运行时的多态，即在系统编译的时候并不知道程序将要调用哪一个函数，只有在运行到这里的时候才能确定接下来会跳转到哪一个函数。）和静态多态（又称编译期多态，即在系统编译期间就可以确定程序将要执行哪个函数），其中动态多态是通过虚函数实现的，虚函数是类的成员函数，存在存储虚函数指针的表叫做虚函数表，虚函数表是一个存储类成员虚函数的指针，每个指针都指向调用它的地方，当子类调用虚函数时，就会去虚表里面找自己对应的函数指针，从而实现“谁调用、实现谁”从而实现多态。而静态多态则是通过函数重载（函数名相同，参数不同，两个函数在同一作用域），运算符重载，和重定义（又叫隐藏，指的是在继承关系中，子类实现了一个和父类名字一样的函数，（只关注函数名，和参数与返回值无关）这样的话子类的函数就把父类的同名函数隐藏了。隐藏只与函数名有关，与参数没有关系.）来实现的。</p>
-<p>优点：加强代码的可扩展性，可替换性，增强程序的灵活性，提高使用效率，简化对应用代码的编写和修改过程。</p>
-<h2 id="6、final标识符的作用是什么"><a href="#6、final标识符的作用是什么" class="headerlink" title="6、final标识符的作用是什么"></a>6、final标识符的作用是什么</h2><p>放在类的后面表示该类无法被继承，也就是阻止了从类的继承，放在虚函数后面该虚函数无法被重写，表示阻止虚函数的重载</p>
-<h2 id="7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的"><a href="#7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的" class="headerlink" title="7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的"></a>7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的</h2><p>在C++中，虚函数的实现原理基于两个关键概念：虚函数表和虚函数指针</p>
-<p>虚函数表：每个包含虚函数的类都会生成一个虚函数表，其中存储着该类中所有虚函数的地址。虚函数表是一个由指针构成的数组，每个指针指向一个虚函数的实现代码。</p>
-<p>虚函数指针：在对象的内存布局中，编译器会添加一个额外的指针，称为虚函数指针或虚表指针。这个指针指向该对象对应的虚函数表，从而让程序能够动态的调用虚函数。</p>
-<p>当一个基类指针或引用调用虚函数时，编译器会使用虚表指针来查找该对象对应的虚函数表，并根据函数在虚函数表中的位置来调用正确的虚函数。</p>
-<p>在编译阶段生成，虚函数和普通函数一样存放在代码段，只是它的指针又存放在了虚表之中。</p>
-<h2 id="8、智能指针的本质是什么，它们的实现原理是什么？"><a href="#8、智能指针的本质是什么，它们的实现原理是什么？" class="headerlink" title="8、智能指针的本质是什么，它们的实现原理是什么？"></a>8、智能指针的本质是什么，它们的实现原理是什么？</h2><p>智能指针本质是一个封装了一个原始C++指针的类模板，为了确保动态内存的安全性而产生的。实现原理是通过一个对象存储需要被自动释放的资源，然后依靠对象的析构函数来释放资源。</p>
-<p>智能指针⽤于管理动态内存的对象，其主要⽬的是在避免内存泄漏和⽅便资源管理。</p>
-<p>分为独占智能指针、共享智能指针和弱引用智能指针。</p>
-<p>std::unique_ptr （独占智能指针）提供对动态分配的单⼀对象所有权的独占管理。通过独占所有权，确保只有⼀个 std::unique_ptr 可以拥有指定的内存资源。移动语义和右值引⽤允许 std::unique_ptr 在所有权转移时⾼ 效地进⾏转移。</p>
-<p>std::shared_ptr （共享智能指针）允许多个智能指针共享同⼀块内存资源。内部使⽤引⽤计数来跟踪对象被共享的次数，当计数 为零时，资源被释放。提供更灵活的内存共享，但可能存在循环引⽤的问题。</p>
-<p>std::weak_ptr （弱引用智能指针）⽤于解决 std::shared_ptr 可能导致的循环引⽤问题。 std::weak_ptr 可以从 std::shared_ptr 创建，但不会增加引⽤计数，不会影响资源的释放。 通过 std::weak_ptr::lock() 可以获取⼀个 std::shared_ptr 来访问资源。</p>
-<h2 id="9、匿名函数的本质是什么？他的优点是什么？"><a href="#9、匿名函数的本质是什么？他的优点是什么？" class="headerlink" title="9、匿名函数的本质是什么？他的优点是什么？"></a>9、匿名函数的本质是什么？他的优点是什么？</h2><p>匿名函数本质上是一个对象，在其定义的过程中会创建出一个栈对象，内部通过<strong>重载()符号</strong>实现函数调用的外表。</p>
-<p>优点：使用匿名函数，可以免去函数的声明和定义。这样匿名函数仅在调用函数的时候才会创建函数对象，而调用结束后立即释放，所以匿名函数比非匿名函数更节省空间。</p>
-<h2 id="10、delete-和-free-有什么区别？"><a href="#10、delete-和-free-有什么区别？" class="headerlink" title="10、delete 和 free 有什么区别？"></a>10、delete 和 free 有什么区别？</h2><p>类型安全性： delete 会调⽤对象的析构函数，确保资源被正确释放。 free 不了解对象的构造和析构，只是简单地释放内存块。 </p>
-<p>内存块释放后的⾏为： delete 释放的内存块的指针值会被设置为 nullptr ，以避免ᰀ指针。 free 不会修改指针的值，可能导致ᰀ指针问题。 </p>
-<p>数组的释放： delete 可以正确释放通过 new[] 分配的数组。 free 不了解数组的⼤⼩，不适⽤于释放通过 malloc 分配的数组。</p>
-<h2 id="11、什么是野指针，如何产生以及如何避免？"><a href="#11、什么是野指针，如何产生以及如何避免？" class="headerlink" title="11、什么是野指针，如何产生以及如何避免？"></a>11、什么是野指针，如何产生以及如何避免？</h2><p>野指针是指指向已被释放或无效的的内存地址的指针，使用野指针可能会导致程序崩溃、数据损坏或其他不可预测的行为。通常由以下几种情况产生：</p>
-<p>1、释放后没有置空指针</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span>* ptr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br><span class="hljs-keyword">delete</span> ptr;<br><span class="hljs-comment">// 此时 ptr 成为ᰀ指针，因为它仍然指向已经被释放的内存</span><br>ptr = <span class="hljs-literal">nullptr</span>; <br></code></pre></td></tr></table></figure>
-
-<p>2、返回局部变量的指针（局部变量在函数调用后被销毁，返回的指针成为了野指针&#x2F;悬浮指针）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span>* <span class="hljs-title">createInt</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-type">int</span> x = <span class="hljs-number">10</span>;<br> <span class="hljs-keyword">return</span> &amp;x; <span class="hljs-comment">// x 是局部变ᰁ，函数结束后 x 被销毁，返回的指针成为野指针</span><br>&#125;<br><span class="hljs-comment">// 在使⽤返回值时可能引发未定义⾏为</span><br></code></pre></td></tr></table></figure>
-
-<p>3、释放内存后没有调整指针指向（同1）</p>
-<p>4、函数参数指针被释放</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-type">int</span>* ptr)</span> </span>&#123;<br> <span class="hljs-comment">// 操作 ptr</span><br> <span class="hljs-keyword">delete</span> ptr;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-type">int</span>* ptr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br> <span class="hljs-built_in">foo</span>(ptr);<br> <span class="hljs-comment">// 在 foo 函数中 ptr 被释放，但在 main 函数中仍然可⽤，成为野指针</span><br> <span class="hljs-comment">// 避免：在 foo 函数中不要释放调⽤⽅传递的指针</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>对应的解决方法以及避免野指针的方法：</p>
-<p>1、释放内存后将指针设置为nullptr；2、避免返回局部变量的指针；3、使用智能指针；4、注意函数参数的生命周期，避免在函数内释放调用方传递的指针。</p>
-<h2 id="12、野指针和悬浮指针的区别"><a href="#12、野指针和悬浮指针的区别" class="headerlink" title="12、野指针和悬浮指针的区别"></a>12、野指针和悬浮指针的区别</h2><p>野指针是指向已经被释放或者⽆效的内存地址的指针。通常由于指针指向的内存被释放，但指针本身没有被置为 nullptr 或者重新分配有效的内存，导致指针仍然包含之前的内存地址。使⽤野指针进⾏访问会导致未定义⾏ 为，可能引发程序崩溃、数据损坏等问题。</p>
-<p> 悬浮指针是<strong>指向已经被销毁的对象的引⽤</strong>。当函数返回⼀个局部变量的引⽤，⽽调⽤者使⽤该引⽤时，就可能产⽣ 悬浮引⽤。访问悬浮引⽤会导致未定义⾏为，因为引⽤指向的对象已经被销毁，数据不再有效。</p>
-<h2 id="13、说说C-的内存分配方式"><a href="#13、说说C-的内存分配方式" class="headerlink" title="13、说说C++的内存分配方式"></a>13、说说C++的内存分配方式</h2><p>（1）从静态存储区域分配：内存在程序编译的时候就已经分配好，这块内存在程序的整个运⾏期间都存在，如全局变量，static变量。 </p>
-<p>（2）在栈上创建：在执⾏函数时，函数内局部变量的存储单元都可以在栈上创建，函数执⾏结束时这些存储单元⾃动被释放。栈内存 分配运算内置于处理器的指令集中，效率很⾼，但是分配的内存容量有限。 </p>
-<p>（3）从堆上分配(动态内存分配) 程序在运⾏的时候⽤malloc或new申请任意多少的内存，程序员负责在何时⽤free或delete释放内存。动态内存的 ⽣存期⾃⼰决定，使⽤⾮常灵活。</p>
-<h2 id="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"><a href="#14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数" class="headerlink" title="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"></a>14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数</h2><p>1、成员函数</p>
-<p>是属于类的函数，它们可以访问类的成员变量和其他成员函数。 成员函数可以分为普通成员函数和静态成员函数。 普通成员函数使⽤对象调⽤，可以访问对象的成员变量。 普通成员函数的声明和定义通常在类的内部，但定义时需要使⽤类名作为限定符。</p>
-<p>2、成员变量</p>
-<p>成员变量是属于类的变量，存储在类的每个对象中。 每个对象拥有⼀份成员变量的副本，它们在对象创建时分配，并在对象销毁时释放。 成员变量的访问权限可以是 public 、 private 或 protected 。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">int</span> memberVariable; <span class="hljs-comment">// 成员变量的声明</span><br> <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">memberFunction</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">// 普通成员函数使用对象调用</span><br> <span class="hljs-comment">// 成员函数的实现</span><br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>3、静态成员函数</p>
-<p> 静态成员函数属于类⽽不是对象，因此可以直接通过类名调⽤，⽽不需要创建类的实例。 静态成员函数不能直接访问普通成员变量，因为它们没有隐含的 this 指针。 静态成员函数的声明和定义也通常在类的内部，但在定义时需要使⽤类名作为限定符。</p>
-<p>4、 静态成员变量</p>
-<p> 静态成员变量是属于类⽽不是对象的变量，它们在所有对象之间共享。 静态成员变量通常在类的声明中进⾏声明，但在类的定义外进⾏定义和初始化。 静态成员变量可以通过类名或对象访问。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">static</span> <span class="hljs-type">int</span> staticMemberVariable; <span class="hljs-comment">// 静态成员变量的声明</span><br> <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">staticMemberFunction</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-comment">// 静态成员函数的实现</span><br> &#125;<br>&#125;;<br><span class="hljs-type">int</span> MyClass::staticMemberVariable = <span class="hljs-number">0</span>;<span class="hljs-comment">// 静态成员变量的定义和初始化</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="15、什么是抽象类和纯虚函数？（接1）"><a href="#15、什么是抽象类和纯虚函数？（接1）" class="headerlink" title="15、什么是抽象类和纯虚函数？（接1）"></a>15、什么是抽象类和纯虚函数？（接1）</h2><p>抽象类是不能被实例化的类，它存在的主要⽬的是为了提供⼀个接⼝，供派⽣类继承和实现。抽象类中可以包含普通的成员函数、数据成员和构造函数，但它必须<strong>包含⾄少⼀个纯虚函数</strong>。即在声明中使⽤ virtual 关键字并赋予 函数⼀个 &#x3D; 0 的纯虚函数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractShape</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-comment">// 纯虚函数，提供接⼝</span><br> <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;<br> <span class="hljs-comment">// 普通成员函数</span><br> <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">commonFunction</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-comment">// 具体实现</span><br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>纯虚函数是在抽象类中声明的虚函数，它<strong>没有具体的实现，只有函数的声明</strong>。通过在函数声明的末尾使⽤ &#x3D; 0 ， 可以将虚函数声明为纯虚函数。派⽣类必须实现抽象类中的纯虚函数，否则它们也会成为抽象类。</p>
-<h2 id="16、为什么有虚析构函数，没有虚构造函数？"><a href="#16、为什么有虚析构函数，没有虚构造函数？" class="headerlink" title="16、为什么有虚析构函数，没有虚构造函数？"></a>16、为什么有虚析构函数，没有虚构造函数？</h2><p><strong>虚析构函数</strong>是⼀个带有 virtual 关键字的析构函数。 主要作⽤是确保在通过基类指针删除派⽣类对象时，能够正确调⽤派⽣类的析构函数，从⽽释放对象所占⽤的资源。 通常，如果⼀个类可能被继承，且在其派⽣类中有可能使⽤ delete 运算符来删除通过基类指针指向的对象，那么该基类的析构函数应该声明为虚析构函数。</p>
-<p>因此，<strong>虚析构函数</strong>的作用是：</p>
-<p>1、允许在<strong>运行的时候</strong>根据对象的实际类型调用正确的析构函数，从而实现多态性。</p>
-<p>2、如果基类的析构函数不是虚函数，当通过基类指针删除指向派生类的对象时，只会调用基类的析构函数，不会调用派生类的析构函数，可能会导致派生类的资源未被正确释放，造成内存泄漏。</p>
-<p>构造函数在对象的<strong>创建阶段</strong>被调⽤，对象的类型在构造函数中已经确定。因此，构造函数调⽤不涉及多态性，也就 是说，在对象的构造期间⽆法实现动态绑定。虚构造函数没有意义，因为对象的类型在构造过程中就已经确定，不需要动态地选择构造函数。</p>
-<p>1、从存储空间⻆度：虚函数对应⼀个vtable,这个表的地址是存储在对象的内存空间的。如果将构造函数设置为虚函数，就需要到vtable 中调⽤，可是对象还没有实例化，没有内存空间分配，如何调⽤。（悖论）</p>
-<p> 2、从使⽤⻆度：虚函数主要⽤于在信息不全的情况下，能使重载的函数得到对应的调⽤。构造函数本身就是要初 始化实例，那使⽤虚函数也没有实际意义呀。所以构造函数没有必要是虚函数。虚函数的作⽤在于通过⽗类的 指针或者引⽤来调⽤它的时候能够变成调⽤⼦类的那个成员函数。⽽构造函数是在创建对象时⾃动调⽤的，不可能通过⽗类的指针或者引⽤去调⽤，因此也就规定构造函数不能是虚函数。 </p>
-<p>3、从实现上看，vtable 在构造函数调⽤后才建⽴，因⽽构造函数不可能成为虚函数。从实际含义上看，在调⽤构造 函数时还不能确定对象的真实类型（因为⼦类会调⽗类的构造函数）；⽽且构造函数的作⽤是提供初始化，在对象⽣命期只执⾏⼀次，不是对象的动态⾏为，也没有太⼤的必要成为虚函数。</p>
-<h2 id="17、哪些函数不能被声明为虚函数？"><a href="#17、哪些函数不能被声明为虚函数？" class="headerlink" title="17、哪些函数不能被声明为虚函数？"></a>17、哪些函数不能被声明为虚函数？</h2><p>构造函数：在对象创建时调用，对象的类型在创建时期已经确定，虚函数是在运行阶段动态绑定，二者矛盾。</p>
-<p>普通函数（非成员函数），在编译阶段绑定，只能重载，不能重写。</p>
-<p>静态成员函数：对于每一个类都只有一份代码，共享，不需要动态绑定。</p>
-<p>友元函数：C++不支持友元函数的继承，对于没有继承性质的函数没有虚函数的说法。</p>
-<p>内联成员函数：内联函数就是为了在代码中直接展开，减少函数调⽤花费的代价，虚函数是为了在继承后对象能够准确的执⾏⾃⼰ 的动作，这是不可能统⼀的。（再说了，inline函数在编译时被展开，虚函数在运⾏时才能动态的绑定函数）</p>
-<h2 id="18、深拷贝和浅拷贝的区别"><a href="#18、深拷贝和浅拷贝的区别" class="headerlink" title="18、深拷贝和浅拷贝的区别"></a>18、深拷贝和浅拷贝的区别</h2><p>主要区别是如何处理对象内部动态分配的资源。</p>
-<p>1、深拷贝：</p>
-<p>深拷⻉是对对象的完全独⽴复制，包括对象内部动态分配的资源。在深拷⻉中，不仅复制对象的值，还会复制对象 所指向的堆上的数据。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DeepCopyExample</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">int</span> *data;<br> <span class="hljs-built_in">DeepCopyExample</span>(<span class="hljs-type">const</span> DeepCopyExample &amp;other) &#123;<br> <span class="hljs-comment">// ⼿动分配内存并复制数据</span><br> data = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(*(other.data));<br> &#125;<br> ~<span class="hljs-built_in">DeepCopyExample</span>() &#123;<br> <span class="hljs-comment">// 释放动态分配的资源</span><br> <span class="hljs-keyword">delete</span> data;<br> &#125;<br> DeepCopyExample&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> DeepCopyExample &amp;other) &#123;<span class="hljs-comment">// 重载 = 号 用于深拷贝的赋值</span><br> <span class="hljs-comment">// 复制数据</span><br> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> != &amp;other) &#123;<br> <span class="hljs-keyword">delete</span> data;<br> data = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(*(other.data));<br> &#125;<br> <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>2、 浅拷⻉ ：</p>
-<p>浅拷⻉仅复制对象的值，⽽不涉及对象内部动态分配的资源。在浅拷⻉中，新对象和原对象共享相同的资源，⽽不 是复制⼀份新的资源。</p>
 <h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1、进程和线程的区别"><a href="#1、进程和线程的区别" class="headerlink" title="1、进程和线程的区别"></a>1、进程和线程的区别</h2><p>进程是系统进行资源分配和调度的基本单位。</p>
 <p>线程是操作系统能够进行运算调度的最小单位。线程是进程的子任务，是进程内的执行单元。一个进程至少有一个线程，一个进程可以运行多个线程，这些线程共享一块内存。</p>
 <p>资源开销：</p>
@@ -1214,6 +1115,248 @@
 <li>至此，一条更新语句执行完成。</li>
 </ol>
 <p><strong>为什么需要两阶段提交：</strong>事务提交后，redo log 和 binlog 都要持久化到磁盘，但是这两个是独立的逻辑，可能出现半成功的状态，这样就造成两份日志之间的逻辑不一致。</p>
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="1、什么是Redis？"><a href="#1、什么是Redis？" class="headerlink" title="1、什么是Redis？"></a>1、什么是Redis？</h2><p>Redis是一种基于内存的数据库，对数据的读写操作都在内存中完成，因此读写速度非常快，通常用于缓存、消息队列、分布式锁等场景。</p>
+<p>Redis 提供了多种数据类型来支持不同的业务场景，比如 String(字符串)、Hash(哈希)、 List (列表)、Set(集合)、Zset(有序集合)、Bitmaps（位图）、HyperLogLog（基数统计）、GEO（地理信息）、Stream（流），并且对数据类型的操作都是<strong>原子性</strong>的，因为执行命令由单线程负责的，不存在并发竞争的问题。</p>
+<p>除此之外，Redis 还支持<strong>事务 、持久化、Lua 脚本、多种集群方案（主从复制模式、哨兵模式、切片机群模式）、发布&#x2F;订阅模式，内存淘汰机制、过期删除机制</strong>等等。</p>
+<h2 id="2、Redis-和-Memcached-有什么区别？"><a href="#2、Redis-和-Memcached-有什么区别？" class="headerlink" title="2、Redis 和 Memcached 有什么区别？"></a>2、Redis 和 Memcached 有什么区别？</h2><p>Redis和Memcached都是内存数据库，为什么选择Redis而不选择Memcached？</p>
+<p><strong>相同点：</strong></p>
+<ol>
+<li>都是基于内存的数据库，一般都用来当做缓存使用。</li>
+<li>都有过期策略。</li>
+<li>两者的性能都非常高。</li>
+</ol>
+<p>不同点：</p>
+<ul>
+<li>Redis 支持的<strong>数据类型更丰富</strong>（String、Hash、List、Set、ZSet），而 Memcached 只支持最简单的 key-value 数据类型；</li>
+<li>Redis 支持<strong>数据的持久化</strong>，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用，而 Memcached 没有持久化功能，数据全部存在内存之中，Memcached 重启或者挂掉后，数据就没了；</li>
+<li>Redis 原生<strong>支持集群模式</strong>，Memcached 没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据；</li>
+<li>Redis 支持<strong>发布订阅模型</strong>、<strong>Lua 脚本</strong>、<strong>事务</strong>等功能，而 Memcached 不支持；</li>
+</ul>
+<h2 id="3、为什么用-Redis-作为-MySQL-的缓存？"><a href="#3、为什么用-Redis-作为-MySQL-的缓存？" class="headerlink" title="3、为什么用 Redis 作为 MySQL 的缓存？"></a>3、为什么用 Redis 作为 MySQL 的缓存？</h2><p>主要是因为 <strong>Redis 具备「高性能」和「高并发」两种特性</strong>。</p>
+<p>1、高性能：</p>
+<p>假如用户第一次访问 MySQL 中的某些数据。这个过程会比较慢，因为是从硬盘上读取的。将该用户访问的数据缓存在 Redis 中，这样下一次再访问这些数据的时候就可以直接从缓存中获取了，操作 Redis 缓存就是直接操作内存，所以速度相当快。</p>
+<p>2、高并发</p>
+<p>单台设备的 Redis 的 QPS（Query Per Second，每秒钟处理完请求的次数） 是 MySQL 的 10 倍，Redis 单机的 QPS 能轻松破 10w，而 MySQL 单机的 QPS 很难破 1w。</p>
+<p>所以，直接访问 Redis 能够承受的请求是远远大于直接访问 MySQL 的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样用户的一部分请求会直接到缓存这里而不用经过数据库。</p>
+<h2 id="4、Redis数据结构和使用场景"><a href="#4、Redis数据结构和使用场景" class="headerlink" title="4、Redis数据结构和使用场景"></a>4、Redis数据结构和使用场景</h2><p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>随着 Redis 版本的更新，后面又支持了四种数据类型： <strong>BitMap（2.2 版新增）、HyperLogLog（2.8 版新增）、GEO（3.2 版新增）、Stream（5.0 版新增）</strong>。 Redis 五种数据类型的应用场景：</p>
+<ul>
+<li>String 类型的应用场景：缓存对象、常规计数、分布式锁、共享 session 信息等。</li>
+<li>List 类型的应用场景：消息队列（但是有两个问题：1. 生产者需要自行实现全局唯一 ID；2. 不能以消费组形式消费数据）等。</li>
+<li>Hash 类型：缓存对象、购物车等。</li>
+<li>Set 类型：聚合计算（并集、交集、差集）场景，比如点赞、共同关注、抽奖活动等。</li>
+<li>Zset 类型：排序场景，比如排行榜、电话和姓名排序等。</li>
+</ul>
+<p>Redis 后续版本又支持四种数据类型，它们的应用场景如下：</p>
+<ul>
+<li>BitMap（2.2 版新增）：二值状态统计的场景，比如签到、判断用户登陆状态、连续签到用户总数等；</li>
+<li>HyperLogLog（2.8 版新增）：海量数据基数统计的场景，比如百万级网页 UV 计数等；</li>
+<li>GEO（3.2 版新增）：存储地理位置信息的场景，比如滴滴叫车；</li>
+<li>Stream（5.0 版新增）：消息队列，相比于基于 List 类型实现的消息队列，有这两个特有的特性：自动生成全局唯一消息ID，支持以消费组形式消费数据。</li>
+</ul>
+<h2 id="5、Redis是单线程的吗？"><a href="#5、Redis是单线程的吗？" class="headerlink" title="5、Redis是单线程的吗？"></a>5、Redis是单线程的吗？</h2><p><strong>Redis 单线程指的是「接收客户端请求-&gt;解析请求 -&gt;进行数据读写等操作-&gt;发送数据给客户端」这个过程是由一个线程（主线程）来完成的</strong>，这也是我们常说 Redis 是单线程的原因。</p>
+<p>但是，<strong>Redis 程序并不是单线程的</strong>，Redis 在启动的时候，是会<strong>启动后台线程</strong>（BIO）的：</p>
+<ul>
+<li><strong>Redis 在 2.6 版本</strong>，会启动 2 个后台线程，分别处理关闭文件、AOF 刷盘这两个任务；</li>
+<li><strong>Redis 在 4.0 版本之后</strong>，新增了一个新的后台线程，用来异步释放 Redis 内存，也就是 lazyfree 线程。例如执行 unlink key &#x2F; flushdb async &#x2F; flushall async 等命令，会把这些删除操作交给后台线程来执行，好处是不会导致 Redis 主线程卡顿。因此，当我们要删除一个大 key 的时候，不要使用 del 命令删除，因为 del 是在主线程处理的，这样会导致 Redis 主线程卡顿，因此我们应该使用 unlink 命令来异步删除大key。</li>
+</ul>
+<p>之所以 Redis 为「关闭文件、AOF 刷盘、释放内存」这些任务创建单独的线程来处理，是因为这些任务的操作都是很耗时的，如果把这些任务都放在主线程来处理，那么 Redis 主线程就很容易发生阻塞，这样就无法处理后续的请求了。</p>
+<h2 id="6、Redis采用单线程模式为什么还这么快？"><a href="#6、Redis采用单线程模式为什么还这么快？" class="headerlink" title="6、Redis采用单线程模式为什么还这么快？"></a>6、Redis采用单线程模式为什么还这么快？</h2><ul>
+<li>Redis 的大部分操作<strong>都在内存中完成</strong>，并且采用了高效的数据结构，因此 Redis 瓶颈可能是机器的内存或者网络带宽，而并非 CPU，既然 CPU 不是瓶颈，那么自然就采用单线程的解决方案了；</li>
+<li>Redis 采用单线程模型可以<strong>避免了多线程之间的竞争</strong>，省去了多线程切换带来的时间和性能上的开销，而且也不会导致死锁问题。</li>
+<li>Redis 采用了 <strong>I&#x2F;O 多路复用机制</strong>处理大量的客户端 Socket 请求，IO 多路复用机制是指一个线程处理多个 IO 流，就是我们经常听到的 select&#x2F;epoll 机制。简单来说，在 Redis 只运行单线程的情况下，该机制允许内核中，同时存在多个监听 Socket 和已连接 Socket。内核会一直监听这些 Socket 上的连接请求或数据请求。一旦有请求到达，就会交给 Redis 线程处理，这就实现了一个 Redis 线程处理多个 IO 流的效果。</li>
+</ul>
+<h2 id="7、-Redis-如何实现数据不丢失？"><a href="#7、-Redis-如何实现数据不丢失？" class="headerlink" title="7、 Redis 如何实现数据不丢失？"></a>7、 Redis 如何实现数据不丢失？</h2><p>Redis 的读写操作都是在内存中，所以 Redis 性能才会高，但是当 Redis 重启后，内存中的数据就会丢失，那为了保证内存中的数据不会丢失，Redis 实现了数据持久化的机制，这个机制会把数据存储到磁盘，这样在 Redis 重启就能够从磁盘中恢复原有的数据。</p>
+<p>Redis 共有三种数据持久化的方式：</p>
+<ul>
+<li><strong>AOF 日志</strong>：每执行一条写操作命令，就把该命令以追加的方式写入到一个文件里；</li>
+<li><strong>RDB 快照</strong>：将某一时刻的内存数据，以二进制的方式写入磁盘；</li>
+<li><strong>混合持久化方式</strong>：Redis 4.0 新增的方式，集成了 AOF 和 RBD 的优点；</li>
+</ul>
+<h2 id="8、AOF-日志是如何实现的？"><a href="#8、AOF-日志是如何实现的？" class="headerlink" title="8、AOF 日志是如何实现的？"></a>8、AOF 日志是如何实现的？</h2><p>Redis 在执行完一条写操作命令后，就会把该命令以追加的方式写入到一个文件里，然后 Redis 重启时，会读取该文件记录的命令，然后逐一执行命令的方式来进行数据恢复。</p>
+<blockquote>
+<p>为什么先执行命令，再把数据写入日志呢？</p>
+</blockquote>
+<p>Redis 是先执行写操作命令后，才将该命令记录到 AOF 日志里的，这么做其实有两个好处。</p>
+<ul>
+<li><strong>避免额外的检查开销</strong>：因为如果先将写操作命令记录到 AOF 日志里，再执行该命令的话，如果当前的命令语法有问题，那么如果不进行命令语法检查，该错误的命令记录到 AOF 日志里后，Redis 在使用日志恢复数据时，就可能会出错。</li>
+<li><strong>不会阻塞当前写操作命令的执行</strong>：因为当写操作命令执行成功后，才会将命令记录到 AOF 日志。</li>
+</ul>
+<p>当然，这样做也会带来风险：</p>
+<ul>
+<li><strong>数据可能会丢失：</strong> 执行写操作命令和记录日志是两个过程，那当 Redis 在还没来得及将命令写入到硬盘时，服务器发生宕机了，这个数据就会有丢失的风险。</li>
+<li><strong>可能阻塞其他操作：</strong> 由于写操作命令执行成功后才记录到 AOF 日志，所以不会阻塞当前命令的执行，但因为 AOF 日志也是在主线程中执行，所以当 Redis 把日志文件写入磁盘的时候，还是会阻塞后续的操作无法执行。</li>
+</ul>
+<p>AOF 写回策略有几种？</p>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a-20230309232253633.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<blockquote>
+<p>AOF 日志过大，会触发什么机制？</p>
+</blockquote>
+<p>AOF 日志是一个文件，随着执行的写操作命令越来越多，文件的大小会越来越大。 如果当 AOF 日志文件过大就会带来性能问题，比如重启 Redis 后，需要读 AOF 文件的内容以恢复数据，如果文件过大，整个恢复的过程就会很慢。</p>
+<p><strong>所以，Redis 为了避免 AOF 文件越写越大，提供了 AOF 重写机制，当 AOF 文件的大小超过所设定的阈值后，Redis 就会启用 AOF 重写机制，来压缩 AOF 文件。</strong></p>
+<p>AOF 重写机制是在重写时，读取当前数据库中的所有键值对，然后将每一个键值对用一条命令记录到「新的 AOF 文件」，等到全部记录完后，就将新的 AOF 文件替换掉现有的 AOF 文件。</p>
+<h2 id="9、RDB-快照是如何实现的呢？"><a href="#9、RDB-快照是如何实现的呢？" class="headerlink" title="9、RDB 快照是如何实现的呢？"></a>9、RDB 快照是如何实现的呢？</h2><p>因为 AOF 日志记录的是操作命令，不是实际的数据，所以用 AOF 方法做故障恢复时，需要全量把日志都执行一遍，一旦 AOF 日志非常多，势必会造成 Redis 的恢复操作缓慢。</p>
+<p>为了解决这个问题，Redis 增加了 RDB 快照。所谓的快照，就是记录某一个瞬间东西，比如当我们给风景拍照时，那一个瞬间的画面和信息就记录到了一张照片。</p>
+<p>所以，<strong>RDB 快照就是记录某一个瞬间的内存数据，记录的是实际数据</strong>，而 <strong>AOF 文件记录的是命令操作的日志</strong>，而不是实际的数据。</p>
+<p>因此在 Redis 恢复数据时， RDB 恢复数据的效率会比 AOF 高些，因为直接将 RDB 文件读入内存就可以，不需要像 AOF 那样还需要额外执行操作命令的步骤才能恢复数据。</p>
+<blockquote>
+<p>RDB 做快照时会阻塞线程吗？</p>
+</blockquote>
+<p>Redis 提供了两个命令来生成 RDB 文件，分别是 save 和 bgsave，他们的区别就在于是否在「主线程」里执行：</p>
+<ul>
+<li>执行了 save 命令，就会在主线程生成 RDB 文件，由于和执行操作命令在同一个线程，所以如果写入 RDB 文件的时间太长，<strong>会阻塞主线程</strong>；</li>
+<li>执行了 bgsave 命令，会创建一个子进程来生成 RDB 文件，这样可以<strong>避免主线程的阻塞</strong>；</li>
+</ul>
+<p>这里提一点，Redis 的快照是<strong>全量快照</strong>，也就是说每次执行快照，都是把内存中的「<strong>所有数据</strong>」都记录到磁盘中。所以执行快照是一个比较重的操作，如果频率太频繁，可能会对 Redis 性能产生影响。如果频率太低，服务器故障时，丢失的数据会更多。</p>
+<blockquote>
+<p>RDB 在执行快照的时候，数据能修改吗？</p>
+</blockquote>
+<p><strong>可以的</strong>，执行 bgsave 过程中，Redis 依然<strong>可以继续处理操作命令</strong>的，也就是数据是能被修改的，关键的技术就在于<strong>写时复制技术（Copy-On-Write, COW）。</strong></p>
+<p>执行 bgsave 命令的时候，会通过 fork() 创建子进程，此时子进程和父进程是<strong>共享同一片内存数据</strong>的，因为创建子进程的时候，会复制父进程的页表，但是页表指向的物理内存还是一个，此时如果主线程执行<strong>读操作</strong>，则主线程和 bgsave 子进程互相不影响。如果主线程执行<strong>写操作</strong>，则被修改的数据会复制一份副本，然后 bgsave 子进程会把该副本数据写入 RDB 文件，在这个过程中，主线程仍然可以直接修改原来的数据。</p>
+<h2 id="10、为什么会有混合持久化？"><a href="#10、为什么会有混合持久化？" class="headerlink" title="10、为什么会有混合持久化？"></a>10、为什么会有混合持久化？</h2><p>RDB 优点是数据恢复速度快，但是快照的频率不好把握。频率太低，丢失的数据就会比较多，频率太高，就会影响性能。</p>
+<p>AOF 优点是丢失数据少，但是数据恢复不快。</p>
+<p>为了集成了两者的优点， Redis 4.0 提出了<strong>混合使用 AOF 日志和内存快照</strong>，也叫混合持久化，既保证了 Redis 重启速度，又降低数据丢失风险。</p>
+<p>混合持久化工作在 <strong>AOF 日志重写过程</strong>，当开启了混合持久化时，在 AOF 重写日志时，fork 出来的重写子进程会先将与主线程共享的内存数据以 RDB 方式写入到 AOF 文件，然后主线程处理的操作命令会被记录在重写缓冲区里，重写缓冲区里的增量命令会以 AOF 方式写入到 AOF 文件，写入完成后通知主进程将新的含有 RDB 格式和 AOF 格式的 AOF 文件替换旧的AOF 文件。</p>
+<p>也就是说，使用了混合持久化，AOF 文件的<strong>前半部分是 RDB 格式的全量数据，后半部分是 AOF 格式的增量数据</strong>，这样的好处在于，重启 Redis 加载数据的时候，由于前半部分是 RDB 内容，这样<strong>加载的时候速度会很快</strong>。</p>
+<p>加载完 RDB 的内容后，才会加载后半部分的 AOF 内容，这里的内容是 Redis 后台子进程重写 AOF 期间，主线程处理的操作命令，可以使得<strong>数据更少的丢失</strong>。</p>
+<p><strong>混合持久化优点：</strong></p>
+<ul>
+<li>混合持久化结合了 RDB 和 AOF 持久化的优点，开头为 RDB 的格式，使得 Redis 可以更快的启动，同时结合 AOF 的优点，有减低了大量数据丢失的风险。</li>
+</ul>
+<p><strong>混合持久化缺点：</strong></p>
+<ul>
+<li>AOF 文件中添加了 RDB 格式的内容，使得 AOF 文件的可读性变得很差；</li>
+<li>兼容性差，如果开启混合持久化，那么此混合持久化 AOF 文件，就不能用在 Redis 4.0 之前版本了。</li>
+</ul>
+<h1 id="C-语言基础"><a href="#C-语言基础" class="headerlink" title="C++语言基础"></a>C++语言基础</h1><h2 id="1、虚函数与纯虚函数的区别"><a href="#1、虚函数与纯虚函数的区别" class="headerlink" title="1、虚函数与纯虚函数的区别"></a>1、虚函数与纯虚函数的区别</h2><p><strong>虚函数</strong> </p>
+<p>有实现： 虚函数有函数声明和实现，即在基类中可以提供默认实现。 </p>
+<p>可选实现： 派⽣类可以选择是否覆盖虚函数。如果派⽣类没有提供实现，将使⽤基类的默认实现。 </p>
+<p>允许实例化： 虚函数的类可以被实例化。即你可以创建⼀个虚函数的类的对象。 调⽤靠对象类型决定： 在运⾏时，根据对象的实际类型来决定调⽤哪个版本的虚函数。 </p>
+<p>⽤ virtual 关键字声明： 虚函数使⽤ virtual 关键字声明，但不包含 &#x3D; 0 。</p>
+<p><strong>纯虚函数</strong> </p>
+<p>没有实现： 纯虚函数没有函数体，只有函数声明，即没有提供默认的实现。 </p>
+<p>强制覆盖： 派⽣类必须提供纯虚函数的具体实现，否则它们也会成为<strong>抽象类</strong>。 </p>
+<p>禁⽌实例化： 包含纯虚函数的类⽆法被实例化，只能⽤于派⽣其他类。</p>
+<p>⽤ &#x3D; 0 声明： 纯虚函数使⽤ &#x3D; 0 在函数声明末尾进⾏声明。</p>
+<p> 为接⼝提供规范： 通过纯虚函数，抽象类提供⼀种接⼝规范，要求派⽣类提供相关实现。</p>
+<h2 id="2、CPP怎么实现多态？"><a href="#2、CPP怎么实现多态？" class="headerlink" title="2、CPP怎么实现多态？"></a>2、CPP怎么实现多态？</h2><p>1、函数重载：通过在同一个作用域内定义多个同名函数，但是参数类型和数量不同，编译器会根据调用时提供的参数来决定调用哪个函数版本。</p>
+<p>2、运算符重载：允许定义或修改大部分运算符的默认行为。</p>
+<p>3、模板：通过模板函数或模板类，可以编写泛型代码，实现对多种类型的操作，而无需知道这些类型的具体细节。</p>
+<p>4、抽象基类：使用包含纯虚函数的类作为接口，强制派生类提供纯虚函数的具体实现。</p>
+<p>5、动态多态：除了虚函数外，还可以通过指针或引用传递基类类型的对象，而在运行时根据对象的实际类型来调用相应的成员函数，这通常与虚函数一起使用。</p>
+<p>6、静态多态：也称为编译时多态，包括函数重载和模版，由于在编译时已经确定了调用哪个函数，所以称为静态多态。</p>
+<h2 id="3、new-和-malloc的区别"><a href="#3、new-和-malloc的区别" class="headerlink" title="3、new 和 malloc的区别"></a>3、new 和 malloc的区别</h2><p>1、new内存分配失败时，会抛出bac_alloc异常，它不会返回NULL；malloc分配内存失败时返回NULL。</p>
+<p>  2、使⽤new操作符申请内存分配时⽆须指定内存块的⼤⼩，⽽malloc则需要显式地指出所需内存的尺⼨。 </p>
+<p> 3、opeartor new &#x2F;operator delete可以被重载，⽽malloc&#x2F;free并不允许重载。 </p>
+<p> 4、new&#x2F;delete会调⽤对象的构造函数&#x2F;析构函数以完成对象的构造&#x2F;析构。⽽malloc则不会  </p>
+<p>5、malloc与free是C++&#x2F;C语⾔的标准库函数,new&#x2F;delete是C++的运算符  </p>
+<p>6、new操作符从⾃由存储区上为对象动态分配内存空间，⽽malloc函数从堆上动态分配内存。</p>
+<h2 id="4、讲一讲封装、继承、多态是什么？"><a href="#4、讲一讲封装、继承、多态是什么？" class="headerlink" title="4、讲一讲封装、继承、多态是什么？"></a>4、讲一讲封装、继承、多态是什么？</h2><p><strong>封装：</strong>将一个功能或者方法的实现过程以及所需要的数据封装成一个函数，对外提供一个公共的访问接口以供其他程序调用，降低耦合性。这么做使得类成为一个具有内部数据自我隐藏能力、功能独立的软件模块。</p>
+<p>意义：保护类中的成员，保护或者防止代码在无意中被破坏，避免了让类外成员直接访问或修改类中的数据，只能通过类提供的接口进行访问。</p>
+<p><strong>继承：</strong>子类可以继承父类的特征和行为，可以复用基类（父类）的全体数据和成员函数具有从基类（父类）复制而来的成员数据和成员函数。（基类的私有成员可以被继承，但是无法被访问）。其中<strong>构造函数、析构函数、友元函数、静态数据成员、静态成员函数</strong>都不能被继承。基类中成员的访问方式只能决定派生类能否访问它们。增强了代码耦合性，当父类中的成员变量或者类本身被final关键字修饰时，修饰的类不能被继承，修饰的成员变量不能重写或修改。</p>
+<p>意义：基类的程序代码可以被派生类服用，提高了软件复用的效率，缩短了软件开发的周期。</p>
+<p><strong>多态：</strong>不同继承类的对象对同一消息做出不同的响应，基类的指针指向或绑定到派生类的对象，使得基类指针呈现不同的表现形式。</p>
+<p>意义：对已存在的代码具有可替代性，对代码具有可扩充性，新增子类不会影响已存在类的各种性质，在程序中体现了灵活多样的操作，提高了使用效率，简化了对应用代码的编写和修改过程。</p>
+<h2 id="5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？"><a href="#5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？" class="headerlink" title="5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？"></a>5、多态的实现原理（实现方式）是什么？以及多态的优点（特点）？</h2><p>实现方式：多态分为动态多态（动态多态是利用虚函数实现运行时的多态，即在系统编译的时候并不知道程序将要调用哪一个函数，只有在运行到这里的时候才能确定接下来会跳转到哪一个函数。）和静态多态（又称编译期多态，即在系统编译期间就可以确定程序将要执行哪个函数），其中动态多态是通过虚函数实现的，虚函数是类的成员函数，存在存储虚函数指针的表叫做虚函数表，虚函数表是一个存储类成员虚函数的指针，每个指针都指向调用它的地方，当子类调用虚函数时，就会去虚表里面找自己对应的函数指针，从而实现“谁调用、实现谁”从而实现多态。而静态多态则是通过函数重载（函数名相同，参数不同，两个函数在同一作用域），运算符重载，和重定义（又叫隐藏，指的是在继承关系中，子类实现了一个和父类名字一样的函数，（只关注函数名，和参数与返回值无关）这样的话子类的函数就把父类的同名函数隐藏了。隐藏只与函数名有关，与参数没有关系.）来实现的。</p>
+<p>优点：加强代码的可扩展性，可替换性，增强程序的灵活性，提高使用效率，简化对应用代码的编写和修改过程。</p>
+<h2 id="6、final标识符的作用是什么"><a href="#6、final标识符的作用是什么" class="headerlink" title="6、final标识符的作用是什么"></a>6、final标识符的作用是什么</h2><p>放在类的后面表示该类无法被继承，也就是阻止了从类的继承，放在虚函数后面该虚函数无法被重写，表示阻止虚函数的重载</p>
+<h2 id="7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的"><a href="#7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的" class="headerlink" title="7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的"></a>7、虚函数是怎么实现的？它存放在哪里在内存的哪个区？什么时候生成的</h2><p>在C++中，虚函数的实现原理基于两个关键概念：虚函数表和虚函数指针</p>
+<p>虚函数表：每个包含虚函数的类都会生成一个虚函数表，其中存储着该类中所有虚函数的地址。虚函数表是一个由指针构成的数组，每个指针指向一个虚函数的实现代码。</p>
+<p>虚函数指针：在对象的内存布局中，编译器会添加一个额外的指针，称为虚函数指针或虚表指针。这个指针指向该对象对应的虚函数表，从而让程序能够动态的调用虚函数。</p>
+<p>当一个基类指针或引用调用虚函数时，编译器会使用虚表指针来查找该对象对应的虚函数表，并根据函数在虚函数表中的位置来调用正确的虚函数。</p>
+<p>在编译阶段生成，虚函数和普通函数一样存放在代码段，只是它的指针又存放在了虚表之中。</p>
+<h2 id="8、智能指针的本质是什么，它们的实现原理是什么？"><a href="#8、智能指针的本质是什么，它们的实现原理是什么？" class="headerlink" title="8、智能指针的本质是什么，它们的实现原理是什么？"></a>8、智能指针的本质是什么，它们的实现原理是什么？</h2><p>智能指针本质是一个封装了一个原始C++指针的类模板，为了确保动态内存的安全性而产生的。实现原理是通过一个对象存储需要被自动释放的资源，然后依靠对象的析构函数来释放资源。</p>
+<p>智能指针⽤于管理动态内存的对象，其主要⽬的是在避免内存泄漏和⽅便资源管理。</p>
+<p>分为独占智能指针、共享智能指针和弱引用智能指针。</p>
+<p>std::unique_ptr （独占智能指针）提供对动态分配的单⼀对象所有权的独占管理。通过独占所有权，确保只有⼀个 std::unique_ptr 可以拥有指定的内存资源。移动语义和右值引⽤允许 std::unique_ptr 在所有权转移时⾼ 效地进⾏转移。</p>
+<p>std::shared_ptr （共享智能指针）允许多个智能指针共享同⼀块内存资源。内部使⽤引⽤计数来跟踪对象被共享的次数，当计数 为零时，资源被释放。提供更灵活的内存共享，但可能存在循环引⽤的问题。</p>
+<p>std::weak_ptr （弱引用智能指针）⽤于解决 std::shared_ptr 可能导致的循环引⽤问题。 std::weak_ptr 可以从 std::shared_ptr 创建，但不会增加引⽤计数，不会影响资源的释放。 通过 std::weak_ptr::lock() 可以获取⼀个 std::shared_ptr 来访问资源。</p>
+<h2 id="9、匿名函数的本质是什么？他的优点是什么？"><a href="#9、匿名函数的本质是什么？他的优点是什么？" class="headerlink" title="9、匿名函数的本质是什么？他的优点是什么？"></a>9、匿名函数的本质是什么？他的优点是什么？</h2><p>匿名函数本质上是一个对象，在其定义的过程中会创建出一个栈对象，内部通过<strong>重载()符号</strong>实现函数调用的外表。</p>
+<p>优点：使用匿名函数，可以免去函数的声明和定义。这样匿名函数仅在调用函数的时候才会创建函数对象，而调用结束后立即释放，所以匿名函数比非匿名函数更节省空间。</p>
+<h2 id="10、delete-和-free-有什么区别？"><a href="#10、delete-和-free-有什么区别？" class="headerlink" title="10、delete 和 free 有什么区别？"></a>10、delete 和 free 有什么区别？</h2><p>类型安全性： delete 会调⽤对象的析构函数，确保资源被正确释放。 free 不了解对象的构造和析构，只是简单地释放内存块。 </p>
+<p>内存块释放后的⾏为： delete 释放的内存块的指针值会被设置为 nullptr ，以避免ᰀ指针。 free 不会修改指针的值，可能导致ᰀ指针问题。 </p>
+<p>数组的释放： delete 可以正确释放通过 new[] 分配的数组。 free 不了解数组的⼤⼩，不适⽤于释放通过 malloc 分配的数组。</p>
+<h2 id="11、什么是野指针，如何产生以及如何避免？"><a href="#11、什么是野指针，如何产生以及如何避免？" class="headerlink" title="11、什么是野指针，如何产生以及如何避免？"></a>11、什么是野指针，如何产生以及如何避免？</h2><p>野指针是指指向已被释放或无效的的内存地址的指针，使用野指针可能会导致程序崩溃、数据损坏或其他不可预测的行为。通常由以下几种情况产生：</p>
+<p>1、释放后没有置空指针</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span>* ptr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br><span class="hljs-keyword">delete</span> ptr;<br><span class="hljs-comment">// 此时 ptr 成为ᰀ指针，因为它仍然指向已经被释放的内存</span><br>ptr = <span class="hljs-literal">nullptr</span>; <br></code></pre></td></tr></table></figure>
+
+<p>2、返回局部变量的指针（局部变量在函数调用后被销毁，返回的指针成为了野指针&#x2F;悬浮指针）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span>* <span class="hljs-title">createInt</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-type">int</span> x = <span class="hljs-number">10</span>;<br> <span class="hljs-keyword">return</span> &amp;x; <span class="hljs-comment">// x 是局部变ᰁ，函数结束后 x 被销毁，返回的指针成为野指针</span><br>&#125;<br><span class="hljs-comment">// 在使⽤返回值时可能引发未定义⾏为</span><br></code></pre></td></tr></table></figure>
+
+<p>3、释放内存后没有调整指针指向（同1）</p>
+<p>4、函数参数指针被释放</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-type">int</span>* ptr)</span> </span>&#123;<br> <span class="hljs-comment">// 操作 ptr</span><br> <span class="hljs-keyword">delete</span> ptr;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-type">int</span>* ptr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>;<br> <span class="hljs-built_in">foo</span>(ptr);<br> <span class="hljs-comment">// 在 foo 函数中 ptr 被释放，但在 main 函数中仍然可⽤，成为野指针</span><br> <span class="hljs-comment">// 避免：在 foo 函数中不要释放调⽤⽅传递的指针</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的解决方法以及避免野指针的方法：</p>
+<p>1、释放内存后将指针设置为nullptr；2、避免返回局部变量的指针；3、使用智能指针；4、注意函数参数的生命周期，避免在函数内释放调用方传递的指针。</p>
+<h2 id="12、野指针和悬浮指针的区别"><a href="#12、野指针和悬浮指针的区别" class="headerlink" title="12、野指针和悬浮指针的区别"></a>12、野指针和悬浮指针的区别</h2><p>野指针是指向已经被释放或者⽆效的内存地址的指针。通常由于指针指向的内存被释放，但指针本身没有被置为 nullptr 或者重新分配有效的内存，导致指针仍然包含之前的内存地址。使⽤野指针进⾏访问会导致未定义⾏ 为，可能引发程序崩溃、数据损坏等问题。</p>
+<p> 悬浮指针是<strong>指向已经被销毁的对象的引⽤</strong>。当函数返回⼀个局部变量的引⽤，⽽调⽤者使⽤该引⽤时，就可能产⽣ 悬浮引⽤。访问悬浮引⽤会导致未定义⾏为，因为引⽤指向的对象已经被销毁，数据不再有效。</p>
+<h2 id="13、说说C-的内存分配方式"><a href="#13、说说C-的内存分配方式" class="headerlink" title="13、说说C++的内存分配方式"></a>13、说说C++的内存分配方式</h2><p>（1）从静态存储区域分配：内存在程序编译的时候就已经分配好，这块内存在程序的整个运⾏期间都存在，如全局变量，static变量。 </p>
+<p>（2）在栈上创建：在执⾏函数时，函数内局部变量的存储单元都可以在栈上创建，函数执⾏结束时这些存储单元⾃动被释放。栈内存 分配运算内置于处理器的指令集中，效率很⾼，但是分配的内存容量有限。 </p>
+<p>（3）从堆上分配(动态内存分配) 程序在运⾏的时候⽤malloc或new申请任意多少的内存，程序员负责在何时⽤free或delete释放内存。动态内存的 ⽣存期⾃⼰决定，使⽤⾮常灵活。</p>
+<h2 id="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"><a href="#14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数" class="headerlink" title="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"></a>14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数</h2><p>1、成员函数</p>
+<p>是属于类的函数，它们可以访问类的成员变量和其他成员函数。 成员函数可以分为普通成员函数和静态成员函数。 普通成员函数使⽤对象调⽤，可以访问对象的成员变量。 普通成员函数的声明和定义通常在类的内部，但定义时需要使⽤类名作为限定符。</p>
+<p>2、成员变量</p>
+<p>成员变量是属于类的变量，存储在类的每个对象中。 每个对象拥有⼀份成员变量的副本，它们在对象创建时分配，并在对象销毁时释放。 成员变量的访问权限可以是 public 、 private 或 protected 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">int</span> memberVariable; <span class="hljs-comment">// 成员变量的声明</span><br> <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">memberFunction</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">// 普通成员函数使用对象调用</span><br> <span class="hljs-comment">// 成员函数的实现</span><br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>3、静态成员函数</p>
+<p> 静态成员函数属于类⽽不是对象，因此可以直接通过类名调⽤，⽽不需要创建类的实例。 静态成员函数不能直接访问普通成员变量，因为它们没有隐含的 this 指针。 静态成员函数的声明和定义也通常在类的内部，但在定义时需要使⽤类名作为限定符。</p>
+<p>4、 静态成员变量</p>
+<p> 静态成员变量是属于类⽽不是对象的变量，它们在所有对象之间共享。 静态成员变量通常在类的声明中进⾏声明，但在类的定义外进⾏定义和初始化。 静态成员变量可以通过类名或对象访问。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">static</span> <span class="hljs-type">int</span> staticMemberVariable; <span class="hljs-comment">// 静态成员变量的声明</span><br> <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">staticMemberFunction</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-comment">// 静态成员函数的实现</span><br> &#125;<br>&#125;;<br><span class="hljs-type">int</span> MyClass::staticMemberVariable = <span class="hljs-number">0</span>;<span class="hljs-comment">// 静态成员变量的定义和初始化</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="15、什么是抽象类和纯虚函数？（接1）"><a href="#15、什么是抽象类和纯虚函数？（接1）" class="headerlink" title="15、什么是抽象类和纯虚函数？（接1）"></a>15、什么是抽象类和纯虚函数？（接1）</h2><p>抽象类是不能被实例化的类，它存在的主要⽬的是为了提供⼀个接⼝，供派⽣类继承和实现。抽象类中可以包含普通的成员函数、数据成员和构造函数，但它必须<strong>包含⾄少⼀个纯虚函数</strong>。即在声明中使⽤ virtual 关键字并赋予 函数⼀个 &#x3D; 0 的纯虚函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractShape</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-comment">// 纯虚函数，提供接⼝</span><br> <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>= <span class="hljs-number">0</span>;<br> <span class="hljs-comment">// 普通成员函数</span><br> <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">commonFunction</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-comment">// 具体实现</span><br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>纯虚函数是在抽象类中声明的虚函数，它<strong>没有具体的实现，只有函数的声明</strong>。通过在函数声明的末尾使⽤ &#x3D; 0 ， 可以将虚函数声明为纯虚函数。派⽣类必须实现抽象类中的纯虚函数，否则它们也会成为抽象类。</p>
+<h2 id="16、为什么有虚析构函数，没有虚构造函数？"><a href="#16、为什么有虚析构函数，没有虚构造函数？" class="headerlink" title="16、为什么有虚析构函数，没有虚构造函数？"></a>16、为什么有虚析构函数，没有虚构造函数？</h2><p><strong>虚析构函数</strong>是⼀个带有 virtual 关键字的析构函数。 主要作⽤是确保在通过基类指针删除派⽣类对象时，能够正确调⽤派⽣类的析构函数，从⽽释放对象所占⽤的资源。 通常，如果⼀个类可能被继承，且在其派⽣类中有可能使⽤ delete 运算符来删除通过基类指针指向的对象，那么该基类的析构函数应该声明为虚析构函数。</p>
+<p>因此，<strong>虚析构函数</strong>的作用是：</p>
+<p>1、允许在<strong>运行的时候</strong>根据对象的实际类型调用正确的析构函数，从而实现多态性。</p>
+<p>2、如果基类的析构函数不是虚函数，当通过基类指针删除指向派生类的对象时，只会调用基类的析构函数，不会调用派生类的析构函数，可能会导致派生类的资源未被正确释放，造成内存泄漏。</p>
+<p>构造函数在对象的<strong>创建阶段</strong>被调⽤，对象的类型在构造函数中已经确定。因此，构造函数调⽤不涉及多态性，也就 是说，在对象的构造期间⽆法实现动态绑定。虚构造函数没有意义，因为对象的类型在构造过程中就已经确定，不需要动态地选择构造函数。</p>
+<p>1、从存储空间⻆度：虚函数对应⼀个vtable,这个表的地址是存储在对象的内存空间的。如果将构造函数设置为虚函数，就需要到vtable 中调⽤，可是对象还没有实例化，没有内存空间分配，如何调⽤。（悖论）</p>
+<p> 2、从使⽤⻆度：虚函数主要⽤于在信息不全的情况下，能使重载的函数得到对应的调⽤。构造函数本身就是要初 始化实例，那使⽤虚函数也没有实际意义呀。所以构造函数没有必要是虚函数。虚函数的作⽤在于通过⽗类的 指针或者引⽤来调⽤它的时候能够变成调⽤⼦类的那个成员函数。⽽构造函数是在创建对象时⾃动调⽤的，不可能通过⽗类的指针或者引⽤去调⽤，因此也就规定构造函数不能是虚函数。 </p>
+<p>3、从实现上看，vtable 在构造函数调⽤后才建⽴，因⽽构造函数不可能成为虚函数。从实际含义上看，在调⽤构造 函数时还不能确定对象的真实类型（因为⼦类会调⽗类的构造函数）；⽽且构造函数的作⽤是提供初始化，在对象⽣命期只执⾏⼀次，不是对象的动态⾏为，也没有太⼤的必要成为虚函数。</p>
+<h2 id="17、哪些函数不能被声明为虚函数？"><a href="#17、哪些函数不能被声明为虚函数？" class="headerlink" title="17、哪些函数不能被声明为虚函数？"></a>17、哪些函数不能被声明为虚函数？</h2><p>构造函数：在对象创建时调用，对象的类型在创建时期已经确定，虚函数是在运行阶段动态绑定，二者矛盾。</p>
+<p>普通函数（非成员函数），在编译阶段绑定，只能重载，不能重写。</p>
+<p>静态成员函数：对于每一个类都只有一份代码，共享，不需要动态绑定。</p>
+<p>友元函数：C++不支持友元函数的继承，对于没有继承性质的函数没有虚函数的说法。</p>
+<p>内联成员函数：内联函数就是为了在代码中直接展开，减少函数调⽤花费的代价，虚函数是为了在继承后对象能够准确的执⾏⾃⼰ 的动作，这是不可能统⼀的。（再说了，inline函数在编译时被展开，虚函数在运⾏时才能动态的绑定函数）</p>
+<h2 id="18、深拷贝和浅拷贝的区别"><a href="#18、深拷贝和浅拷贝的区别" class="headerlink" title="18、深拷贝和浅拷贝的区别"></a>18、深拷贝和浅拷贝的区别</h2><p>主要区别是如何处理对象内部动态分配的资源。</p>
+<p>1、深拷贝：</p>
+<p>深拷⻉是对对象的完全独⽴复制，包括对象内部动态分配的资源。在深拷⻉中，不仅复制对象的值，还会复制对象 所指向的堆上的数据。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DeepCopyExample</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">int</span> *data;<br> <span class="hljs-built_in">DeepCopyExample</span>(<span class="hljs-type">const</span> DeepCopyExample &amp;other) &#123;<br> <span class="hljs-comment">// ⼿动分配内存并复制数据</span><br> data = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(*(other.data));<br> &#125;<br> ~<span class="hljs-built_in">DeepCopyExample</span>() &#123;<br> <span class="hljs-comment">// 释放动态分配的资源</span><br> <span class="hljs-keyword">delete</span> data;<br> &#125;<br> DeepCopyExample&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> DeepCopyExample &amp;other) &#123;<span class="hljs-comment">// 重载 = 号 用于深拷贝的赋值</span><br> <span class="hljs-comment">// 复制数据</span><br> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> != &amp;other) &#123;<br> <span class="hljs-keyword">delete</span> data;<br> data = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(*(other.data));<br> &#125;<br> <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>2、 浅拷⻉ ：</p>
+<p>浅拷⻉仅复制对象的值，⽽不涉及对象内部动态分配的资源。在浅拷⻉中，新对象和原对象共享相同的资源，⽽不 是复制⼀份新的资源。</p>
+<h2 id="19、什么是STL（标准模板库），包含哪些组件？"><a href="#19、什么是STL（标准模板库），包含哪些组件？" class="headerlink" title="19、什么是STL（标准模板库），包含哪些组件？"></a>19、什么是STL（标准模板库），包含哪些组件？</h2><p><strong>⼴义上讲</strong>，STL分为3类：Algorithm（算法）、Container（容器）和Iterator（迭代器），容器和算法通过迭代器 可以进⾏⽆缝地连接。 </p>
+<p>详细的说，STL由6部分组成：容器(Container)、算法（Algorithm）、 迭代器（Iterator）、仿函数（Function object）、适配器（Adaptor）、空间配制器（Allocator）。 STL提供了六⼤组件，彼此之间可以组合套⽤，这六⼤组件分别是:容器、算法、迭代器、仿函数、适配器（配接器）、空间配置器。</p>
+<p>  STL六⼤组件的交互关系：</p>
+<p>1、容器通过空间配置器取得数据存储空间 </p>
+<p>2、算法通过迭代器存储容器中的内容  </p>
+<p>3、仿函数可以协助算法完成不同的策略的变化  </p>
+<p>4、适配器可以修饰仿函数</p>
+<p>容器: vector map list deque set等用来存放数据，从实现角度看是一种类模板（class template）</p>
+<p>算法：sort find for_each copy等，从实现角度来看，是一种函数模板（function template）</p>
+<p>迭代器：扮演着容器与算法之间的粘合剂，从实现⻆度来看，迭代器是⼀种将operator* , operator-&gt; , operator++,operator–等指针相关操作予以重载的class template。（类模板）</p>
+<p>仿函数：⾏为类似函数，可作为算法的某种策略。从实现⻆度来看，仿函数是⼀种重载了operator()的class 或者class template </p>
+<p>适配器：用来修饰容器、仿函数、或迭代器的接口</p>
+<p>STL提供的queue 和 stack，虽然看似容器，但其实只能算是⼀种容器配接器，因为它们的底部完全借助deque， 所有操作都由底层的deque供应。</p>
+<p>空间配置器：负责空间的配置与管理。从实现⻆度看，配置器是⼀个实现了动态空间配置、空间管理、空间释放的class template.  ⼀般的分配器的std:alloctor都含有两个函数allocate与deallocte，这两个函数分别调⽤operator new()与 delete()，这两个函数的底层⼜分别是malloc()and free();但是每次malloc会带来格外开销（因为每次malloc⼀个元素都要带有附加信息）</p>
+<h2 id="20、STL的优点"><a href="#20、STL的优点" class="headerlink" title="20、STL的优点"></a>20、STL的优点</h2><p>STL具有高可重用性、高性能、高移植性、跨平台的优点。</p>
+<p>1、高可重用性：STL中所有的代码都采用了模板类和模板函数的方式实现，相比于传统的由函数和类组成的库来说，提供了更好的代码重用机会。</p>
+<p>2、高性能：例如map可以高效的从几十万的记录里面查出指定的记录，map底层采用红黑树实现。</p>
+<p>3、高移植性</p>
+<p>STL 的⼀个᯿要特性是将数据和操作分离 数据由容器类别加以管理，操作则由可定制的算法定义。迭代器在两者之间充当“粘合剂”,以使算法可以和容器交互 运作。</p>
+<h2 id="21、vector和list的区别"><a href="#21、vector和list的区别" class="headerlink" title="21、vector和list的区别"></a>21、vector和list的区别</h2><p>1、vector底层实现是数组；list是双向链表 </p>
+<p>2、vector是顺序内存,⽀持随机访问，list不⾏</p>
+<p>3、 vector在中间节点进⾏插⼊删除会导致内存拷⻉，list不会 </p>
+<p>4、vector⼀次性分配好内存，不够时才进⾏翻倍扩容；list每次插⼊新节点都会进⾏内存申请 </p>
+<p>5、vector随机访问性能好，插⼊删除性能差；list随机访问性能差，插⼊删除性能好</p>
+<h2 id="22、map-set的区别和实现原理"><a href="#22、map-set的区别和实现原理" class="headerlink" title="22、map &amp;&amp; set的区别和实现原理"></a>22、map &amp;&amp; set的区别和实现原理</h2><p> map内部实现了⼀个红⿊树（红⿊树是⾮严格平衡的⼆叉搜索树，⽽AVL是严格平衡⼆叉搜索树），红⿊树有⾃动 排序的功能，因此map内部所有元素都是有序的，红⿊树的每⼀个节点都代表着map的⼀个元素。因此，对于map 进⾏的查找、删除、添加等⼀系列的操作都相当于是对红⿊树进⾏的操作。map中的元素是按照⼆叉树（⼜名⼆叉 查找树、⼆叉排序树）存储的，特点就是左⼦树上所有节点的键值都⼩于根节点的键值，右⼦树所有节点的键值都 ⼤于根节点的键值。使⽤中序遍历可将键值按照从⼩到⼤遍历出来。 </p>
+<p>共同点： 都是C++的关联容器,只是通过它提供的接⼝对⾥⾯的元素进⾏访问，底层都是采⽤红⿊树实现。 </p>
+<p> 不同点： set：⽤来判断某⼀个元素是不是在⼀个组⾥⾯。  </p>
 
                 
               </div>
