@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a-20230309232253633.png">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-05-31T07:27:57.346Z">
+<meta property="article:modified_time" content="2024-06-01T08:24:28.366Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
@@ -233,7 +233,7 @@
         
         
         
-          406 分钟
+          409 分钟
         
       </span>
     
@@ -1308,7 +1308,7 @@
 <p> 悬浮指针是<strong>指向已经被销毁的对象的引⽤</strong>。当函数返回⼀个局部变量的引⽤，⽽调⽤者使⽤该引⽤时，就可能产⽣ 悬浮引⽤。访问悬浮引⽤会导致未定义⾏为，因为引⽤指向的对象已经被销毁，数据不再有效。</p>
 <h2 id="13、说说C-的内存分配方式"><a href="#13、说说C-的内存分配方式" class="headerlink" title="13、说说C++的内存分配方式"></a>13、说说C++的内存分配方式</h2><p>（1）从静态存储区域分配：内存在程序编译的时候就已经分配好，这块内存在程序的整个运⾏期间都存在，如全局变量，static变量。 </p>
 <p>（2）在栈上创建：在执⾏函数时，函数内局部变量的存储单元都可以在栈上创建，函数执⾏结束时这些存储单元⾃动被释放。栈内存 分配运算内置于处理器的指令集中，效率很⾼，但是分配的内存容量有限。 </p>
-<p>（3）从堆上分配(动态内存分配) 程序在运⾏的时候⽤malloc或new申请任意多少的内存，程序员负责在何时⽤free或delete释放内存。动态内存的 ⽣存期⾃⼰决定，使⽤⾮常灵活。</p>
+<p>（3）从堆上分配(动态内存分配) 程序在运⾏的时候⽤malloc或new申请任意多少的内存，程序员负责在何时⽤free或delete释放内存。动态内存的⽣存期⾃⼰决定，使⽤⾮常灵活。</p>
 <h2 id="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"><a href="#14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数" class="headerlink" title="14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数"></a>14、成员函数、成员变量、静态成员变量、静态成员函数的区别成员函数</h2><p>1、成员函数</p>
 <p>是属于类的函数，它们可以访问类的成员变量和其他成员函数。 成员函数可以分为普通成员函数和静态成员函数。 普通成员函数使⽤对象调⽤，可以访问对象的成员变量。 普通成员函数的声明和定义通常在类的内部，但定义时需要使⽤类名作为限定符。</p>
 <p>2、成员变量</p>
@@ -1554,6 +1554,21 @@
 <p>可以将整型转换为指针，也可以把指针转换为数组；可以在指针和引⽤⾥进⾏肆⽆忌惮的转换，平台移植性⽐价 差。</p>
 <p>4、const_cast </p>
 <p>常量指针转换为⾮常量指针，并且仍然指向原来的对象。常量引⽤被转换为⾮常量引⽤，并且仍然指向原来的对象。<strong>去掉类型的const或volatile属性</strong>。</p>
+<h2 id="38、堆和栈的区别"><a href="#38、堆和栈的区别" class="headerlink" title="38、堆和栈的区别"></a>38、堆和栈的区别</h2><p>堆和栈都是用来存储程序数据的内存区域。</p>
+<p>栈是一种有限的内存区域，用于存储局部变量，函数调用信息等。</p>
+<p>堆是一种动态分配的内存区域，用于存储程序运行时动态分配的数据。</p>
+<p>栈上的变量生命周期与其所在函数的执行周期相同，</p>
+<p>堆上的变量生命周期由程序员显示的控制，可以（使⽤ new 或 malloc ）开辟和释放（使⽤ delete 或 free ）。</p>
+<h2 id="39、内存分区"><a href="#39、内存分区" class="headerlink" title="39、内存分区"></a>39、内存分区</h2><p>1、栈 （自顶向下增长）</p>
+<p>栈⽤于存储函数的<strong>局部变量</strong>、<strong>函数参数</strong>和<strong>函数调⽤</strong>信息的区域。函数的调⽤和返回通过栈来管理。</p>
+<p>2、堆 （自底向上增长）</p>
+<p>堆⽤于存储动态分配的内存的区域，由程序员⼿动分配和释放。使⽤ new 和 delete 或 malloc 和 free 来进 ⾏堆内存的分配和释放。 </p>
+<p>3、全局&#x2F;静态区 </p>
+<p>全局区存储全局变ᰁ和静态变量。⽣命周期是整个程序运⾏期间。在程序启动时分配，程序结束时释放。</p>
+<p>4、常量区 </p>
+<p>常量区也被称为只读区。存储常量数据，如字符串常量。</p>
+<p>5、代码区 </p>
+<p>存储程序的代码。 </p>
 <h1 id="C-11-新特性"><a href="#C-11-新特性" class="headerlink" title="C++11 新特性"></a>C++11 新特性</h1><h2 id="1、语法的改进"><a href="#1、语法的改进" class="headerlink" title="1、语法的改进"></a>1、语法的改进</h2><p>（1） 统一的初始化方法</p>
 <p>（2）成员变量默认初始化</p>
 <p>（3）<strong>auto关键字：允许编译器自动推断变量的类型，减少类型声明的冗余。</strong></p>
