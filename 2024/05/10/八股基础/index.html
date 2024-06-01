@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a-20230309232253633.png">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-05-30T07:31:39.577Z">
+<meta property="article:modified_time" content="2024-05-31T07:27:57.346Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          45k 字
+          49k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          376 分钟
+          406 分钟
         
       </span>
     
@@ -1399,6 +1399,161 @@
 <p>⽐如在32位cpu下，假设⼀个整型变量的地址为0x00000004(为4的倍数)，那它就是⾃然对⻬的，⽽如果其地址为 0x00000002（⾮4的倍数）则是⾮对⻬的。现代计算机中内存空间都是按照byte划分的，从理论上讲似乎对任何类 型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特定的内存地址访问，这就 需要各种类型数据按照⼀定的规则在空间上排列，⽽不是顺序的⼀个接⼀个的排放，这就是对⻬。</p>
 <p>2、为什么需要内存对齐</p>
 <p>需要字节对⻬的根本原因在于<strong>CPU访问数据的效率问题</strong>。假设上⾯整型变ᰁ的地址不是⾃然对⻬，⽐如为 0x00000002，则CPU如果取它的值的话需要访问两次内存，第⼀次取从0x00000002-0x00000003的⼀个short， 第⼆次取从0x00000004-0x00000005的⼀个short然后组合得到所要的数据，如果变量在0x00000003地址上的话 则要访问三次内存，第⼀次为char，第⼆次为short，第三次为char，然后组合得到整型数据。 ⽽如果变量在⾃然对⻬位置上，则只要⼀次就可以取出数据。⼀些系统对内存对⻬要求⾮常严格，⽐如sparc系统，如 果取未对⻬的数据会发⽣错误，⽽在x86上就不会出现错误，只是效率下降。</p>
+<h2 id="26、指针和引用的区别"><a href="#26、指针和引用的区别" class="headerlink" title="26、指针和引用的区别"></a>26、指针和引用的区别</h2><p>指针存放某个对象的地址，其本身就是变量（命了名的对象），<strong>本身就有地址</strong>，所以可以有指向指针的指针；可变，包括其所指向的地址的改变和其指向的地址中所存放的数据的改变。</p>
+<p>引⽤就是变量的别名，从⼀⽽终，不可变，必须初始化。不存在指向空值的引⽤，但是存在指向空值的指针。</p>
+<p>1、定义和声明： </p>
+<p>指针是⼀个变量，其值是另⼀个变量的地址。声明指针时，使⽤ * 符号。</p>
+<p>引⽤是⼀个别名，它是在<strong>已存在的变量上创建</strong>的。在声明引⽤时，使⽤ &amp; 符号。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> x = <span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> *ptr = &amp;x;<span class="hljs-comment">// 指针的定义</span><br><br><span class="hljs-type">int</span> y = <span class="hljs-number">20</span>;<br><span class="hljs-type">int</span> &amp;ref = y;<span class="hljs-comment">// 引用的定义与初始化</span><br></code></pre></td></tr></table></figure>
+
+<p>2、 使⽤和操作： </p>
+<p>指针： 可以通过解引⽤操作符 * 来访问指针指向的变量的值，还可以通过地址运算符 &amp; 获取变量的地址。 </p>
+<p>引⽤： 引⽤在声明时被初始化，并在整个⽣命周期中⼀直引⽤同⼀个变量。不需要使⽤解引⽤操作符，因为引⽤本身就是变量的别名。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> value = *ptr; <span class="hljs-comment">// 获取指针指向的值</span><br><span class="hljs-type">int</span> address = &amp;x; <span class="hljs-comment">// 获取变量 x 的地址</span><br><span class="hljs-type">int</span> newValue = ref;<span class="hljs-comment">//获取引用的值</span><br></code></pre></td></tr></table></figure>
+
+<p>3、空值和空引用：</p>
+<p>指针可以指向空（nullptr），表示不指向任何有效的地址。</p>
+<p>引用必须在声明时初始化，并且不能再后续改变引用的绑定对象，因此没有空引用的概念。</p>
+<p>4、可变性：</p>
+<p>指针：指针的指向可以改变，使其指向不同的地址，指针指向的的地址里面的值也可以修改。</p>
+<p>引用：一旦引用被初始化，它将一直引用同一个对象，不能改变绑定。</p>
+<p>5、用途：</p>
+<p>指针： 通常⽤于动态内存分配、数组操作以及函数参数传递。</p>
+<p> 引⽤： 通常⽤于函数参数传递、操作符᯿载以及创建别名。</p>
+<h2 id="27、数据类型"><a href="#27、数据类型" class="headerlink" title="27、数据类型"></a>27、数据类型</h2><p>C++ 整型数据⻓度标准 short ⾄少 16 位， int ⾄少与 short ⼀样⻓ ，long ⾄少 32 位，且⾄少与 int ⼀样⻓ 。long long ⾄少 64 位，且⾄少与 long ⼀样⻓，在使⽤8位字节的系统中，1 byte &#x3D; 8 bit 。很多系统都使⽤最⼩⻓度，short 为 16 位即 2 个字节，long 为 32 位即 4 个字节，long long 为 64 位即 8 个字 节，int 的⻓度较为灵活，⼀般认为 int 的⻓度为 4 个字节，与 long 等⻓。 </p>
+<p>可以通过运算符 sizeof 判断数据类型的⻓度。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">cout &lt;&lt; <span class="hljs-string">&quot;int is &quot;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span> (<span class="hljs-type">int</span>) &lt;&lt; <span class="hljs-string">&quot; bytes. \n&quot;</span>;<br>cout &lt;&lt; <span class="hljs-string">&quot;short is &quot;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span> (<span class="hljs-type">short</span>) &lt;&lt; <span class="hljs-string">&quot; bytes. \n&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>头⽂件climits定义了符号常量：例如：INT_MAX 表示 int 的最⼤值，INT_MIN 表示 int 的最⼩值。</p>
+<p>⽆符号类型：即为<strong>不存储负数值的整型</strong>，可以增⼤变量能够存储的最⼤值，数据⻓度不变。 int 被设置为⾃然⻓度，即为计算机处理起来效率最⾼的⻓度，所以选择类型时⼀般选⽤ int 类型。</p>
+<h2 id="28、关键字"><a href="#28、关键字" class="headerlink" title="28、关键字"></a>28、关键字</h2><p>一、const 关键字</p>
+<p>const的作⽤： <strong>被它修饰的值不能改变</strong>，是只读变量。必须在定义的时候就给它赋初值。</p>
+<p>1、常量指针（底层const）</p>
+<p>是指定义了⼀个指针，<strong>这个指针指向⼀个只读的对象</strong>，不能通过常量指针来改变这个对象的值。常量指针强调的是 <strong>指针对其所指对象的不可改变性</strong>。</p>
+<p>特点：靠近变量名</p>
+<p>形式：</p>
+<p>（1）const 数据类型 *指针变量 &#x3D; 变量名 （2）数据类型 const *指针变量 &#x3D; 变量名</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-type">int</span> temp = <span class="hljs-number">10</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span>* a = &amp;temp;<br><span class="hljs-type">int</span> <span class="hljs-type">const</span> *a = &amp;temp;<br><span class="hljs-comment">// 更改：</span><br>*a = <span class="hljs-number">9</span>; <span class="hljs-comment">// 错误：只读对象</span><br>temp = <span class="hljs-number">9</span>; <span class="hljs-comment">// 正确</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>不能通过常量指针修改指针指向的值</strong></p>
+<p>2、指针常量（顶层const）</p>
+<p>指针常量是指定义了⼀个指针，这个指针的值只能在定义时初始化，其他地⽅不能改变。指针常量强调的是指针的 不可改变性。</p>
+<p>特点：靠近变量类型</p>
+<p>形式：</p>
+<p>数据类型 * const 指针变量&#x3D;变量名</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> temp = <span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> temp1 = <span class="hljs-number">12</span>;<br><span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;temp;<br><span class="hljs-comment">// 更改：</span><br>p = &amp;temp2; <span class="hljs-comment">// 错误</span><br>*p = <span class="hljs-number">9</span>; <span class="hljs-comment">// 正确</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>不能修改指针的指向</strong></p>
+<p>二、static关键字的作用</p>
+<p>static 关键字主要⽤于控制变量和函数的⽣命周期、作⽤域以及访问权限。</p>
+<p>1、 静态变量</p>
+<p>在函数内部使⽤ static 关键字修饰的变量称为静态变量。</p>
+<p>静态变量在程序的整个⽣命周期内存在，不会因为离开作⽤域⽽被销毁。</p>
+<p>静态变量默认初始化为零（对于基本数据类型）。</p>
+<p>2、静态函数</p>
+<p>在类内部使⽤ static 关键字修饰的函数是静态函数。</p>
+<p>静态函数属于类而不是类的实例，可以通过类名直接调⽤，而无需创建对象。 </p>
+<p>静态函数不能直接访问⾮静态成员变量或⾮静态成员函数。</p>
+<p>3、静态成员变量 </p>
+<p>在类中使⽤ static 关键字修饰的成员变量是静态成员变量。 </p>
+<p>所有类的对象共享同⼀个静态成员变量的副本。 </p>
+<p>静态成员变量必须在类外部单独定义，以便为其分配存储空间。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-type">static</span> <span class="hljs-type">int</span> staticVar; <span class="hljs-comment">// 静态成员变量声明</span><br>&#125;;<br><span class="hljs-comment">// 静态成员变量定义</span><br><span class="hljs-type">int</span> ExampleClass::staticVar = <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<p>4、静态成员函数 </p>
+<p>在类中使⽤ static 关键字修饰的成员函数是静态成员函数。 </p>
+<p>静态成员函数不能直接访问⾮静态成员变量或⾮静态成员函数。 </p>
+<p>静态成员函数可以通过类名调⽤，而不需要创建类的实例。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br> <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">staticMethod</span><span class="hljs-params">()</span> </span>&#123;<br> cout &lt;&lt; <span class="hljs-string">&quot;Static method&quot;</span> &lt;&lt; endl;<br> &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="29、const关键字的作用"><a href="#29、const关键字的作用" class="headerlink" title="29、const关键字的作用"></a>29、const关键字的作用</h2><p>const 关键字主要⽤于指定变量、指针、引⽤、成员函数等的性质 </p>
+<ol>
+<li>常量变量：声明常量，使变量的值不能被修改。</li>
+<li>指针和引⽤：声明指向常量的指针，表示指针所指向的值是常量，不能通过指针修改。声明常量引⽤，表示引 ⽤的值是常量，不能通过引⽤修改。</li>
+<li>成员函数：⽤于声明常量成员函数，表示该函数不会修改对象的成员变量（对于成员变量是⾮静态的情况）。</li>
+<li>常量对象：声明对象为常量，使得对象的成员变量不能被修改。 </li>
+<li>常引⽤参数：声明函数参数为常量引⽤，表示函数不会修改传⼊的参数</li>
+<li>常量指针参数：声明函数参数为指向常量的指针，表示函数不会通过指针修改传⼊的数据。</li>
+</ol>
+<h2 id="30、define-和-typedef-的区别"><a href="#30、define-和-typedef-的区别" class="headerlink" title="30、define 和 typedef 的区别"></a>30、define 和 typedef 的区别</h2><p>define </p>
+<p>1、只是简单的字符串替换，没有类型检查 </p>
+<p>2、只是在编译的预处理阶段起作⽤ </p>
+<p>3、可以⽤来防⽌头⽂件重复引⽤</p>
+<p> 4、不分配内存，给出的是⽴即数，有多少次使⽤就进⾏多少次替换</p>
+<p>typedef </p>
+<p>1、有对应的数据类型，是要进⾏判断的</p>
+<p>2、是在编译、运⾏的时候起作⽤ </p>
+<p>3、在<strong>静态存储区</strong>中分配空间，在程序运⾏过程中内存中只有⼀个拷⻉</p>
+<h2 id="31、define和inline的区别"><a href="#31、define和inline的区别" class="headerlink" title="31、define和inline的区别"></a>31、define和inline的区别</h2><p>1、define： 定义预编译时处理的宏，只是简单的字符串替换，⽆类型检查，不安全。</p>
+<p>2、inline： </p>
+<p>inline是先将内联函数编译完成⽣成了函数体直接插⼊被调⽤的地⽅，减少了压栈，跳转和返回的操作。</p>
+<p>没有普通 函数调⽤时的额外开销； 内联函数是⼀种特殊的函数，会进⾏类型检查； </p>
+<p>对编译器的⼀种请求，编译器有可能拒绝这种请求；</p>
+<p>C++中inline编译限制：</p>
+<p>1、不能存在任何形式的循环语句 </p>
+<p>2、不能存在过多的条件判断语句</p>
+<p>3、函数体不能过于庞⼤ </p>
+<p>4、内联函数声明必须在调⽤语句之前</p>
+<h2 id="32、const和define的区别"><a href="#32、const和define的区别" class="headerlink" title="32、const和define的区别"></a>32、const和define的区别</h2><p>const⽤于定义常量；⽽define⽤于定义宏，⽽宏也可以⽤于定义常量。都⽤于常量定义时，它们的区别有：</p>
+<p>1、const⽣效于编译的阶段；define⽣效于预处理阶段。</p>
+<p>2、 const定义的常量，在C语⾔中是<strong>存储在内存中、需要额外的内存空间</strong>的；define定义的常量，运⾏时是直接的操作数，并不会存放在内存中。</p>
+<p>3、const定义的常量是带类型的；define定义的常量不带类型。因此define定义的常量不利于类型检查。</p>
+<h2 id="33、constexpr-和-const"><a href="#33、constexpr-和-const" class="headerlink" title="33、constexpr 和 const"></a>33、constexpr 和 const</h2><p>const 表示“只读”的语义，constexpr 表示“常量”的语义 </p>
+<p>constexpr 只能定义编译期常量，⽽ const 可以定义编译期常量，也可以定义运⾏期常量。 你将⼀个成员函数标记为constexpr，则顺带也将它标记为了const。</p>
+<p>如果你将⼀个变量标记为constexpr，则同样它是const的。但相反并不成⽴，⼀个const的变量或函数，并不是constexpr的。</p>
+<p>constexpr变量</p>
+<p>复杂系统中很难分辨⼀个初始值是不是常量表达式，可以将变量声明为constexpr类型，由编译器来验证变量的值 是否是⼀个常量表达式。  </p>
+<p>必须使⽤常量初始化:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> n = <span class="hljs-number">20</span>;<br><span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> m = n + <span class="hljs-number">1</span>;<br><span class="hljs-type">static</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1000000007</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>如果constexpr声明中定义了⼀个指针，constexpr仅对指针有效，和所指对象⽆关。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> *p = <span class="hljs-literal">nullptr</span>; <span class="hljs-comment">//常量指针 顶层const</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *q = <span class="hljs-literal">nullptr</span>; <span class="hljs-comment">//指向常量的指针， 底层const（常量指针）</span><br><span class="hljs-type">int</span> *<span class="hljs-type">const</span> q = <span class="hljs-literal">nullptr</span>; <span class="hljs-comment">//顶层const（指针常量）</span><br></code></pre></td></tr></table></figure>
+
+<p>顶层const：指针本身是常量； </p>
+<p>底层const：指针所指的对象是常量；</p>
+<p>左定值，右定向：指的是const在*的左还是右边</p>
+<h2 id="34、constexpr的好处"><a href="#34、constexpr的好处" class="headerlink" title="34、constexpr的好处"></a>34、constexpr的好处</h2><p>1、为⼀些不能修改数据提供保障，写成变量则就有被意外修改的⻛险</p>
+<p> 2、有些场景，编译器可以在编译期对constexpr的代码进⾏优化，提⾼效率</p>
+<p> 3、相⽐宏来说，没有额外的开销，但更安全可靠</p>
+<h2 id="35、前置-与后置"><a href="#35、前置-与后置" class="headerlink" title="35、前置++与后置++"></a>35、前置++与后置++</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp">self &amp;<span class="hljs-keyword">operator</span>++() &#123;<br> node = (linktype)((node).next);<br> <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>&#125;<br><span class="hljs-type">const</span> self <span class="hljs-keyword">operator</span>++(<span class="hljs-type">int</span>) &#123;<br> self tmp = *<span class="hljs-keyword">this</span>;<br> ++*<span class="hljs-keyword">this</span>;<br> <span class="hljs-keyword">return</span> tmp;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>为了区分前后置，重载函数是以参数类型来区分，在调⽤的时候，编译器默默给int指定为⼀个0。</p>
+<p>1、为什么后置返回对象，⽽不是引⽤ </p>
+<p>因为后置为了返回旧值创建了⼀个临时对象，在函数结束的时候这个对象就会被销毁，如果返回引⽤，那么我请问你？你的对象对象都被销毁了，你引⽤啥呢？ </p>
+<p>2、为什么后置前⾯也要加const </p>
+<p>其实也可以不加，但是为了防⽌你使⽤i++++,连续两次的调⽤后置++重载符，为什么呢? 原因： 它与内置类型⾏为不⼀致；你⽆法获得你所期望的结果，因为第⼀次返回的是旧值，⽽不是原对象，你调⽤两次后置++，结果只累加了⼀次，所以我们必须⼿动禁⽌，使其合法化，就要在前⾯加上const</p>
+<p>36、什么是函数指针，如何定义和使⽤场景</p>
+<p>函数指针是指向函数的指针变量。它可以⽤于存储函数的地址，允许在运⾏时动态选择要调⽤的函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 返回类型 (*指针变量名)(参数列表)</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br> <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">subtract</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>&#123;<br> <span class="hljs-keyword">return</span> a - b;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br> <span class="hljs-comment">// 定义⼀个函数指针，指向⼀个接受两个int参数、返回int的函数</span><br> <span class="hljs-built_in">int</span> (*operationPtr)(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>);<br> <span class="hljs-comment">// 初始化函数指针，使其指向 add 函数</span><br> operationPtr = &amp;add;<br> <span class="hljs-comment">// 通过函数指针调⽤函数</span><br> <span class="hljs-type">int</span> result = <span class="hljs-built_in">operationPtr</span>(<span class="hljs-number">10</span>,<span class="hljs-number">5</span>)<br> cout &lt;&lt; <span class="hljs-string">&quot;Result: &quot;</span> &lt;&lt; result &lt;&lt; endl;<br> <span class="hljs-comment">// 将函数指针切换到 subtract 函数</span><br> operationPtr = &amp;subtract;<br> <span class="hljs-comment">// 再次通过函数指针调⽤函数</span><br> result = <span class="hljs-built_in">operationPtr</span>(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>);<br> cout &lt;&lt; <span class="hljs-string">&quot;Result: &quot;</span> &lt;&lt; result &lt;&lt; endl;<br> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使⽤场景： </p>
+<p>1、回调函数： 函数指针常⽤于实现回调机制，允许将函数的地址传递给其他函数，以便在适当的时候调用。 </p>
+<p>2、函数指针数组： 可以使⽤函数指针数组实现类似于状态机的逻辑，根据不同的输⼊调⽤不同的函数。</p>
+<p> 3、动态加载库： 函数指针可⽤于在运⾏时动态加载库中的函数，实现动态链接库的调用。</p>
+<p>4、多态实现： 在C++中，虚函数和函数指针结合使⽤，可以实现类似于多态的效果。 </p>
+<p>5、函数指针作为参数： 可以将函数指针作为参数传递给其他函数，实现⼀种可插拔的函数⾏为。</p>
+<p>6、实现函数映射表： 在⼀些需要根据某些条件调⽤不同函数的情况下，可以使⽤函数指针来实现函数映射表。</p>
+<h2 id="36、struct和class的区别"><a href="#36、struct和class的区别" class="headerlink" title="36、struct和class的区别"></a>36、struct和class的区别</h2><p>通常， struct ⽤于表示⼀组相关的数据，⽽ class ⽤于表示⼀个封装了<strong>数据和操作</strong>的对象,在实际使⽤中， 可以根据具体的需求选择使⽤ struct 或 class 。</p>
+<p>如果只是⽤来组织⼀些数据，⽽不涉及复杂的封装和继承关系， struct 可能更直观；如果需要进⾏封装、继承等⾯向对象编程的特性，可以选择使⽤ class 。 </p>
+<p>struct结构体中的成员默认是公有的（public）。类中的成员默认是私有的（private）。 struct 继承时默认使⽤公有继承。class 继承时默认使⽤私有继承。</p>
+<p>如果结构体没有定义任何构造函数，编译器会⽣成默认的无参数构造函数。如果类没有定义任何构造函数，编译器也会⽣成默认的⽆参数构造函数。</p>
+<h2 id="37、C-强制类型转换"><a href="#37、C-强制类型转换" class="headerlink" title="37、C++强制类型转换"></a>37、C++强制类型转换</h2><p> 关键字：static_cast、dynamic_cast、reinterpret_cast和 const_cast</p>
+<p>1、static_cast </p>
+<p>没有运⾏时类型检查来保证转换的安全性 </p>
+<p>进⾏上⾏转换（把派⽣类的指针或引⽤转换成基类表示）是安全的 </p>
+<p>进⾏下⾏转换（把基类的指针或引⽤转换为派⽣类表示），由于没有动态类型检查，所以是不安全的。 </p>
+<p> 使⽤：</p>
+<p>​         1、⽤于基本数据类型之间的转换，如把int转换成char。</p>
+<pre><code class="hljs">     2、把任何类型的表达式转换成void类型。
+</code></pre>
+<p>2、dynamic_cast </p>
+<p>在进⾏下⾏转换时，dynamic_cast具有类型检查（信息在虚函数中）的功能，⽐static_cast更安全。 </p>
+<p>转换后必须是类的指针、引⽤或者void*，基类要有虚函数，可以交叉转换。</p>
+<p> dynamic本身只能⽤于<strong>存在虚函数的⽗⼦关系的强制类型转换</strong>；对于指针，转换失败则返回nullptr，对于引⽤，转换失败会抛出异常。 </p>
+<p>3、reinterpret_cast </p>
+<p>可以将整型转换为指针，也可以把指针转换为数组；可以在指针和引⽤⾥进⾏肆⽆忌惮的转换，平台移植性⽐价 差。</p>
+<p>4、const_cast </p>
+<p>常量指针转换为⾮常量指针，并且仍然指向原来的对象。常量引⽤被转换为⾮常量引⽤，并且仍然指向原来的对象。<strong>去掉类型的const或volatile属性</strong>。</p>
 <h1 id="C-11-新特性"><a href="#C-11-新特性" class="headerlink" title="C++11 新特性"></a>C++11 新特性</h1><h2 id="1、语法的改进"><a href="#1、语法的改进" class="headerlink" title="1、语法的改进"></a>1、语法的改进</h2><p>（1） 统一的初始化方法</p>
 <p>（2）成员变量默认初始化</p>
 <p>（3）<strong>auto关键字：允许编译器自动推断变量的类型，减少类型声明的冗余。</strong></p>
