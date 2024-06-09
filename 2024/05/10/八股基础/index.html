@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a-20230309232253633.png">
 <meta property="article:published_time" content="2024-05-10T11:48:02.000Z">
-<meta property="article:modified_time" content="2024-06-07T12:56:55.179Z">
+<meta property="article:modified_time" content="2024-06-09T09:28:01.343Z">
 <meta property="article:author" content="ZDS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E5%85%AB%E8%82%A1%E6%96%87/%E4%BA%94%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          54k 字
+          56k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          449 分钟
+          464 分钟
         
       </span>
     
@@ -451,6 +451,11 @@
 <li>拆包：接收方在接收到报文后提取包头中的长度信息进行截取。</li>
 </ul>
 <h2 id="9、UDP怎么实现可靠传输？"><a href="#9、UDP怎么实现可靠传输？" class="headerlink" title="9、UDP怎么实现可靠传输？"></a>9、UDP怎么实现可靠传输？</h2><p>最简单的方式是在应用层模仿传输层TCP的可靠性传输。下面不考虑拥塞处理，可靠UDP的简单设计。<br>1、添加seq&#x2F;ack机制，确保数据发送到对端<br>2、添加发送和接收缓冲区，主要是用户超时重传。<br>3、添加超时重传机制。<br>详细说明：发送端发送数据时，生成一个随机seq&#x3D;x，然后每一片按照数据大小分配seq。数据到达接收端后接收端放入缓存，并发送一个ack&#x3D;x的包，表示对方已经收到了数据。发送端收到了ack包后，删除缓冲区对应的数据。时间到后，定时任务检查是否需要重传数据。</p>
+<p>10、TCP还有什么机制可以保证可靠传输？</p>
+<p>除了TCP本身提供的可靠传输机制即序号和确认号、超时重传、滑动窗口、确认机制、拥塞控制之外，还有其他层上的方式可以保证数据的可靠传输。</p>
+<p>比如在数<strong>据链路层和物理层上</strong>，常用的技术包括<strong>循环冗余校验</strong>（CRC）、<strong>帧检验序列</strong>（FCS）等，用于检测和纠正数据传输中的错误。</p>
+<p>在应用层上，常用的方法包括<strong>数据重传、数据校验</strong>等。例如，HTTP协议通常会在应用层上进行数据重传，以保证数据的可靠传输。另外，<strong>应用层协议也可以使用一些校验算法，如MD5、SHA等</strong>，来验证数据的完整性，以保证数据在传输过程中不被篡改。</p>
+<p>总之，在不同层次上都可以采用不同的技术和机制来保证数据的可靠传输，这些机制相互配合，共同保障了数据的安全和可靠性</p>
 <h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1、进程和线程的区别"><a href="#1、进程和线程的区别" class="headerlink" title="1、进程和线程的区别"></a>1、进程和线程的区别</h2><p>进程是系统进行资源分配的基本单位。</p>
 <p>线程是操作系统能够进行运算调度的最小单位。线程是进程的子任务，是进程内的执行单元。一个进程至少有一个线程，一个进程可以运行多个线程，这些线程共享一块内存。</p>
 <p>资源开销：</p>
@@ -1157,6 +1162,17 @@
 <h2 id="15、MVCC原理及其实现方式"><a href="#15、MVCC原理及其实现方式" class="headerlink" title="15、MVCC原理及其实现方式"></a>15、MVCC原理及其实现方式</h2><p>MVCC(Multi-Version Concurrency Control)是一种多版本并发控制机制，它可以在数据库的读写操作中，将数据按照时间版本进行保存，并且在读取时只读取已提交的版本，避免数据的并发访问产生的问题。</p>
 <p>MVCC是通过在每行记录后面保存两个隐藏的列来实现的。 这两个列，一个保存了行的创建时间，一个保存行的过期时间(或删除时间)。 当然存储的并不是实际的时间值，而是系统版本号(system version number)。 每开始一个新的事务，系统版本号都会自动递增。</p>
 <p>MVCC就是多版本并发控制，实现了读写的并发控制，在mysql通过readview 隐藏字段和undolog实现了，比如在可重复读里面，比如开启了一个事务，就生成了一个readview，然后记录现在active的事务，判断查询的数据在这个事务可不可读。</p>
+<h2 id="16、数据库的备份和容灾可以大致聊聊吗？"><a href="#16、数据库的备份和容灾可以大致聊聊吗？" class="headerlink" title="16、数据库的备份和容灾可以大致聊聊吗？"></a>16、数据库的备份和容灾可以大致聊聊吗？</h2><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>备份和容灾是数据库管理员和系统管理员经常考虑的重要问题。</p>
+<p><strong>当谈到数据库的备份和容灾时，我们通常是在讨论如何保护数据库免受数据丢失和系统中断的影响。</strong></p>
+<h3 id="数据库备份"><a href="#数据库备份" class="headerlink" title="数据库备份"></a>数据库备份</h3><p>数据库备份是指定期间将数据库的副本创建到另一个位置，以便在发生数据丢失或数据库崩溃时进行恢复。备份可以存储在磁盘、磁带或远程服务器等位置。备份的频率可以根据业务需求和数据重要性来确定，可以是每天、每周或每月进行一次。</p>
+<h3 id="数据库容灾"><a href="#数据库容灾" class="headerlink" title="数据库容灾"></a>数据库容灾</h3><p>数据库容灾是指在数据库主服务器发生故障或不可用时，确保数据库系统继续运行并提供服务的能力。<strong>容灾解决方案通常包括冗余硬件、多个数据库实例、数据复制和故障转移</strong>。这些措施可以确保在主服务器发生故障时，备用服务器可以接管并继续提供服务，从而减少系统中断时间。</p>
+<h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><p>常见的数据库备份和容灾技术包括：</p>
+<h3 id="完全备份"><a href="#完全备份" class="headerlink" title="完全备份"></a>完全备份</h3><p>将整个数据库的副本创建到备份位置。这是最基本和最简单的备份方法，<strong>但也是最耗时和占用存储空间的方法。</strong></p>
+<h3 id="增量备份"><a href="#增量备份" class="headerlink" title="增量备份"></a>增量备份</h3><p>只备份自上次完全备份或增量备份以来发生更改的数据。这种备份方法可以减少备份时间和存储空间的使用，但需要进行完全备份和增量备份的恢复过程。</p>
+<h3 id="数据库复制"><a href="#数据库复制" class="headerlink" title="数据库复制"></a>数据库复制</h3><p><strong>将数据库的副本创建到另一个服务器</strong>，使其可以独立运行。这种方法可以提供高可用性和容灾能力，因为备用服务器可以在主服务器发生故障时接管。</p>
+<h3 id="数据库镜像"><a href="#数据库镜像" class="headerlink" title="数据库镜像"></a>数据库镜像</h3><p><strong>创建数据库的实时副本，并将更改传输到备用服务器。这种方法可以提供几乎无中断的故障转移，但需要更多的网络带宽和服务器资源。</strong></p>
+<h3 id="热备份"><a href="#热备份" class="headerlink" title="热备份"></a>热备份</h3><p>在运行的数据库上进行备份，而不需要停止数据库服务。这种方法可以确保数据库持续运行，但可能会对性能产生一些影响。</p>
+<p><strong>总的来说，备份和容灾是数据库管理中不可或缺的一部分，对于确保数据的完整性和系统的可用性至关重要。选择适当的备份和容灾策略取决于业务需求、数据重要性和可承受的风险。</strong></p>
 <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="1、什么是Redis？"><a href="#1、什么是Redis？" class="headerlink" title="1、什么是Redis？"></a>1、什么是Redis？</h2><p>Redis是一种基于内存的数据库，对数据的读写操作都在内存中完成，因此读写速度非常快，通常用于缓存、消息队列、分布式锁等场景。</p>
 <p>Redis 提供了多种数据类型来支持不同的业务场景，比如 String(字符串)、Hash(哈希)、 List (列表)、Set(集合)、Zset(有序集合)、Bitmaps（位图）、HyperLogLog（基数统计）、GEO（地理信息）、Stream（流），并且对数据类型的操作都是<strong>原子性</strong>的，因为执行命令由单线程负责的，不存在并发竞争的问题。</p>
 <p>除此之外，Redis 还支持<strong>事务 、持久化、Lua 脚本、多种集群方案（主从复制模式、哨兵模式、切片机群模式）、发布&#x2F;订阅模式，内存淘汰机制、过期删除机制</strong>等等。</p>
@@ -1681,6 +1697,38 @@
 <h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><p>unordered_map是C++ 11新添加的容器，底层机制是哈希表，通过hash函数计算元素位置，其查询时间复杂度为O(1)，维护时间与bucket桶所维护的list长度有关，但是建立hash表耗时较大.</p>
 <h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><p>unordered_set: 与unordered_map类似，unordered_set的底层实现通常也是哈希表。unordered_set是一种特殊的unordered_map，只有键没有值。</p>
 <p>从底层机制和特点可以看出：map适用于有序数据的应用场景，unordered_map适用于高效查询的应用场景.</p>
+<h2 id="43、strcpy函数和strncpy函数的区别？哪个函数更安全？"><a href="#43、strcpy函数和strncpy函数的区别？哪个函数更安全？" class="headerlink" title="43、strcpy函数和strncpy函数的区别？哪个函数更安全？"></a>43、strcpy函数和strncpy函数的区别？哪个函数更安全？</h2><p>strcpy函数</p>
+<p>如果参数 dest 所指的内存空间不够大，可能会造成缓冲溢出(buffer Overflow)的错误情况，在编写程序时请特别留意，或者用strncpy()来取代。</p>
+<p>strncpy函数</p>
+<p>用来复制源字符串的前n个字符，src 和 dest 所指的内存区域不能重叠，且 dest 必须有足够的空间放置n个字符。</p>
+<h2 id="44、什么是内存泄露，如何检测与避免"><a href="#44、什么是内存泄露，如何检测与避免" class="headerlink" title="44、什么是内存泄露，如何检测与避免"></a>44、什么是内存泄露，如何检测与避免</h2><p><strong>内存泄露</strong></p>
+<p>一般我们常说的内存泄漏是指<strong>堆内存的泄漏</strong>。堆内存是指程序从堆中分配的，大小任意的(内存块的大小可以在程序运行期决定)内存块，使用完后必须显式释放的内存。应用程序一般使用malloc,、realloc、 new等函数从堆中分配到块内存，使用完后，程序必须负责调用相应的free或delete释放该内存块，否则，这块内存就不能被再次使用，我们就说这块内存泄漏了</p>
+<p><strong>避免内存泄露的几种方式</strong></p>
+<ul>
+<li>计数法：使用new或者malloc时，让该数+1，delete或free时，该数-1，程序执行完打印这个计数，如果不为0则表示存在内存泄露</li>
+<li>一定要将基类的析构函数声明为<strong>虚函数</strong></li>
+<li>对象数组的释放一定要用<strong>delete []</strong></li>
+<li>有new就有delete，有malloc就有free，保证它们一定成对出现</li>
+</ul>
+<p><strong>检测工具</strong></p>
+<ul>
+<li>Linux下可以使用<strong>Valgrind工具</strong></li>
+<li>Windows下可以使用<strong>CRT库</strong></li>
+</ul>
+<h2 id="45、设计模式相关"><a href="#45、设计模式相关" class="headerlink" title="45、设计模式相关"></a>45、设计模式相关</h2><p>设计模式是指在软件开发中，经过验证的，用于解决在特定环境下，重复出现的，特定问题的解决方案</p>
+<p>按照设计目的分为三类：创建型模式、结构型模式和行为模式</p>
+<p>分别对应了面向对象开发的三个问题：如何创建对象、如何组合对象、如何处理对象之间的动态通信和职责分配。</p>
+<p>常见的设计模式有以下几种</p>
+<ol>
+<li>工厂模式：将对象的创建和使用分离，客户端只需知道产品的接口，无需关心具体实现。</li>
+<li>单例模式：保证一个类只有一个实例，并提供全局访问点。</li>
+<li>观察者模式：对象间的一种一对多的依赖关系，当一个对象状态发生改变时，所有依赖它的对象都会得到通知并自动更新。</li>
+<li>装饰器模式：动态地给一个对象添加一些额外的职责，同时又不改变其结构。</li>
+<li>策略模式：定义一系列算法，将每个算法封装起来并可互换使用，使得算法的变化不会影响到使用算法的客户端。</li>
+<li>适配器模式：将一个类的接口转换成客户端所期望的另一个接口，使得原本由于接口不兼容而不能一起工作的类可以一起工作。</li>
+<li>模板方法模式：定义一个算法的骨架，将一些步骤延迟到子类中实现，使得子类可以不改变算法的结构即可重定义该算法的某些特定步骤。</li>
+<li>建造者模式：将一个复杂对象的构建与其表示分离，使得同样的构建过程可以创建不同的表示。</li>
+</ol>
 <h1 id="C-11-新特性"><a href="#C-11-新特性" class="headerlink" title="C++11 新特性"></a>C++11 新特性</h1><h2 id="1、语法的改进"><a href="#1、语法的改进" class="headerlink" title="1、语法的改进"></a>1、语法的改进</h2><p>（1） 统一的初始化方法</p>
 <p>（2）成员变量默认初始化</p>
 <p>（3）<strong>auto关键字：允许编译器自动推断变量的类型，减少类型声明的冗余。</strong></p>
